@@ -1,12 +1,12 @@
 <template>
   <v-app light>
     <v-main>
-      <v-container bg grid-list-md text-xs-center fill-height fluid>
-        <v-row align="center" justify="center">
-          <v-col cols="12" sm="4">
+      <v-container fill-height fluid>
+        <v-layout align-center justify-center>
+          <v-flex xs12 sm8 md4>
             <Nuxt />
-          </v-col>
-        </v-row>
+          </v-flex>
+        </v-layout>
       </v-container>
     </v-main>
     <v-footer :absolute="!fixed" app>
