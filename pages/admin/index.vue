@@ -8,17 +8,21 @@
 
 <script>
 export default {
-  layout: 'center',
+  layout: 'admin',
+  auth: false,
   data() {
     return {
       randNumber: 0,
     }
   },
+  created() {
+    // this.$router.push('/admin/login')
+  },
   mounted() {},
   methods: {
     async showMessageFromBackend() {
       try {
-        const response = (await this.$axios.get('/api/test')).data
+        const response = (await this.$axios.get('/api/_base/admin/user')).data
         this.randNumber = response.number
         console.log(response)
       } catch (err) {

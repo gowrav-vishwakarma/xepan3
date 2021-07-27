@@ -19,15 +19,23 @@
   "dependencies": {
     "@mdi/font": "^5.9.55",
     "@nuxt/content": "^1.14.0",
+    "@nuxtjs/auth-next": "5.0.0-1624817847.21691f1",
     "@nuxtjs/axios": "^5.13.6",
     "@nuxtjs/pwa": "^3.3.5",
+    "bcrypt": "^5.0.1",
     "cookie-parser": "~1.4.4",
     "core-js": "^3.15.1",
+    "cors": "^2.8.5",
     "debug": "~2.6.9",
     "express": "^4.17.1",
     "import": "0.0.6",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21",
     "morgan": "~1.9.1",
+    "mysql2": "^2.2.5",
     "nuxt": "^2.15.7",
+    "sequelize": "^6.6.5",
+    "vnatk-express-sequelize": "0.0.37",
     "vuetify": "^2.5.5"
   },
   "devDependencies": {

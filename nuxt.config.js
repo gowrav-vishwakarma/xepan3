@@ -16,6 +16,10 @@ export default {
     ]
   },
 
+  server: {
+    host: 'xepan3.loc' // default: localhost
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     "@mdi/font/css/materialdesignicons.css"
@@ -46,7 +50,41 @@ export default {
     '@nuxtjs/pwa',
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
+    '@nuxtjs/auth-next'
   ],
+
+  auth: {
+    strategies: {
+      adminlogin: {
+        scheme: 'local',
+        token: {
+          property: 'token',
+          global: true,
+          // required: true,
+          // type: 'Bearer'
+        },
+        user: {
+          property: 'user',
+          // autoFetch: true
+        },
+        endpoints: {
+          login: { url: '/api/_base/admin/login', method: 'post' },
+          logout: { url: '/api/_base/admin/logout', method: 'post' },
+          user: { url: '/api/_base/admin/user', method: 'get' }
+        }
+      }
+    },
+    redirect: {
+      login: '/admin/login',
+      logout: '/admin',
+      callback: '/admin/login',
+      home: '/admin'
+    }
+  },
+
+  router: {
+    middleware: ['auth']
+  },
 
   serverMiddleware: {
     '/api': '~/server.js'
