@@ -9,7 +9,7 @@
 <script>
 export default {
   layout: 'admin',
-  auth: false,
+  // auth: false,
   data() {
     return {
       randNumber: 0,

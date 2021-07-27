@@ -43,6 +43,11 @@ export default {
       },
     }
   },
+  created() {
+    if (this.$auth.loggedIn) {
+      this.$router.push('/admin')
+    }
+  },
   methods: {
     validate() {
       if (this.$refs.form.validate()) {
@@ -55,6 +60,7 @@ export default {
     resetValidation() {
       this.$refs.form.resetValidation()
     },
+
     async userLogin() {
       // if (!this.validate()) return
       try {
@@ -63,6 +69,7 @@ export default {
         })
         console.log(response)
         this.$auth.setUser(response.data.user)
+        this.$router.push('/admin')
       } catch (err) {
         console.log(err)
       }

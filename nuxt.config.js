@@ -27,6 +27,7 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
+    { src: '~/plugins/persistedState.client.js' }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -54,6 +55,7 @@ export default {
   ],
 
   auth: {
+    localStorage: true,
     strategies: {
       adminlogin: {
         scheme: 'local',
@@ -65,7 +67,7 @@ export default {
         },
         user: {
           property: 'user',
-          // autoFetch: true
+          autoFetch: false
         },
         endpoints: {
           login: { url: '/api/_base/admin/login', method: 'post' },
@@ -77,7 +79,7 @@ export default {
     redirect: {
       login: '/admin/login',
       logout: '/admin',
-      callback: '/admin/login',
+      callback: '/admin',
       home: '/admin'
     }
   },

@@ -16,7 +16,7 @@ router.post('/login', async function (req, res, next) {
     return;
   }
 
-  res.send({ user });
+  res.send({ user, token: 'test' });
 });
 
 router.get('/user', function (req, res) {
