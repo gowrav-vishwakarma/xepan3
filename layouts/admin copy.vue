@@ -87,20 +87,5 @@ export default {
       title: 'Vuetify.js',
     }
   },
-
-  async mounted() {
-    const menus = (
-      await this.$axios.get('/api/admin/menus').catch((err) => console.log(err))
-    ).data
-    menus.drawer.forEach((m) => {
-      this.$router.addRoute({
-        path: '/about',
-        component: () => {
-          import('~/xepan-applications/xepan/components/AppsList')
-        },
-      })
-    })
-    console.log(menus)
-  },
 }
 </script>

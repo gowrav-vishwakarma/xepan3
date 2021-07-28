@@ -31,7 +31,10 @@ export default {
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: [
+    '~/components', // default level is 0
+    { path: '~xepan-applications/xepan/components', prefix: 'xEpan' }
+  ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -70,16 +73,16 @@ export default {
           autoFetch: false
         },
         endpoints: {
-          login: { url: '/api/_base/admin/login', method: 'post' },
-          logout: { url: '/api/_base/admin/logout', method: 'post' },
-          user: { url: '/api/_base/admin/user', method: 'get' }
+          login: { url: '/api/admin/login', method: 'post' },
+          logout: false,
+          user: false
         }
       }
     },
     redirect: {
       login: '/admin/login',
       logout: '/admin',
-      callback: '/admin',
+      // callback: '/admin',
       home: '/admin'
     }
   },
@@ -126,5 +129,6 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    watch: ['~/xepan-applications/xepan/routes/admin.js', '~/routes/admin.js']
   }
 }

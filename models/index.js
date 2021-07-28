@@ -26,35 +26,29 @@ fs
   });
 
 
-db.xepanApps = [];
+db.xepanApps = ['xepan'];
 
-sequelize
-  .authenticate()
-  .then(function () {
-    // sequelize.sync({ alter: true });
-    sequelize.query('SELECT * FROM InstalledApps').then(function (result) {
-      console.log(result);
-    }).catch(function (err) {
-      console.log(err);
-    });
-    db.xepanApps.push('_base');
-    db.xepanApps.map(f => {
-      // Read All Models from _base+ installedApps
-      const modelfolders = path.normalize(path.join(__dirname, '/../xepan-applications/', f, '/models/'));
-      fs
-        .readdirSync(modelfolders)
-        .filter(file => {
-          return (file.indexOf('.') !== 0) && (file !== 'index.js') && (file.slice(-3) === '.js');
-        })
-        .forEach(file => {
-          const model = require(path.join(modelfolders, file))(sequelize, Sequelize.DataTypes)
-          db[model.name] = model;
-        });
-      return modelfolders;
+// sequelize.query('SELECT * FROM InstalledApps').then(function (result) {
+//   console.log(result);
+// }).catch(function (err) {
+//   console.log(err);
+// });
+db.xepanApps.map(f => {
+  // Read All Models from _base+ installedApps
+  const modelfolders = path.normalize(path.join(__dirname, '/../xepan-applications/', f, '/models/'));
+  fs
+    .readdirSync(modelfolders)
+    .filter(file => {
+      return (file.indexOf('.') !== 0) && (file !== 'index.js') && (file.slice(-3) === '.js');
     })
-  }).catch(function (err) {
-    console.log('Unable to connect to the database:', err);
-  });
+    .forEach(file => {
+      const model = require(path.join(modelfolders, file))(sequelize, Sequelize.DataTypes)
+      db[model.name] = model;
+    });
+  return modelfolders;
+})
+// sequelize.sync({ alter: true });
+
 
 Object.keys(db).forEach(modelName => {
   if (db[modelName].associate) {

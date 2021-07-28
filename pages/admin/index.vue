@@ -3,6 +3,13 @@
     <NuxtLogo />
     <div>{{ `${randNumber} Hi` }}</div>
     <button @click="showMessageFromBackend">Show message from backend</button>
+    <button @click="logout">LOGOUT</button>
+    <div>
+      <xEpanAppsList />
+    </div>
+    <div>
+      <NuxtLink to="/about">asda</NuxtLink>
+    </div>
   </div>
 </template>
 
@@ -22,12 +29,16 @@ export default {
   methods: {
     async showMessageFromBackend() {
       try {
-        const response = (await this.$axios.get('/api/_base/admin/user')).data
+        const response = (await this.$axios.get('/api/admin/user')).data
         this.randNumber = response.number
         console.log(response)
       } catch (err) {
         console.log(err)
       }
+    },
+    async logout() {
+      await this.$auth.logout()
+      this.$router.push('/admin/login')
     },
   },
 }
