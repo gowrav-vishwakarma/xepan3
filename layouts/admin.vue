@@ -7,11 +7,11 @@
       fixed
       app
     >
-      <v-list>
+      <v-list v-if="drawermenus.length">
         <v-list-item
-          v-for="(item, i) in items"
+          v-for="(item, i) in drawermenus[0].items"
           :key="i"
-          :to="item.to"
+          :to="item.path"
           router
           exact
         >
@@ -24,38 +24,43 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar :clipped-left="clipped" fixed app>
+    <v-app-bar :clipped-left="clipped" fixed app dense>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-btn icon @click.stop="miniVariant = !miniVariant">
-        <v-icon>mdi-{{ `chevron-${miniVariant ? 'right' : 'left'}` }}</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="clipped = !clipped">
-        <v-icon>mdi-application</v-icon>
-      </v-btn>
-      <v-btn icon @click.stop="fixed = !fixed">
-        <v-icon>mdi-minus</v-icon>
-      </v-btn>
       <v-toolbar-title v-text="title" />
+      <v-toolbar-items class="hidden-sm-and-down text--caption">
+        <v-menu
+          v-for="(menu, index) in topmenus"
+          :key="index"
+          :close-on-content-click="false"
+          open-on-hover
+          bottom
+          offset-y
+        >
+          <template #activator="{ on }">
+            <v-btn text v-on="on"> {{ menu.title }} </v-btn>
+          </template>
+          <v-list>
+            <v-list-item
+              v-for="(item, b) in menu.items"
+              :key="b"
+              link
+              router
+              :to="item.path"
+            >
+              <v-list-item-content style="align-self: left">
+                <v-list-item-title>{{ item.title }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-menu>
+      </v-toolbar-items>
       <v-spacer />
-      <v-btn icon @click.stop="rightDrawer = !rightDrawer">
-        <v-icon>mdi-menu</v-icon>
-      </v-btn>
     </v-app-bar>
     <v-main>
       <v-container>
         <Nuxt />
       </v-container>
     </v-main>
-    <v-navigation-drawer v-model="rightDrawer" :right="right" temporary fixed>
-      <v-list>
-        <v-list-item @click.native="right = !right">
-          <v-list-item-action>
-            <v-icon light> mdi-repeat </v-icon>
-          </v-list-item-action>
-          <v-list-item-title>Switch drawer (click me)</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-navigation-drawer>
     <v-footer :absolute="!fixed" app>
       <span>&copy; {{ new Date().getFullYear() }}</span>
     </v-footer>
@@ -63,44 +68,62 @@
 </template>
 
 <script>
+import _ from 'lodash'
+
 export default {
+  name: 'AdminLayout',
   data() {
     return {
       clipped: false,
       drawer: false,
       fixed: false,
-      items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/',
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire',
-        },
+      drawermenus: [],
+      topmenus: [
+        // {
+        //   title: 'Sample',
+        //   icon: 'cogs',
+        //   items: [{ title: 'Sub One', path: '/admin/xyz', icon: 'cog' }],
+        // },
       ],
       miniVariant: false,
       right: true,
       rightDrawer: false,
-      title: 'Vuetify.js',
+      title: 'SaaSaaS',
     }
   },
 
   async mounted() {
-    const menus = (
+    const menusFromApi = (
       await this.$axios.get('/api/admin/menus').catch((err) => console.log(err))
     ).data
-    menus.drawer.forEach((m) => {
-      this.$router.addRoute({
-        path: '/about',
-        component: () => {
-          import('~/xepan-applications/xepan/components/AppsList')
-        },
-      })
+
+    // topmenu populate
+    const sortedTopMenu = []
+    Object.entries(menusFromApi.topmenu).forEach(([key, m]) => {
+      const existingMenu = sortedTopMenu.findIndex((e) => e.title === m.title)
+      if (existingMenu === -1) {
+        sortedTopMenu.push(m)
+      } else {
+        sortedTopMenu[existingMenu] = _.merge(existingMenu, m)
+      }
     })
-    console.log(menus)
+    this.topmenus = sortedTopMenu
+
+    const sortedDrawerMenu = []
+    Object.entries(menusFromApi.drawer).forEach(([key, m]) => {
+      const existingMenu = sortedDrawerMenu.findIndex(
+        (e) => e.title === m.title
+      )
+      if (existingMenu === -1) {
+        sortedDrawerMenu.push(m)
+      } else {
+        sortedDrawerMenu[existingMenu] = _.merge(existingMenu, m)
+      }
+    })
+
+    this.drawermenus = sortedDrawerMenu
+
+    console.log(menusFromApi)
   },
 }
 </script>

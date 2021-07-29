@@ -4,7 +4,7 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 
-const adminRouter = require('./routes/admin.js');
+const adminRouter = require('./api-routes/admin.js');
 
 const app = express();
 
@@ -17,10 +17,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/admin', adminRouter);
 
 const { xepanApps } = require('./models');
-// const xepanApps = ['_base'];
-// Read all routes
+// Read all api-routes
 xepanApps.forEach(f => {
-    const routesfolders = path.normalize(path.join(__dirname, '/xepan-applications/', f, '/routes'));
+    const routesfolders = path.normalize(path.join(__dirname, '/xepan-applications/', f, '/api-routes'));
     const routeFiles = fs
         .readdirSync(routesfolders)
         .filter(file => {

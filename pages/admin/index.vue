@@ -7,9 +7,6 @@
     <div>
       <xEpanAppsList />
     </div>
-    <div>
-      <NuxtLink to="/about">asda</NuxtLink>
-    </div>
   </div>
 </template>
 

@@ -88,7 +88,20 @@ export default {
   },
 
   router: {
-    middleware: ['auth']
+    middleware: ['auth'],
+    extendRoutes(routes, resolve) {
+      const path = require('path');
+      const { xepanApps } = require('./models');
+      // Read all vue-routes
+      xepanApps.forEach(xapp => {
+        const vueroute = path.normalize(path.join(__dirname, 'xepan-applications/', xapp, '/vue-routes.js'));
+        const _routes = require(vueroute).default;
+        _routes.forEach(r => {
+          r.component = resolve(__dirname, r.component);
+          routes.push(r)
+        });
+      });
+    }
   },
 
   serverMiddleware: {
@@ -129,6 +142,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    watch: ['~/xepan-applications/xepan/routes/admin.js', '~/routes/admin.js']
+    watch: ['~/xepan-applications/**/*.js', '~/api-routes/admin.js'],
+    cache: false
   }
 }
