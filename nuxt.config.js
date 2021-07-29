@@ -17,7 +17,7 @@ export default {
   },
 
   server: {
-    host: 'xepan3.loc' // default: localhost
+    host: '0.0.0.0' // default: localhost
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -88,7 +88,6 @@ export default {
   },
 
   router: {
-    middleware: ['auth'],
     extendRoutes(routes, resolve) {
       const path = require('path');
       const { xepanApps } = require('./models');
@@ -101,6 +100,11 @@ export default {
           routes.push(r)
         });
       });
+      routes.push({
+        name: 'custom',
+        path: '*',
+        component: resolve(__dirname, 'pages/front.vue')
+      })
     }
   },
 
@@ -143,6 +147,10 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     watch: ['~/xepan-applications/**/*.js', '~/api-routes/admin.js'],
-    cache: false
+    cache: false,
+    extend(config, ctx) {
+      // You can extend webpack config here
+      config.resolve.alias.vue$ = "vue/dist/vue.esm.js";
+    }
   }
 }

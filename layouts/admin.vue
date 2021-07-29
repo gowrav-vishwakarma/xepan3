@@ -1,12 +1,6 @@
 <template>
   <v-app dark>
-    <v-navigation-drawer
-      v-model="drawer"
-      :mini-variant="miniVariant"
-      :clipped="clipped"
-      fixed
-      app
-    >
+    <v-navigation-drawer v-model="drawer" dark :clipped="clipped" fixed app>
       <v-list v-if="drawermenus.length">
         <v-list-item
           v-for="(item, i) in drawermenus[0].items"
@@ -14,6 +8,7 @@
           :to="item.path"
           router
           exact
+          @click="drawer = false"
         >
           <v-list-item-action>
             <v-icon>{{ item.icon }}</v-icon>
@@ -72,19 +67,15 @@ import _ from 'lodash'
 
 export default {
   name: 'AdminLayout',
+  middleware: ['auth'],
+
   data() {
     return {
       clipped: false,
       drawer: false,
       fixed: false,
       drawermenus: [],
-      topmenus: [
-        // {
-        //   title: 'Sample',
-        //   icon: 'cogs',
-        //   items: [{ title: 'Sub One', path: '/admin/xyz', icon: 'cog' }],
-        // },
-      ],
+      topmenus: [],
       miniVariant: false,
       right: true,
       rightDrawer: false,
