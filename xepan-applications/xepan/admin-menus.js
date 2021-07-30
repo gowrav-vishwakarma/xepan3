@@ -17,8 +17,8 @@ module.exports = {
                 { path: '/admin/epans', title: 'EpansManagement', icon: 'cogs' }
             ]
         },
-        xEpan1: {
-            title: 'xEpan1',
+        xEpan111: {
+            title: 'xEpan11111',
             icon: 'cogs',
             items: [
                 { path: '/admin/epans', title: 'EpansManagement', icon: 'cogs' }

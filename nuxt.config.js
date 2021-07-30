@@ -17,7 +17,7 @@ export default {
   },
 
   server: {
-    host: '0.0.0.0' // default: localhost
+    host: 'xepan3.loc' // default: localhost
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
@@ -27,7 +27,8 @@ export default {
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    { src: '~/plugins/persistedState.client.js' }
+    { src: '~/plugins/persistedState.client.js' },
+    { src: '~plugins/vuedraggable.js', ssr: false }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -90,10 +91,13 @@ export default {
   router: {
     extendRoutes(routes, resolve) {
       const path = require('path');
+      const fs = require('fs');
+
       const { xepanApps } = require('./models');
       // Read all vue-routes
       xepanApps.forEach(xapp => {
         const vueroute = path.normalize(path.join(__dirname, 'xepan-applications/', xapp, '/vue-routes.js'));
+        if (!fs.existsSync(vueroute)) return;
         const _routes = require(vueroute).default;
         _routes.forEach(r => {
           r.component = resolve(__dirname, r.component);
@@ -103,7 +107,7 @@ export default {
       routes.push({
         name: 'custom',
         path: '*',
-        component: resolve(__dirname, 'pages/front.vue')
+        component: resolve(__dirname, 'pages/Website.vue')
       })
     }
   },
@@ -148,9 +152,9 @@ export default {
   build: {
     watch: ['~/xepan-applications/**/*.js', '~/api-routes/admin.js'],
     cache: false,
-    extend(config, ctx) {
-      // You can extend webpack config here
-      config.resolve.alias.vue$ = "vue/dist/vue.esm.js";
-    }
+    // extend(config, ctx) {
+    //   // You can extend webpack config here
+    //   config.resolve.alias.vue$ = "vue/dist/vue.esm.js";
+    // }
   }
 }

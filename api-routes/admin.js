@@ -26,10 +26,15 @@ router.get('/user', function (req, res) {
 
 router.get('/menus', function (req, res) {
   const path = require('path');
+  const fs = require('fs');
   let menus = { drawer: {}, topmenu: {}, usermenu: {} };
+  const menusPath = [];
   xepanApps.forEach(xapp => {
     const menuPath = path.normalize(path.join(__dirname, '/../xepan-applications/', xapp, '/admin-menus.js'));
-    const m = require(menuPath);
+    if (fs.existsSync(menuPath)) menusPath.push(menuPath);
+  })
+  menusPath.forEach(p => {
+    const m = require(p);
     menus = _.merge(menus, m);
   })
   res.send(menus);

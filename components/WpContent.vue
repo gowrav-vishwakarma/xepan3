@@ -25,5 +25,10 @@ export default {
       }),
     ])
   },
+  methods: {
+    say(t) {
+      alert(t)
+    },
+  },
 }
 </script>

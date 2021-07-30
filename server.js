@@ -7,6 +7,7 @@ const cors = require('cors')
 
 
 const adminRouter = require('./api-routes/admin.js');
+const editorRouter = require('./api-routes/editor.js');
 
 const app = express();
 app.use(cors());
@@ -17,6 +18,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/admin', adminRouter);
+app.use('/web-editor', editorRouter);
 
 const { xepanApps } = require('./models');
 // Read all api-routes
