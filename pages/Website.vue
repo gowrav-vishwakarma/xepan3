@@ -39,18 +39,6 @@ export default {
       })
       .catch((err) => console.log(err))
   },
-  methods: {
-    onInsert(event) {
-      this.pageContent.splice(event.index, 0, event.data)
-    },
-    generateId() {
-      return (
-        'id' +
-        Math.random().toString(36).substring(2) +
-        new Date().getTime().toString(36)
-      )
-    },
-  },
 }
 </script>
 <style lang="scss">

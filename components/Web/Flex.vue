@@ -12,20 +12,23 @@
       mode="cut"
     >
       <template v-slot:item="{ item }">
-        <drag :data="item" :key="generateId()" @cut="remove(item)">
-          <component
-            :is="item.component"
-            :key="generateId()"
-            :componentprops.sync="item.props"
-            class="item"
-          ></component>
+        <drag
+          tag="WebGeneric"
+          :item="item"
+          :key="generateId()"
+          :data="item"
+          @cut="remove(item)"
+        >
+          <template v-slot:drag-image>
+            <div class="drag-image">DRAG</div>
+          </template>
         </drag>
       </template>
-      <template v-slot:feedback="{}">
-        <div class="feedback" :key="generateId()">MOVING</div>
+      <template v-slot:feedback="{ data }">
+        <div class="feedback" :key="generateId(data)" />
       </template>
-      <template v-slot:reordering-feedback="{ item }">
-        <div class="reordering-feedback" :key="generateId()">{{ item }}</div>
+      <template v-slot:reordering-feedback="{}">
+        <div class="reordering-feedback" key="feedback"></div>
       </template>
     </drop-list>
   </div>
@@ -42,7 +45,7 @@ export default {
     direction: String,
   },
   methods: {
-    generateId() {
+    generateId(data = false) {
       return (
         'id' +
         Math.random().toString(36).substring(2) +

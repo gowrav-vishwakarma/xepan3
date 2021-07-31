@@ -1,20 +1,12 @@
 <template>
-  <WebFlex
-    :items="items"
-    direction="column"
-    style="border: 1px solid green; min-width: 50px"
-  ></WebFlex>
+  <WebFlex :items="items" direction="column"></WebFlex>
 </template>
 
 <script>
-// import _ from 'lodash'
-
 export default {
+  name: 'Column',
   props: {
-    items: {
-      type: Array,
-      default: () => [],
-    },
+    items: null,
   },
 }
 </script>

@@ -4,7 +4,7 @@
       :is="comp"
       :key="generateId()"
       :componentprops.sync="item.props"
-      class="inner"
+      class="inner item"
     ></component>
     <slot />
   </div>
@@ -24,7 +24,7 @@ export default {
       return this.item.component
     },
     props() {
-      return this.item
+      return this.item.props
     },
   },
   methods: {
