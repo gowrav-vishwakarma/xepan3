@@ -29,10 +29,10 @@ export default {
               icon: 'TextEditor',
             },
             // {
-            //   name: 'Row',
-            //   component: 'WebRow',
+            //   name: 'Column',
+            //   component: 'WebColumn',
             //   props: { options: {}, defaultcontent: '' },
-            //   icon: 'Row',
+            //   icon: 'Col',
             // },
           ],
         }

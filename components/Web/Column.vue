@@ -2,7 +2,7 @@
   <WebFlex
     :items="items"
     direction="column"
-    style="border: 1px solid orange"
+    style="border: 1px solid green; min-width: 50px"
   ></WebFlex>
 </template>
 
