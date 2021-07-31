@@ -36,6 +36,7 @@
               :key="n.name"
               class="drag"
               :data="n"
+              @cut="rejectCut"
             >
               {{ n.name }}
             </drag>
@@ -65,6 +66,11 @@ export default {
   computed: {
     toolsKey() {
       return Object.keys(this.toolsData)
+    },
+  },
+  methods: {
+    rejectCut() {
+      return false
     },
   },
 }

@@ -12,22 +12,17 @@
       mode="cut"
     >
       <template v-slot:item="{ item }">
-        <drag :item="item" :key="generateId()">
-          <template #item="{ item }">
-            <component
-              :is="item.component"
-              :key="generateId()"
-              :componentprops.sync="item.props"
-              class="item"
-            ></component>
-          </template>
-          <template v-slot:drag-image>
-            <div class="drag-image">DRAG</div>
-          </template>
+        <drag :data="item" :key="generateId()" mode="cut" @cut="remove(item)">
+          <component
+            :is="item.component"
+            :key="generateId()"
+            :componentprops.sync="item.props"
+            class="item"
+          ></component>
         </drag>
       </template>
       <template v-slot:feedback="{}">
-        <div class="feedback" :key="generateId()" />
+        <div class="feedback" :key="generateId()">MOVING</div>
       </template>
       <template v-slot:reordering-feedback="{}">
         <div class="reordering-feedback" key="feedback" />
