@@ -22,13 +22,17 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    "@mdi/font/css/materialdesignicons.css"
+    "@mdi/font/css/materialdesignicons.css",
+    'medium-editor/dist/css/medium-editor.css',
+    'vuejs-medium-editor/src/themes/default.css',
+    'highlight.js/styles/ocean.css' // if using code highlight
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~/plugins/persistedState.client.js' },
-    { src: '~plugins/vuedraggable.js', ssr: false }
+    { src: '~plugins/vuedraggable.js', ssr: false },
+    { src: '~/plugins/medium-editor', ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

@@ -59,7 +59,6 @@ export default {
   data() {
     return {
       drawer: false,
-      numbers: [1, 2, 3, 4, 5],
       toolsList: this.toolsData,
     }
   },

@@ -38,6 +38,7 @@
     "vnatk-express-sequelize": "0.0.37",
     "vue-easy-dnd": "^1.12.2",
     "vuedraggable": "^2.24.3",
+    "vuejs-medium-editor": "^1.2.1",
     "vuetify": "^2.5.5",
     "vuex-persistedstate": "^4.0.0"
   },

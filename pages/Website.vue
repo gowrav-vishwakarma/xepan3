@@ -2,27 +2,7 @@
   <div class="wrapper">
     <Editor :tools="tools" />
     <!-- OPTIONS BAR -->
-    <drop-list
-      :items="pageContent"
-      class="list"
-      no-animations
-      @insert="onInsert"
-      @reorder="$event.apply(pageContent)"
-    >
-      <template #item="{ item }">
-        <drag :key="generateId()" class="item" :tag="item.tag">
-          {{ item.name }}
-        </drag>
-      </template>
-      <template #feedback="{ data }">
-        <div :key="generateId()" class="item feedback" :tag="data.tag">
-          {{ data.name }}
-        </div>
-      </template>
-      <template #reordering-feedback="{}">
-        <div :key="generateId()" class="item feedback"></div>
-      </template>
-    </drop-list>
+    <WebColumn :items="pageContent" />
   </div>
 </template>
 
@@ -35,7 +15,26 @@ export default {
         // console.log(data.basic.tools)
         return {
           tools: data,
-          pageContent: [],
+          pageContent: [
+            {
+              name: 'Header',
+              component: 'WebHeader',
+              icon: 'H1 icon',
+              props: { options: {}, defaultcontent: 'I am header' },
+            },
+            {
+              name: 'Medium Editor',
+              component: 'WebRichEditor',
+              props: { options: {}, defaultcontent: '' },
+              icon: 'TextEditor',
+            },
+            // {
+            //   name: 'Row',
+            //   component: 'WebRow',
+            //   props: { options: {}, defaultcontent: '' },
+            //   icon: 'Row',
+            // },
+          ],
         }
       })
       .catch((err) => console.log(err))
@@ -54,19 +53,19 @@ export default {
   },
 }
 </script>
-<style scoped lang="scss">
+<style lang="scss">
 .wrapper {
   .list {
     margin: 0;
     width: 100%;
     min-height: 100px;
     .item {
-      // padding: 20px;
-      // margin: 10px;
-      // background-color: rgb(220, 220, 255);
-      // display: flex;
-      // align-items: center;
-      // justify-content: center;
+      padding: 20px;
+      margin: 10px;
+      background-color: rgb(220, 220, 255);
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       &.feedback {
         flex: 0 0 0;
