@@ -21,8 +21,8 @@
           ></component>
         </drag>
       </template>
-      <template v-slot:feedback="{}">
-        <div class="feedback" :key="generateId()">MOVING</div>
+      <template v-slot:feedback="{ data }">
+        <div class="feedback" :key="generateId()">{{ data }}</div>
       </template>
       <template v-slot:reordering-feedback="{ item }">
         <div class="reordering-feedback" :key="generateId()">{{ item }}</div>

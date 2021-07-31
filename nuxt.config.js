@@ -1,6 +1,7 @@
 import colors from 'vuetify/es5/util/colors'
 
 export default {
+  // ssr: false,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - xEpan3',
@@ -38,7 +39,8 @@ export default {
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [
     '~/components', // default level is 0
-    { path: '~xepan-applications/xepan/components', prefix: 'xEpan' }
+    { path: '~xepan-applications/xepan/components', prefix: 'xEpan' },
+    // { path: '~node_modules/vnatk-vue', ssr: false }
   ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules

@@ -36,10 +36,13 @@
     "nuxt": "^2.15.7",
     "sequelize": "^6.6.5",
     "vnatk-express-sequelize": "0.0.37",
+    "vnatk-vue": "0.0.42",
     "vue-easy-dnd": "^1.12.2",
+    "vue-papa-parse": "^2.0.0",
     "vuedraggable": "^2.24.3",
     "vuejs-medium-editor": "^1.2.1",
     "vuetify": "^2.5.5",
+    "vuetify-form-base": "^0.3.3",
     "vuex-persistedstate": "^4.0.0"
   },
   "devDependencies": {
