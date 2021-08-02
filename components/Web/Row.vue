@@ -8,7 +8,7 @@
     <WebGeneric
       :item="item"
       v-for="(item, index) in items"
-      :key="index"
+      :key="generateId(index)"
       class="item"
     />
   </draggable>
@@ -25,6 +25,12 @@ export default {
     },
   },
   methods: {
+    addedElement(e) {
+      if (e.added) {
+        e.added.element = JSON.parse(JSON.stringify(e.added.element))
+      }
+      console.log(e)
+    },
     generateId() {
       return (
         'id' +

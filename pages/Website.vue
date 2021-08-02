@@ -5,13 +5,12 @@
     <draggable
       :list="pageContent"
       style="width: 100%; min-height: 50px; border: 1px solid red"
-      @change="addedElement"
       group="webtools"
     >
       <WebGeneric
         :item="item"
         v-for="(item, index) in pageContent"
-        :key="index"
+        :key="generateId(index)"
         class="item"
       />
     </draggable>
@@ -52,13 +51,6 @@ export default {
       .catch((err) => console.log(err))
   },
   methods: {
-    addedElement(e) {
-      if (e.added) {
-        e.added.element = JSON.parse(JSON.stringify(e.added.element))
-      }
-      console.log(e)
-    },
-
     generateId() {
       return (
         'id' +

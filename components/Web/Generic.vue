@@ -5,6 +5,7 @@
       :key="generateId()"
       :componentprops.sync="item.props"
       class="inner"
+      :items="item.items"
     ></component>
     <slot />
   </div>
