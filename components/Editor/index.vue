@@ -1,6 +1,6 @@
 <template>
   <div>
-    <ToolBar :tools-data="tools" />
+    <EditorToolBar :tools-data="tools" />
   </div>
 </template>
 

@@ -1,7 +1,12 @@
 <template>
   <draggable
     :list="items"
-    style="width: 100%; min-height: 50px; border: 1px solid green"
+    style="
+      width: 100%;
+      min-height: 50px;
+      border: 1px solid green;
+      flex-direction: row;
+    "
     @change="addedElement"
     group="webtools"
   >

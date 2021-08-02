@@ -22,7 +22,10 @@
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="text-h6"> Application </v-list-item-title>
-          <v-list-item-subtitle> subtext </v-list-item-subtitle>
+          <v-list-item-subtitle>
+            <v-btn x-small color="success">Save Page (^s)</v-btn>
+            <EditorPageManager />
+          </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
@@ -44,6 +47,8 @@
               :group="{ name: 'webtools', pull: 'clone', put: false }"
               :clone="clone"
               v-model="toolsList[toolKey].tools"
+              @start="toolDragStarted"
+              @end="toolDragOrDropEnded"
             >
               <div
                 v-for="element in toolsList[toolKey].tools"
@@ -81,6 +86,12 @@ export default {
     },
   },
   methods: {
+    toolDragStarted() {
+      this.drawer = true
+    },
+    toolDragOrDropEnded() {
+      this.drawer = false
+    },
     clone(original) {
       return JSON.parse(JSON.stringify(original))
     },
