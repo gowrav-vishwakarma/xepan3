@@ -1,9 +1,17 @@
 <template>
-  <WebFlex
-    :items="items"
-    direction="column"
-    style="border: 1px solid green; min-width: 50px"
-  ></WebFlex>
+  <draggable
+    :list="items"
+    style="width: 100%; min-height: 50px; border: 1px solid orange"
+    @change="addedElement"
+    group="webtools"
+  >
+    <WebGeneric
+      :item="item"
+      v-for="(item, index) in items"
+      :key="index"
+      class="item"
+    />
+  </draggable>
 </template>
 
 <script>
@@ -14,6 +22,15 @@ export default {
     items: {
       type: Array,
       default: () => [],
+    },
+  },
+  methods: {
+    generateId() {
+      return (
+        'id' +
+        Math.random().toString(36).substring(2) +
+        new Date().getTime().toString(36)
+      )
     },
   },
 }

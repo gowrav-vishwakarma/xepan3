@@ -31,7 +31,7 @@
         <v-expansion-panel v-for="(toolKey, i) in toolsKey" :key="i">
           <v-expansion-panel-header> {{ toolKey }} </v-expansion-panel-header>
           <v-expansion-panel-content>
-            <drag
+            <!-- <drag
               v-for="n in toolsList[toolKey].tools"
               :key="n.name"
               class="drag"
@@ -39,7 +39,19 @@
               @cut="rejectCut"
             >
               {{ n.name }}
-            </drag>
+            </drag> -->
+            <draggable
+              :group="{ name: 'webtools', pull: 'clone', put: false }"
+              :clone="clone"
+              v-model="toolsList[toolKey].tools"
+            >
+              <div
+                v-for="element in toolsList[toolKey].tools"
+                :key="element.id"
+              >
+                {{ element.name }}
+              </div>
+            </draggable>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
@@ -69,6 +81,9 @@ export default {
     },
   },
   methods: {
+    clone(original) {
+      return JSON.parse(JSON.stringify(original))
+    },
     rejectCut() {
       return false
     },
