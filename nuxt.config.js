@@ -34,13 +34,14 @@ export default {
     { src: '~/plugins/persistedState.client.js' },
     { src: '~plugins/vuedraggable.js', ssr: false },
     { src: '~/plugins/medium-editor', ssr: false },
+    { src: '~/plugins/vnatk-crud.js', ssr: false },
+
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [
     '~/components', // default level is 0
     { path: '~xepan-applications/xepan/components', prefix: 'xEpan' },
-    // { path: '~node_modules/vnatk-vue', ssr: false }
   ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules

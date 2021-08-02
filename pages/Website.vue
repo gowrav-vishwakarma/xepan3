@@ -1,8 +1,12 @@
 <template>
   <div class="wrapper">
-    <Editor :tools="tools" />
-    <!-- OPTIONS BAR -->
-    <WebColumn :items="pageContent" />
+    <Editor :tools="tools" v-if="isLoggedIn" />
+    <WebGeneric
+      v-for="(item, index) in pageContent"
+      :item="item"
+      :key="generateId(index)"
+      class="item"
+    />
   </div>
 </template>
 
@@ -17,32 +21,35 @@ export default {
           tools: data,
           pageContent: [
             {
-              name: 'Header',
-              component: 'WebHeader',
-              icon: 'H1 icon',
+              name: 'Row',
+              component: 'WebRow',
               props: { options: {}, defaultcontent: 'I am header' },
+              items: [
+                {
+                  name: 'Header',
+                  component: 'WebHeader',
+                  icon: 'H1 icon',
+                  props: { options: {}, defaultcontent: 'I am header' },
+                },
+                {
+                  name: 'Medium Editor',
+                  component: 'WebRichEditor',
+                  props: { options: {}, defaultcontent: '' },
+                  icon: 'TextEditor',
+                },
+              ],
             },
-            {
-              name: 'Medium Editor',
-              component: 'WebRichEditor',
-              props: { options: {}, defaultcontent: '' },
-              icon: 'TextEditor',
-            },
-            // {
-            //   name: 'Column',
-            //   component: 'WebColumn',
-            //   props: { options: {}, defaultcontent: '' },
-            //   icon: 'Col',
-            // },
           ],
         }
       })
       .catch((err) => console.log(err))
   },
-  methods: {
-    onInsert(event) {
-      this.pageContent.splice(event.index, 0, event.data)
+  computed: {
+    isLoggedIn() {
+      return true
     },
+  },
+  methods: {
     generateId() {
       return (
         'id' +
