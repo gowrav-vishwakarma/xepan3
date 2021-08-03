@@ -32,10 +32,15 @@ export default {
       crudoptions: {
         service: this.$axios,
         basepath: '/api/web-editor/vnatk',
-        model: 'User',
+        model: 'WebPage',
+        create: {
+          modeloptions: {
+            attributes: ['name'],
+          },
+        },
         read: {
           modeloptions: {
-            attributes: ['username'],
+            attributes: ['name'],
           },
           serversidepagination: true,
         },

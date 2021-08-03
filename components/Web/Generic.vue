@@ -3,7 +3,7 @@
     <component
       :is="comp"
       :key="generateId()"
-      :componentprops.sync="item.props"
+      :props.sync="item.props"
       class="inner"
       :items="item.items"
     ></component>

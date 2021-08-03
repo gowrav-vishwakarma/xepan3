@@ -1,10 +1,14 @@
 <template>
   <div class="wrapper">
-    <Editor :tools="tools" v-if="isLoggedIn" />
+    <Editor
+      v-if="isLoggedIn"
+      :tools="tools"
+      @save-page-content="savePageContent"
+    />
     <WebGeneric
       v-for="(item, index) in pageContent"
-      :item="item"
       :key="generateId(index)"
+      :item="item"
       class="item"
     />
   </div>
@@ -12,37 +16,49 @@
 
 <script>
 export default {
-  asyncData(context) {
-    return context.$axios
-      .$get('/api/web-editor/tools')
-      .then((data) => {
-        // console.log(data.basic.tools)
-        return {
-          tools: data,
-          pageContent: [
-            {
-              name: 'Row',
-              component: 'WebRow',
-              props: { options: {}, defaultcontent: 'I am header' },
-              items: [
-                {
-                  name: 'Header',
-                  component: 'WebHeader',
-                  icon: 'H1 icon',
-                  props: { options: {}, defaultcontent: 'I am header' },
-                },
-                {
-                  name: 'Medium Editor',
-                  component: 'WebRichEditor',
-                  props: { options: {}, defaultcontent: '' },
-                  icon: 'TextEditor',
-                },
-              ],
-            },
-          ],
-        }
+  async asyncData(context) {
+    console.log('context.req.url', context.req.url)
+    let pageContent = await context.$axios
+      .$get('/api/web/page-content', {
+        params: { page: context.req.url },
       })
       .catch((err) => console.log(err))
+    if (!pageContent) {
+      pageContent = [
+        {
+          name: 'WebRow',
+          component: 'WebRow',
+          props: { options: {}, defaultcontent: '' },
+          icon: 'Row',
+          items: [],
+        },
+      ]
+    }
+    const tools = await context.$axios
+      .$get('/api/web-editor/tools')
+      .catch((err) => console.log(err))
+    return { tools, pageContent, pageUrl: context.req.url }
+    // pageContent: [
+    //   {
+    //     name: 'Row',
+    //     component: 'WebRow',
+    //     props: { options: {}, defaultcontent: 'I am header' },
+    //     items: [
+    //       {
+    //         name: 'Header',
+    //         component: 'WebHeader',
+    //         icon: 'H1 icon',
+    //         props: { options: {}, defaultcontent: 'I am header' },
+    //       },
+    //       {
+    //         name: 'Medium Editor',
+    //         component: 'WebRichEditor',
+    //         props: { options: {}, defaultcontent: '' },
+    //         icon: 'TextEditor',
+    //       },
+    //     ],
+    //   },
+    // ],
   },
   computed: {
     isLoggedIn() {
@@ -50,6 +66,18 @@ export default {
     },
   },
   methods: {
+    savePageContent() {
+      const postOptions = {
+        page: this.pageUrl,
+        content: this.pageContent,
+      }
+
+      this.$axios
+        .post('/api/web-editor/page-content-save', postOptions)
+        .then(() => {
+          alert('saved')
+        })
+    },
     generateId() {
       return (
         'id' +

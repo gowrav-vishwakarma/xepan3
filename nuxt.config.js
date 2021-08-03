@@ -35,6 +35,7 @@ export default {
     { src: '~plugins/vuedraggable.js', ssr: false },
     { src: '~/plugins/medium-editor', ssr: false },
     { src: '~/plugins/vnatk-crud.js', ssr: false },
+    { src: '~/plugins/v-form-base.js', ssr: false },
 
   ],
 

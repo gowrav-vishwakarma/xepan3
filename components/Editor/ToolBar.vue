@@ -23,7 +23,9 @@
         <v-list-item-content>
           <v-list-item-title class="text-h6"> Application </v-list-item-title>
           <v-list-item-subtitle>
-            <v-btn x-small color="success">Save Page (^s)</v-btn>
+            <v-btn x-small color="success" @click="$emit('save-page-content')"
+              >Save Page (^s)</v-btn
+            >
             <EditorPageManager />
           </v-list-item-subtitle>
         </v-list-item-content>
@@ -34,15 +36,6 @@
         <v-expansion-panel v-for="(toolKey, i) in toolsKey" :key="i">
           <v-expansion-panel-header> {{ toolKey }} </v-expansion-panel-header>
           <v-expansion-panel-content>
-            <!-- <drag
-              v-for="n in toolsList[toolKey].tools"
-              :key="n.name"
-              class="drag"
-              :data="n"
-              @cut="rejectCut"
-            >
-              {{ n.name }}
-            </drag> -->
             <draggable
               :group="{ name: 'webtools', pull: 'clone', put: false }"
               :clone="clone"

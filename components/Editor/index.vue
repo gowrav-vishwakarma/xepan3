@@ -1,6 +1,7 @@
 <template>
   <div>
-    <EditorToolBar :tools-data="tools" />
+    <EditorToolBar :tools-data="tools" v-on="$listeners" />
+    <EditorOptionBar :tools-data="tools" v-on="$listeners" />
   </div>
 </template>
 
