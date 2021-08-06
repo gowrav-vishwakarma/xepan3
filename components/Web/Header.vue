@@ -1,6 +1,10 @@
 <template>
   <web-component :props.sync="props" :toolbar-options.sync="toolbarOptions">
-    <h1 type="text" v-text="props.defaultcontent"></h1>
+    <component
+      :is="headerType"
+      type="text"
+      v-text="props.defaultcontent"
+    ></component>
     <v-btn color="success" @click="changedefaultcontent">update me</v-btn>
   </web-component>
 </template>
@@ -9,15 +13,15 @@
 import WebComponent from '~/components/WebComponent.vue'
 
 export default {
-  extends: WebComponent,
-  // components: {
-  //   WebComponent,
-  // },
+  // extends: WebComponent,
+  components: {
+    WebComponent,
+  },
   props: {
     props: {
       type: Object,
       default: () => {
-        return { defaultcontent: 'HII' }
+        return { defaultcontent: 'HII', headerType: 'h1' }
       },
     },
     toolbarOptions: {
@@ -29,6 +33,11 @@ export default {
     return {
       content: this.props.defaultcontent,
     }
+  },
+  computed: {
+    headerType() {
+      return this.props.headerType ? this.props.headerType : 'h1'
+    },
   },
   methods: {
     changedefaultcontent() {

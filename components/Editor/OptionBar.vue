@@ -56,9 +56,9 @@ export default {
       formschemaProperty = false
     ) {
       this.drawer = false
+      console.log('received', toolProps, toolbarOptions)
       this.optionModel = toolProps
       this.optionSchema = toolbarOptions
-      // console.log(props, toolbarOptions)
     },
   },
 }

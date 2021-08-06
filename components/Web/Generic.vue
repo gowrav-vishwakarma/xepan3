@@ -4,6 +4,7 @@
       :is="comp"
       :key="generateId()"
       :props.sync="item.props"
+      :toolbar-options.sync="item.toolbarOptions"
       class="inner"
       :items="item.items"
     ></component>

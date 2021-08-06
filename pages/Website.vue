@@ -28,7 +28,8 @@ export default {
         {
           name: 'WebRow',
           component: 'WebRow',
-          props: { options: {}, defaultcontent: '' },
+          props: {},
+          toolbarOptions: {},
           icon: 'Row',
           items: [],
         },
@@ -38,33 +39,15 @@ export default {
       .$get('/api/web-editor/tools')
       .catch((err) => console.log(err))
     return { tools, pageContent, pageUrl: context.req.url }
-    // pageContent: [
-    //   {
-    //     name: 'Row',
-    //     component: 'WebRow',
-    //     props: { options: {}, defaultcontent: 'I am header' },
-    //     items: [
-    //       {
-    //         name: 'Header',
-    //         component: 'WebHeader',
-    //         icon: 'H1 icon',
-    //         props: { options: {}, defaultcontent: 'I am header' },
-    //       },
-    //       {
-    //         name: 'Medium Editor',
-    //         component: 'WebRichEditor',
-    //         props: { options: {}, defaultcontent: '' },
-    //         icon: 'TextEditor',
-    //       },
-    //     ],
-    //   },
-    // ],
   },
   computed: {
     isLoggedIn() {
       return true
     },
   },
+  // created() {
+  //   this.$nuxt.$on('xepan-editor-tools-selected', this.toolsSelectedCallBack)
+  // },
   methods: {
     savePageContent() {
       const postOptions = {
