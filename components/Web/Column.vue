@@ -1,24 +1,35 @@
 <template>
-  <draggable
-    :list="items"
-    style="width: 100%; min-height: 50px; border: 1px solid orange"
-    @change="addedElement"
-    group="webtools"
+  <web-component
+    :props.sync="props"
+    :toolbar-options.sync="toolbarOptions"
+    :component="component"
+    :isLoggedIn="isLoggedIn"
   >
-    <WebGeneric
-      :item="item"
-      v-for="(item, index) in items"
-      :key="generateId(index)"
-      class="item"
-    />
-  </draggable>
+    <draggable
+      :list="items"
+      style="width: 100%; min-height: 50px; border: 1px solid orange"
+      @change="addedElement"
+      group="webtools"
+    >
+      <WebGeneric
+        :item="item"
+        v-for="(item, index) in items"
+        :key="generateId(index)"
+        class="item"
+      />
+    </draggable>
+  </web-component>
 </template>
 
 <script>
 // import _ from 'lodash'
+import WebComponent from '~/components/WebComponent.vue'
 
 export default {
+  extends: WebComponent,
+
   props: {
+    isLoggedIn: Boolean,
     items: {
       type: Array,
       default: () => [],

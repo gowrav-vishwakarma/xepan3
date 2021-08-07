@@ -14,6 +14,7 @@ module.exports = {
                         title: 'Title Haha',
                         col: 12,
                         schema: {
+                            huhu: { type: 'text', label: 'Huhu' },
                             haha: { type: 'text', label: 'label me' },
                             defaultcontent: { type: 'text' },
                             headerType: { type: 'select', items: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }

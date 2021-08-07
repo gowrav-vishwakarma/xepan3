@@ -7,6 +7,7 @@
 <script>
 export default {
   props: {
+    isLoggedIn: Boolean,
     component: {
       type: String,
     },
@@ -22,6 +23,7 @@ export default {
 
   methods: {
     toolsSelected() {
+      if (!this.isLoggedIn) return
       this.$nuxt.$emit(
         'xepan-editor-tools-selected',
         this.component,

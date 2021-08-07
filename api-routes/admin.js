@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const jwt = require('jsonwebtoken')
 const _ = require('lodash');
 const { User, xepanApps } = require('../models');
 
@@ -7,7 +8,8 @@ const { User, xepanApps } = require('../models');
 router.post('/login', async function (req, res, next) {
   // console.log(req);
   const user = await User.findOne({
-    where: { username: req.body.username, password: req.body.password }
+    where: { username: req.body.username, password: req.body.password },
+    raw: true
   }).catch(err => {
     console.log(err);
   })
@@ -15,13 +17,31 @@ router.post('/login', async function (req, res, next) {
     res.status(401).send("UnAuthenticated");
     return;
   }
-
-  res.send({ user, token: 'test' });
+  const token = jwt.sign(user, process.env.JWT_SECRET || 'secret', { expiresIn: process.env.JWT_TOKENLIFE || '365d' });
+  res.send({ user, token });
 });
 
 // PUT MIDDLEWARE HERE
-router.get('/user', function (req, res) {
-  res.send({ number: Math.random() });
+router.get('/user', async function (req, res) {
+  const token = req.cookies['auth._token.adminlogin'].replace('Bearer ', '');
+  await jwt.verify(token, process.env.JWT_SECRET || 'secret', async function (err, decoded) {
+    if (err) {
+      throw err;
+    }
+    const user = await User.findOne({
+      where: { id: decoded.id }
+    }).catch(err => {
+      console.log(err);
+    })
+    if (!user) {
+      res.status(401).send("UnAuthenticated");
+      return;
+    }
+    res.send({ user });
+    // res.send({ user: decoded });
+  });
+
+
 });
 
 router.get('/menus', function (req, res) {

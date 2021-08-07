@@ -4,7 +4,8 @@ module.exports = {
             title: 'xEpan',
             icon: 'cogs',
             items: [
-                { path: '/admin/epans', title: 'EpansManagement', icon: 'mdi-cogs' }
+                { path: '/admin/epans', title: 'EpansManagement', icon: 'mdi-cogs' },
+                { path: '/home', title: 'GOTO HOme web', icon: 'mdi-cogs' },
             ]
         },
 

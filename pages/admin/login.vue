@@ -67,7 +67,7 @@ export default {
         const response = await this.$auth.loginWith('adminlogin', {
           data: this.login,
         })
-        console.log(response)
+        // console.log(response)
         this.$auth.setUser(response.data.user)
         this.$router.push('/admin')
       } catch (err) {

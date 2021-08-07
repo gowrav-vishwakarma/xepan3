@@ -7,6 +7,7 @@
       :props.sync="item.props"
       :toolbar-options.sync="item.toolbarOptions"
       class="inner"
+      :isLoggedIn="isLoggedIn"
       :items="item.items"
     ></component>
     <slot />
@@ -17,6 +18,7 @@
 export default {
   name: 'Generic',
   props: {
+    isLoggedIn: Boolean,
     item: {
       type: Object,
       default: () => {},

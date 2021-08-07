@@ -67,7 +67,6 @@ export default {
   ],
 
   auth: {
-    localStorage: true,
     strategies: {
       adminlogin: {
         scheme: 'local',
@@ -79,12 +78,12 @@ export default {
         },
         user: {
           property: 'user',
-          autoFetch: false
+          autoFetch: true
         },
         endpoints: {
           login: { url: '/api/admin/login', method: 'post' },
           logout: false,
-          user: false
+          user: { url: '/api/admin/user', method: 'get' },
         }
       }
     },

@@ -2,17 +2,14 @@ const express = require('express');
 const router = express.Router();
 
 
-router.get('/page-content', function (req, res) {
+router.get('/page-content', async function (req, res) {
     const { WebPage } = require('../models')
-    console.log('req.query', req.query);
-    WebPage.findOne({
+    const page = await WebPage.findOne({
         where: { name: req.query.page }
-    })
-        .then(page => {
-            if (page) res.json(page.content);
-            else
-                res.send(null);
-        })
+    });
+    if (page) res.json(page.content);
+    else
+        res.status(404).json({ exec: 'NotFound' });
 })
 
 module.exports = router;

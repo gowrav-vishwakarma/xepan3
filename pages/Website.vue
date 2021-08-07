@@ -9,6 +9,7 @@
       v-for="(item, index) in pageContent"
       :key="generateId(index)"
       :item="item"
+      :isLoggedIn="isLoggedIn"
       class="item"
     />
   </div>
@@ -19,12 +20,16 @@ import _ from 'lodash'
 
 export default {
   async asyncData(context) {
-    // console.log('context.req.url', context.req.url)
+    const pagePath = process.client ? context.route.path : context.req.url
     let pageContent = await context.$axios
       .$get('/api/web/page-content', {
-        params: { page: context.req.url },
+        params: { page: pagePath },
       })
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        if (err.response.status === 404) {
+          context.error({ statusCode: 404, message: 'Page not found' })
+        }
+      })
     if (!pageContent) {
       pageContent = [
         {
@@ -40,22 +45,19 @@ export default {
     const tools = await context.$axios
       .$get('/api/web-editor/tools')
       .catch((err) => console.log(err))
-    return { tools, pageContent, pageUrl: context.req.url }
+
+    return { tools, pageContent, pageUrl: pagePath }
   },
   computed: {
     isLoggedIn() {
-      return true
+      console.log('this.$store.state.auth', this.$store.state.auth)
+      return (
+        this.$store.state.auth.loggedIn &&
+        this.$store.state.auth.user.roles.includes('editor')
+      )
     },
   },
-  // created() {
-  //   this.$nuxt.$on('xepan-editor-tools-selected', this.toolsSelectedCallBack)
-  // },
   methods: {
-    // toolsSelectedCallBack(props, toolbarOptions) {
-    //   const originalOptions = _.find(this.tools, ['id', toolbarOptions.id])
-    //   toolbarOptions = Object.assign(originalOptions, toolbarOptions)
-    //   console.log('new options', toolbarOptions)
-    // },
     removeToolBarOptions(o) {
       if (Array.isArray(o)) {
         o = o.map((i) => this.removeToolBarOptions(i))

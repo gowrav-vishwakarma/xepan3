@@ -3,6 +3,7 @@
     :props.sync="props"
     :toolbar-options.sync="toolbarOptions"
     :component="component"
+    :isLoggedIn="isLoggedIn"
   >
     <component
       :is="headerType"
@@ -22,6 +23,7 @@ export default {
   //   WebComponent,
   // },
   props: {
+    isLoggedIn: Boolean,
     props: {
       type: Object,
       default: () => {
