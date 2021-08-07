@@ -7,6 +7,9 @@
 <script>
 export default {
   props: {
+    component: {
+      type: String,
+    },
     props: {
       type: Object,
       default: () => {},
@@ -21,8 +24,8 @@ export default {
     toolsSelected() {
       this.$nuxt.$emit(
         'xepan-editor-tools-selected',
-        this.props,
-        this.toolbarOptions
+        this.component,
+        this.props
         // modelProperty: 'variable in props' Optional, default props itself
         // formschema: 'variable in toolbarOptions' Optional, default toolbarOptions itself
       )

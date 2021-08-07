@@ -37,6 +37,14 @@
 
 <script>
 export default {
+  props: {
+    toolsData: {
+      type: Object,
+      default: () => {
+        return {}
+      },
+    },
+  },
   data() {
     return {
       drawer: false,
@@ -50,15 +58,28 @@ export default {
 
   methods: {
     toolsSelectedCallBack(
+      component,
       toolProps,
-      toolbarOptions,
       modelProperty = false,
       formschemaProperty = false
     ) {
       this.drawer = false
-      console.log('received', toolProps, toolbarOptions)
       this.optionModel = toolProps
-      this.optionSchema = toolbarOptions
+      for (const key in this.toolsData) {
+        if (Object.hasOwnProperty.call(this.toolsData, key)) {
+          const element = this.toolsData[key]
+          if (element.tools) {
+            const opt = element.tools.find((o) => o.component === component)
+            console.log('Found options', opt)
+            if (opt) {
+              this.optionSchema = opt.toolbarOptions
+              break
+            }
+          }
+        }
+      }
+      console.log('component', component, 'tools-data', this.toolsData)
+      // this.optionSchema = toolbarOptions
     },
   },
 }

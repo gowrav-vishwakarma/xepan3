@@ -15,9 +15,11 @@
 </template>
 
 <script>
+import _ from 'lodash'
+
 export default {
   async asyncData(context) {
-    console.log('context.req.url', context.req.url)
+    // console.log('context.req.url', context.req.url)
     let pageContent = await context.$axios
       .$get('/api/web/page-content', {
         params: { page: context.req.url },
@@ -49,10 +51,28 @@ export default {
   //   this.$nuxt.$on('xepan-editor-tools-selected', this.toolsSelectedCallBack)
   // },
   methods: {
+    // toolsSelectedCallBack(props, toolbarOptions) {
+    //   const originalOptions = _.find(this.tools, ['id', toolbarOptions.id])
+    //   toolbarOptions = Object.assign(originalOptions, toolbarOptions)
+    //   console.log('new options', toolbarOptions)
+    // },
+    removeToolBarOptions(o) {
+      if (Array.isArray(o)) {
+        o = o.map((i) => this.removeToolBarOptions(i))
+      } else {
+        o = _.omit(o, 'toolbarOptions')
+      }
+      if (o.items) o.items = this.removeToolBarOptions(o.items)
+      return o
+    },
     savePageContent() {
+      let content = JSON.parse(JSON.stringify(this.pageContent))
+      content = this.removeToolBarOptions(content)
+      console.log('content', content)
+
       const postOptions = {
         page: this.pageUrl,
-        content: this.pageContent,
+        content,
       }
 
       this.$axios

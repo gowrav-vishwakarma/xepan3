@@ -3,6 +3,7 @@
     <component
       :is="comp"
       :key="generateId()"
+      :component="comp"
       :props.sync="item.props"
       :toolbar-options.sync="item.toolbarOptions"
       class="inner"

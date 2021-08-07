@@ -1,5 +1,9 @@
 <template>
-  <web-component :props.sync="props" :toolbar-options.sync="toolbarOptions">
+  <web-component
+    :props.sync="props"
+    :toolbar-options.sync="toolbarOptions"
+    :component="component"
+  >
     <component
       :is="headerType"
       type="text"
@@ -13,15 +17,15 @@
 import WebComponent from '~/components/WebComponent.vue'
 
 export default {
-  // extends: WebComponent,
-  components: {
-    WebComponent,
-  },
+  extends: WebComponent,
+  // components: {
+  //   WebComponent,
+  // },
   props: {
     props: {
       type: Object,
       default: () => {
-        return { defaultcontent: 'HII', headerType: 'h1' }
+        return { defaultcontent: 'HII', headerType: 'h1', haha: 'JJJ' }
       },
     },
     toolbarOptions: {

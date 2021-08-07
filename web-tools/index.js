@@ -1,7 +1,7 @@
 module.exports = {
     basic: {
         tools: [
-            { name: 'Block', tag: 'div', icon: "cogs" },
+            { name: 'Block', component: 'div', tag: 'div', icon: "cogs" },
             {
                 name: 'Header', component: 'WebHeader', icon: "H1 icon",
                 props: {
@@ -14,6 +14,7 @@ module.exports = {
                         title: 'Title Haha',
                         col: 12,
                         schema: {
+                            haha: { type: 'text', label: 'label me' },
                             defaultcontent: { type: 'text' },
                             headerType: { type: 'select', items: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'] }
                         }
