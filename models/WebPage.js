@@ -3,10 +3,8 @@
 const mongoose = require("mongoose");
 
 const WebPageSchema = new mongoose.Schema({
-  name: {
-    name: String,
-    content: String,
-  }
+  name: String,
+  content: Array,
 });
 
-module.exports = mongoose.model('WebPages', WebPageSchema); // register model
+module.exports = mongoose.model('WebPage', WebPageSchema); // register model
