@@ -1,19 +1,13 @@
 'use strict';
-const { Model } = require('sequelize');
-module.exports = (sequelize, DataTypes) => {
-    class User extends Model {
-        static associate(models) { }
-    }
-    User.init(
-        {
-            username: DataTypes.STRING,
-            password: DataTypes.STRING,
-            roles: DataTypes.JSON
-        },
-        {
-            sequelize,
-            modelName: 'User',
-        }
-    );
-    return User;
-};
+
+'use strict';
+
+const mongoose = require("mongoose");
+
+const UserSchema = new mongoose.Schema({
+    username: String,
+    password: String,
+    roles:[]
+});
+
+module.exports = mongoose.model('User', UserSchema); // register model
