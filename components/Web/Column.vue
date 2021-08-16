@@ -7,15 +7,22 @@
   >
     <draggable
       :list="items"
-      style="width: 100%; min-height: 50px; border: 1px solid orange"
+      style="
+        width: 100%;
+        min-height: 50px;
+        border: 1px solid orange;
+        display: flex;
+      "
       @change="addedElement"
       group="webtools"
+      :options="{ disabled: !isLoggedIn }"
     >
       <WebGeneric
         :item="item"
         v-for="(item, index) in items"
         :key="generateId(index)"
         class="item"
+        :isLoggedIn="isLoggedIn"
       />
     </draggable>
   </web-component>

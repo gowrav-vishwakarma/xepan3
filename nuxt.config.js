@@ -24,19 +24,18 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     "@mdi/font/css/materialdesignicons.css",
-    'medium-editor/dist/css/medium-editor.css',
-    'vuejs-medium-editor/src/themes/default.css',
-    'highlight.js/styles/ocean.css' // if using code highlight
+    // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' },
+    // { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css' },
+    // { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/4.4.95/css/materialdesignicons.min.css' }
   ],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     { src: '~/plugins/persistedState.client.js' },
     { src: '~plugins/vuedraggable.js', ssr: false },
-    { src: '~/plugins/medium-editor', ssr: false },
+    { src: '~/plugins/CKEditor.js', ssr: false },
     { src: '~/plugins/vnatk-crud.js', ssr: false },
     { src: '~/plugins/v-form-base.js', ssr: false },
-
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -158,6 +157,7 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     watch: ['~/xepan-applications/**/*.js', '~/api-routes/admin.js'],
+    transpile: ['vuetify/lib', 'tiptap-vuetify'],
     cache: false,
     // extend(config, ctx) {
     //   // You can extend webpack config here

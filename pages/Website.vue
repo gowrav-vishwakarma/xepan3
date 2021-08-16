@@ -50,7 +50,6 @@ export default {
   },
   computed: {
     isLoggedIn() {
-      console.log('this.$store.state.auth', this.$store.state.auth)
       return (
         this.$store.state.auth.loggedIn &&
         this.$store.state.auth.user.roles.includes('editor')

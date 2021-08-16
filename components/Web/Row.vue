@@ -22,6 +22,7 @@
         v-for="(item, index) in items"
         :key="generateId(index)"
         class="item"
+        :isLoggedIn="isLoggedIn"
       />
     </draggable>
   </web-component>

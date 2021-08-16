@@ -1,5 +1,5 @@
 <template>
-  <div @dblclick="toolsSelected">
+  <div @dblclick.stop="toolsSelected">
     <slot />
   </div>
 </template>
