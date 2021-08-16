@@ -2,7 +2,6 @@ const fs = require('fs');
 const express = require('express');
 const router = express.Router();
 const _ = require('lodash');
-const vnatk = require('vnatk-express-sequelize');
 
 
 // router.use(require('./middleware/adminTokenChecker'));
@@ -35,10 +34,5 @@ router.get('/tools', function (req, res) {
 })
 
 const Models = require('../models');
-router.use('/vnatk', vnatk({ // "/vnatk" will be your base path where the system will hit for its APIs
-    Models,
-    router
-}));
-
 
 module.exports = router;

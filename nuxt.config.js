@@ -33,8 +33,7 @@ export default {
   plugins: [
     { src: '~/plugins/persistedState.client.js' },
     { src: '~plugins/vuedraggable.js', ssr: false },
-    // { src: '~/plugins/CKEditor.js', ssr: false },
-    { src: '~/plugins/vnatk-crud.js', ssr: false },
+    { src: '~/plugins/tinymce.js'},
     { src: '~/plugins/v-form-base.js', ssr: false },
   ],
 
