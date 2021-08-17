@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 type="text" v-text="componentprops.defaultcontent"></h1>
+    <h1 type="text" v-text="props.defaultcontent"></h1>
     <v-btn color="success" @click="changedefaultcontent">update me</v-btn>
   </div>
 </template>
@@ -8,7 +8,7 @@
 <script>
 export default {
   props: {
-    componentprops: {
+    props: {
       type: Object,
       default: () => {},
     },
@@ -21,7 +21,7 @@ export default {
   methods: {
     changedefaultcontent() {
       /* eslint vue/no-mutating-props:0 */
-      this.componentprops.defaultcontent = 'xEpan ' + Math.random()
+      this.props.defaultcontent = 'xEpan ' + Math.random()
     },
   },
 }

@@ -40,7 +40,7 @@ export default {
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [
     '~/components', // default level is 0
-    { path: '~xepan-applications/xepan/components', prefix: 'xEpan' },
+    // { path: '~xepan-applications/xepan/components', prefix: 'xEpan' },
   ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -51,7 +51,21 @@ export default {
     '@nuxtjs/stylelint-module',
     // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
+    '@nuxtjs/router',
+    '@ergonode/vuems',
   ],
+  vuems: {
+      modules: {
+        local: [
+          '@xepan/core',
+          '@xepan/webbuilder',
+        ],
+      },
+      required: [ '@xepan/core' ],
+      vuex: true,
+      logLoadedModules: true,
+      isDev: process.env.NODE_ENV !== 'production',
+   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -94,27 +108,9 @@ export default {
   },
 
   router: {
-    extendRoutes(routes, resolve) {
-      const path = require('path');
-      const fs = require('fs');
-
-      const { xepanApps } = require('./models');
-      // Read all vue-routes
-      xepanApps.forEach(xapp => {
-        const vueroute = path.normalize(path.join(__dirname, 'xepan-applications/', xapp, '/vue-routes.js'));
-        if (!fs.existsSync(vueroute)) return;
-        const _routes = require(vueroute).default;
-        _routes.forEach(r => {
-          r.component = resolve(__dirname, r.component);
-          routes.push(r)
-        });
-      });
-      routes.push({
-        name: 'custom',
-        path: '*',
-        component: resolve(__dirname, 'pages/Website.vue')
-      })
-    }
+    middleware: [
+            // '~/middleware/modulesMiddlewareLoader.js',
+        ],
   },
 
   serverMiddleware: {

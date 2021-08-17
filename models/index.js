@@ -11,7 +11,7 @@ const db = {};
 mongoose.set('debug', true);
 
 db._mongoose = mongoose;
-mongoose.connect('mongodb://localhost/'+config.database,{ useUnifiedTopology: true, useFindAndModify:false });
+mongoose.connect('mongodb://localhost/'+config.database,{ useUnifiedTopology: true, useFindAndModify:false,  useNewUrlParser: true  });
 db._connection = mongoose.connection;
 
 fs

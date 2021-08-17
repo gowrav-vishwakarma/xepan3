@@ -8,7 +8,7 @@ const { User, xepanApps } = require('../models');
 router.post('/login', async function (req, res, next) {
   // console.log(req);
   const user = await User.findOne({ username: req.body.username, password: req.body.password }).catch(err => {
-    console.log(err);
+    throw err;
   })
 
   console.log('user',user);
