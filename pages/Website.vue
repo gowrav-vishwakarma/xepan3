@@ -52,6 +52,8 @@ export default {
     isLoggedIn() {
       return (
         this.$store.state.auth.loggedIn &&
+        this.$store.state.auth.user &&
+        this.$store.state.auth.user.roles &&
         this.$store.state.auth.user.roles.includes('editor')
       )
     },

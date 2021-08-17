@@ -7,17 +7,16 @@ const { User, xepanApps } = require('../models');
 /* GET home page. */
 router.post('/login', async function (req, res, next) {
   // console.log(req);
-  const user = await User.findOne({
-    where: { username: req.body.username, password: req.body.password },
-    raw: true
-  }).catch(err => {
+  const user = await User.findOne({ username: req.body.username, password: req.body.password }).catch(err => {
     console.log(err);
   })
+
+  console.log('user',user);
   if (!user) {
     res.status(401).send("UnAuthenticated");
     return;
   }
-  const token = jwt.sign(user, process.env.JWT_SECRET || 'secret', { expiresIn: process.env.JWT_TOKENLIFE || '365d' });
+  const token = jwt.sign(user.toJSON(), process.env.JWT_SECRET || 'secret', { expiresIn: process.env.JWT_TOKENLIFE || '365d' });
   res.send({ user, token });
 });
 
@@ -29,7 +28,7 @@ router.get('/user', async function (req, res) {
       throw err;
     }
     const user = await User.findOne({
-      where: { id: decoded.id }
+      _id: decoded._id
     }).catch(err => {
       console.log(err);
     })
@@ -37,7 +36,7 @@ router.get('/user', async function (req, res) {
       res.status(401).send("UnAuthenticated");
       return;
     }
-    res.send({ user });
+    res.send({ user: user.toJSON() });
     // res.send({ user: decoded });
   });
 

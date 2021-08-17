@@ -22,7 +22,7 @@ module.exports = {
                     }
                 }
             },
-            { name: 'Medium Editor', component: 'WebRichEditor', props: { defaultcontent: "" }, icon: "TextEditor" },
+            { name: 'RichText Editor', component: 'WebRichEditor', props: { defaultcontent: "" }, icon: "TextEditor" },
             { name: 'Row', component: 'WebRow', isDroppable: true, items: [], props: { defaultcontent: "" }, icon: "Row" },
             { name: 'Column', component: 'WebColumn', isDroppable: true, items: [], props: { defaultcontent: "" }, icon: "Col" },
         ]

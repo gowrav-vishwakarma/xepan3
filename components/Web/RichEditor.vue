@@ -5,18 +5,36 @@
     :component="component"
     :isLoggedIn="isLoggedIn"
   >
-    <ckeditor :editor="editor" v-model="content" :config="editorConfig"></ckeditor>
+  <div v-html="content" v-if="!isLoggedIn">
+  </div>
+    <tinymce
+      v-else
+       inline
+       :init="{
+         plugins: [
+           'advlist autolink lists link image charmap print preview anchor',
+           'searchreplace visualblocks code fullscreen',
+           'insertdatetime media table paste code help wordcount'
+         ],
+         toolbar:
+           'undo redo | formatselect | bold italic backcolor | \
+           alignleft aligncenter alignright alignjustify | \
+           bullist numlist outdent indent | removeformat | help'
+       }"
+       v-model="content"
+       @onChange="contentChanged" 
+     />
   </web-component>
 </template>
 
 <script>
-
-
 import WebComponent from '~/components/WebComponent.vue'
 
 export default {
   extends: WebComponent,
-  // components: { ckeditor: CKEditor.component },
+  // components: { 
+    // 'editor': Editor
+    // },
   props: {
     isLoggedIn: Boolean,
     props: {
@@ -32,10 +50,14 @@ export default {
   },
   data() {
     return {
-      editor:this.$InlineEditor,
       content: this.props.defaultcontent,
-      editorConfig: {}
     }
   },
+  methods:{
+    contentChanged(){
+      /* eslint vue/no-mutating-props:0 */
+      this.props.defaultcontent=this.content;
+    }
+  }
 }
 </script>

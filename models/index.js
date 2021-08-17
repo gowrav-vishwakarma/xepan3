@@ -2,18 +2,17 @@
 
 const fs = require('fs');
 const path = require('path');
-const Sequelize = require('sequelize');
+const mongoose = require('mongoose');
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
 const config = require(path.join(__dirname, '/../config/config.js'))[env];
 const db = {};
 
-let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+mongoose.set('debug', true);
+
+db._mongoose = mongoose;
+mongoose.connect('mongodb://localhost/'+config.database,{ useUnifiedTopology: true, useFindAndModify:false });
+db._connection = mongoose.connection;
 
 fs
   .readdirSync(__dirname)
@@ -21,43 +20,26 @@ fs
     return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
   })
   .forEach(file => {
-    const model = require(path.join(__dirname, file))(sequelize, Sequelize.DataTypes)
-    db[model.name] = model;
+    const model = require(path.join(__dirname, file))
+    db[file.split('.')[0]] = model;
   });
 
 
 db.xepanApps = ['xepan'];
 
-// sequelize.query('SELECT * FROM InstalledApps').then(function (result) {
-//   console.log(result);
-// }).catch(function (err) {
-//   console.log(err);
-// });
-db.xepanApps.map(f => {
+db.xepanApps.map(app => {
   // Read All Models from _base+ installedApps
-  const modelfolders = path.normalize(path.join(__dirname, '/../xepan-applications/', f, '/models/'));
+  const modelfolders = path.normalize(path.join(__dirname, '/../xepan-applications/', app, '/models/'));
   fs
     .readdirSync(modelfolders)
     .filter(file => {
       return (file.indexOf('.') !== 0) && (file !== 'index.js') && (file.slice(-3) === '.js');
     })
     .forEach(file => {
-      const model = require(path.join(modelfolders, file))(sequelize, Sequelize.DataTypes)
-      db[model.name] = model;
+      const model = require(path.join(__dirname, file))
+      db[app+'_'+file.split('.')[0]] = model;
     });
   return modelfolders;
 })
-// sequelize.sync({ alter: true });
-
-
-Object.keys(db).forEach(modelName => {
-  if (db[modelName].associate) {
-    db[modelName].associate(db);
-  }
-});
-
-
-db.sequelize = sequelize;
-db.Sequelize = Sequelize;
 
 module.exports = db;

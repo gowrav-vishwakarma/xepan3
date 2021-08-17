@@ -33,8 +33,7 @@ export default {
   plugins: [
     { src: '~/plugins/persistedState.client.js' },
     { src: '~plugins/vuedraggable.js', ssr: false },
-    { src: '~/plugins/CKEditor.js', ssr: false },
-    { src: '~/plugins/vnatk-crud.js', ssr: false },
+    { src: '~/plugins/tinymce.js'},
     { src: '~/plugins/v-form-base.js', ssr: false },
   ],
 
@@ -156,7 +155,7 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    watch: ['~/xepan-applications/**/*.js', '~/api-routes/admin.js'],
+    watch: ['~/models/*.js','~/api-routes/*.js','~/xepan-applications/**/*.js', '~/api-routes/admin.js'],
     transpile: ['vuetify/lib', 'tiptap-vuetify'],
     cache: false,
     // extend(config, ctx) {

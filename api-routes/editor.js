@@ -2,22 +2,17 @@ const fs = require('fs');
 const express = require('express');
 const router = express.Router();
 const _ = require('lodash');
-const vnatk = require('vnatk-express-sequelize');
 
 
 // router.use(require('./middleware/adminTokenChecker'));
 
 router.post('/page-content-save', async function (req, res) {
     const { WebPage } = require('../models')
-    const page = await WebPage.findOne({
-        where: { name: req.body.page }
-    })
-    if (page) {
-        page.content = req.body.content;
-        page.save().then(page => {
-            res.send({ message: 'Page Saved' });
-        }).catch(e => console.log(e));
-    }
+    console.log('req.body.page',req.body.page);
+    console.log('req.body.content',req.body.content);
+    console.log('typeof req.body.content',typeof req.body.content);
+    const docs = await WebPage.findOneAndUpdate({name: req.body.page},{content: req.body.content},{new: true,  strict: false }).catch(err=>{throw err});
+    res.send({ docs });
 })
 
 router.get('/tools', function (req, res) {
@@ -39,10 +34,5 @@ router.get('/tools', function (req, res) {
 })
 
 const Models = require('../models');
-router.use('/vnatk', vnatk({ // "/vnatk" will be your base path where the system will hit for its APIs
-    Models,
-    router
-}));
-
 
 module.exports = router;
