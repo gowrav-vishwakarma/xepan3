@@ -17,7 +17,7 @@
       group="webtools"
       :options="{ disabled: !isLoggedIn }"
     >
-      <WebGeneric
+      <xEpanWebGeneric
         :item="item"
         v-for="(item, index) in items"
         :key="generateId(index)"
@@ -33,6 +33,7 @@
 import WebComponent from '~/modules/@xepan/webbuilder/components/Webcomponent.vue'
 
 export default {
+  name:'xepan-web-column',
   extends: WebComponent,
 
   props: {

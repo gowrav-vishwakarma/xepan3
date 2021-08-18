@@ -10,20 +10,18 @@ export default {
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { hid: 'description', name: 'description', content: '' },
-      { name: 'format-detection', content: 'telephone=no' }
+      { name: 'format-detection', content: 'telephone=no' },
     ],
-    link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
-    ]
+    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
   server: {
-    host: 'xepan3.loc' // default: localhost
+    host: 'xepan3.loc', // default: localhost
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    "@mdi/font/css/materialdesignicons.css",
+    '@mdi/font/css/materialdesignicons.css',
     // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' },
     // { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css' },
     // { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/4.4.95/css/materialdesignicons.min.css' }
@@ -33,14 +31,13 @@ export default {
   plugins: [
     { src: '~/plugins/persistedState.client.js' },
     { src: '~plugins/vuedraggable.js', ssr: false },
-    { src: '~/plugins/tinymce.js'},
+    { src: '~/plugins/tinymce.js' },
     { src: '~/plugins/v-form-base.js', ssr: false },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: [
     '~/components', // default level is 0
-    // { path: '~xepan-applications/xepan/components', prefix: 'xEpan' },
   ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
@@ -55,27 +52,25 @@ export default {
     '@ergonode/vuems',
   ],
   vuems: {
-      modules: {
-        local: [
-          '@xepan/core',
-          '@xepan/webbuilder',
-        ],
-      },
-      required: [ '@xepan/core' ],
-      vuex: true,
-      logLoadedModules: true,
-      isDev: process.env.NODE_ENV !== 'production',
-   },
+    modules: {
+      local: ['@xepan/core', '@xepan/api-gateway', '@xepan/webbuilder'],
+    },
+    required: ['@xepan/core', '@xepan/api-gateway'],
+    vuex: true,
+    logLoadedModules: true,
+    isDev: process.env.NODE_ENV !== 'production',
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    '@nuxtjs/dotenv',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
-    '@nuxtjs/auth-next'
+    '@nuxtjs/auth-next',
   ],
 
   auth: {
@@ -90,41 +85,45 @@ export default {
         },
         user: {
           property: 'user',
-          autoFetch: true
+          autoFetch: true,
         },
         endpoints: {
           login: { url: '/api/admin/login', method: 'post' },
           logout: false,
           user: { url: '/api/admin/user', method: 'get' },
-        }
-      }
+        },
+      },
     },
     redirect: {
       login: '/admin/login',
       logout: '/admin',
       // callback: '/admin',
-      home: '/admin'
-    }
+      home: '/admin',
+    },
   },
 
   router: {
     middleware: [
-            // '~/middleware/modulesMiddlewareLoader.js',
-        ],
+      // '~/middleware/modulesMiddlewareLoader.js',
+    ],
   },
 
-  serverMiddleware: {
-    '/api': '~/server.js'
-  },
+  serverMiddleware: [
+    // '/api': '~/server.js'
+  ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    axios: {
+      baseURL: process.env.API_GATEWAY_URL || 'http://localhost', // Used as fallback if no runtime config is provided
+    },
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     manifest: {
-      lang: 'en'
-    }
+      lang: 'en',
+    },
   },
 
   // Content module configuration: https://go.nuxtjs.dev/config-content
@@ -143,20 +142,25 @@ export default {
           info: colors.teal.lighten1,
           warning: colors.amber.base,
           error: colors.deepOrange.accent4,
-          success: colors.green.accent3
-        }
-      }
-    }
+          success: colors.green.accent3,
+        },
+      },
+    },
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
-    watch: ['~/models/*.js','~/api-routes/*.js','~/xepan-applications/**/*.js', '~/api-routes/admin.js'],
+    watch: [
+      '~/models/*.js',
+      '~/api-routes/*.js',
+      '~/xepan-applications/**/*.js',
+      '~/api-routes/admin.js',
+    ],
     transpile: ['vuetify/lib', 'tiptap-vuetify'],
     cache: false,
     // extend(config, ctx) {
     //   // You can extend webpack config here
     //   config.resolve.alias.vue$ = "vue/dist/vue.esm.js";
     // }
-  }
+  },
 }

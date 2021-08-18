@@ -6,6 +6,7 @@
 
 <script>
 export default {
+  name:"Webcomponent",
   props: {
     isLoggedIn: Boolean,
     component: {

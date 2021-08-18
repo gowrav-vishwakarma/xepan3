@@ -16,7 +16,7 @@
 
 <script>
 export default {
-  name: 'Generic',
+  name: 'xEpan-Web-Generic',
   props: {
     isLoggedIn: Boolean,
     item: {

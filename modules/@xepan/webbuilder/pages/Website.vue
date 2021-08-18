@@ -21,8 +21,10 @@ import _ from 'lodash'
 export default {
   async asyncData(context) {
     const pagePath = process.client ? context.route.path : context.req.url
-    let pageContent = await context.$axios
-      .$get('/api/web/page-content', {
+    context.$axios.setBaseURL('http://localhost:8080')
+
+    const pageContent1 = await context.$axios
+      .$get('/api/xepan/webbuilder/web/page-content', {
         params: { page: pagePath },
       })
       .catch((err) => {
@@ -30,6 +32,8 @@ export default {
           context.error({ statusCode: 404, message: 'Page not found' })
         }
       })
+      console.log(pageContent1);
+    let pageContent=false;
     if (!pageContent) {
       pageContent = [
         {
@@ -42,9 +46,11 @@ export default {
         },
       ]
     }
-    const tools = await context.$axios
-      .$get('/api/web-editor/tools')
-      .catch((err) => console.log(err))
+    const tools=[]
+
+    // const tools = await context.$axios
+    //   .$get('/api/web-editor/tools')
+    //   .catch((err) => console.log(err))
 
     return { tools, pageContent, pageUrl: pagePath }
   },
