@@ -1,15 +1,16 @@
 <template>
-  <web-component
+  <xEpanWebcomponent
     :props.sync="props"
     :toolbar-options.sync="toolbarOptions"
     :component="component"
-    :isLoggedIn="isLoggedIn"
+    :is-logged-in="isLoggedIn"
   >
-  <div v-html="content" v-if="!isLoggedIn">
+  <div v-if="!isLoggedIn" v-html="content" >
   </div>
     <tinymce
       v-else
        inline
+       v-model="content"
        :init="{
          plugins: [
            'advlist autolink lists link image charmap print preview anchor',
@@ -21,14 +22,13 @@
            alignleft aligncenter alignright alignjustify | \
            bullist numlist outdent indent | removeformat | help'
        }"
-       v-model="content"
        @onChange="contentChanged" 
      />
-  </web-component>
+  </xEpanWebcomponent>
 </template>
 
 <script>
-import WebComponent from '~/components/WebComponent.vue'
+import WebComponent from '~/modules/@xepan/webbuilder/components/Webcomponent.vue'
 
 export default {
   extends: WebComponent,

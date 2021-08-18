@@ -1,7 +1,7 @@
 <template>
   <div>
-    <EditorToolBar :tools-data="tools" v-on="$listeners" />
-    <EditorOptionBar :tools-data="tools" v-on="$listeners" />
+    <xEpanEditorToolBar :tools-data="tools" v-on="$listeners" />
+    <xEpanEditorOptionBar :tools-data="tools" v-on="$listeners" />
   </div>
 </template>
 

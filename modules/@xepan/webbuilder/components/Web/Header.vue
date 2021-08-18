@@ -1,5 +1,5 @@
 <template>
-  <web-component
+  <xEpanWebcomponent
     :props.sync="props"
     :toolbar-options.sync="toolbarOptions"
     :component="component"
@@ -11,11 +11,11 @@
       v-text="props.defaultcontent"
     ></component>
     <v-btn color="success" @click="changedefaultcontent">update me</v-btn>
-  </web-component>
+  </xEpanWebcomponent>
 </template>
 
 <script>
-import WebComponent from '~/components/WebComponent.vue'
+import WebComponent from '~/modules/@xepan/webbuilder/components/Webcomponent.vue'
 
 export default {
   extends: WebComponent,

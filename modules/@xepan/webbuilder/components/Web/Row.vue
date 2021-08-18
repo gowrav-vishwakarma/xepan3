@@ -1,40 +1,40 @@
 <template>
-  <web-component
+  <xEpanWebcomponent
     :props.sync="props"
     :toolbar-options.sync="toolbarOptions"
     :component="component"
-    :isLoggedIn="isLoggedIn"
+    :is-logged-in="isLoggedIn"
   >
     <draggable
       :list="items"
       style="
         width: 100%;
         min-height: 50px;
-        border: 1px solid orange;
-        display: flex;
+        border: 1px solid green;
+        flex-direction: row;
       "
-      @change="addedElement"
       group="webtools"
       :options="{ disabled: !isLoggedIn }"
+      @change="addedElement"
     >
-      <WebGeneric
-        :item="item"
+      <xEpanWebGeneric
         v-for="(item, index) in items"
         :key="generateId(index)"
+        :item="item"
         class="item"
-        :isLoggedIn="isLoggedIn"
+        :is-logged-in="isLoggedIn"
       />
     </draggable>
-  </web-component>
+  </xEpanWebcomponent>
 </template>
 
 <script>
+import WebComponent from '~/modules/@xepan/webbuilder/components/Webcomponent.vue'
+
 // import _ from 'lodash'
-import WebComponent from '~/components/WebComponent.vue'
 
 export default {
   extends: WebComponent,
-
   props: {
     isLoggedIn: Boolean,
     items: {

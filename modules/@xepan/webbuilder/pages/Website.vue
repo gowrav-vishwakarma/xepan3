@@ -1,11 +1,11 @@
 <template>
   <div class="wrapper">
-    <Editor
+    <xEpanEditor
       v-if="isLoggedIn"
       :tools="tools"
       @save-page-content="savePageContent"
     />
-    <WebGeneric
+    <xEpanWebGeneric
       v-for="(item, index) in pageContent"
       :key="generateId(index)"
       :item="item"
@@ -33,8 +33,8 @@ export default {
     if (!pageContent) {
       pageContent = [
         {
-          name: 'WebRow',
-          component: 'WebRow',
+          name: 'xEpanWebRow',
+          component: 'xEpanWebRow',
           props: {},
           toolbarOptions: {},
           icon: 'Row',

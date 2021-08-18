@@ -26,7 +26,7 @@
             <v-btn x-small color="success" @click="$emit('save-page-content')"
               >Save Page (^s)</v-btn
             >
-            <EditorPageManager />
+            <xEpanEditorPageManager />
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>

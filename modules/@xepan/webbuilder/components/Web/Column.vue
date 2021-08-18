@@ -1,5 +1,5 @@
 <template>
-  <web-component
+  <xEpanWebcomponent
     :props.sync="props"
     :toolbar-options.sync="toolbarOptions"
     :component="component"
@@ -10,8 +10,8 @@
       style="
         width: 100%;
         min-height: 50px;
-        border: 1px solid green;
-        flex-direction: row;
+        border: 1px solid orange;
+        display: flex;
       "
       @change="addedElement"
       group="webtools"
@@ -25,16 +25,16 @@
         :isLoggedIn="isLoggedIn"
       />
     </draggable>
-  </web-component>
+  </xEpanWebcomponent>
 </template>
 
 <script>
-import WebComponent from '~/components/WebComponent.vue'
-
 // import _ from 'lodash'
+import WebComponent from '~/modules/@xepan/webbuilder/components/Webcomponent.vue'
 
 export default {
   extends: WebComponent,
+
   props: {
     isLoggedIn: Boolean,
     items: {
