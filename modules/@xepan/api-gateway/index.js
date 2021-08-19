@@ -16,7 +16,6 @@ export async function beforeModule(context) {
   let baseEGconfig = require(baseEGConfigJSFilePath)
   const useApiGateway = process.env.USE_API_GATEWAY !== 'false'
   context.allModules.forEach((m) => {
-    console.log(m)
     const apiConfigfilePath = path.join(
       m.path,
       'server',
@@ -33,13 +32,12 @@ export async function beforeModule(context) {
           if (typeof apiName.paths === 'string') apiName.paths = [apiName.paths]
           apiName.paths.forEach((p) => {
             const handler = path.join(m.path, 'server', 'app.js')
-            this.nuxt.options.serverMiddleware.push({ path: p, handler })
+            this.options.serverMiddleware.push({ path: p, handler })
           })
         }
       }
     }
   })
-  console.log(this.nuxt.options.serverMiddleware)
   if (useApiGateway) {
     const data = YAML.stringify(baseEGconfig)
     fs.writeFileSync(baseEGConfigYMLFilePath, data)
@@ -52,3 +50,5 @@ export async function afterModule() {
   // run after loading module
   console.log('I AM CALLED afterModule')
 }
+
+module.exports.meta = require('./package.json')

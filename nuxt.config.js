@@ -1,8 +1,8 @@
 import colors from 'vuetify/es5/util/colors'
+require('dotenv').config()
 
 export default {
   // ssr: false,
-  // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     titleTemplate: '%s - xEpan3',
     title: 'xEpan3',
@@ -19,34 +19,17 @@ export default {
     host: 'xepan3.loc', // default: localhost
   },
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
-  css: [
-    '@mdi/font/css/materialdesignicons.css',
-    // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900|Material+Icons' },
-    // { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css' },
-    // { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/4.4.95/css/materialdesignicons.min.css' }
-  ],
+  css: ['@mdi/font/css/materialdesignicons.css'],
 
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [
-    { src: '~/plugins/persistedState.client.js' },
-    { src: '~plugins/vuedraggable.js', ssr: false },
-    { src: '~/plugins/tinymce.js' },
-    { src: '~/plugins/v-form-base.js', ssr: false },
-  ],
+  plugins: [{ src: '~/plugins/persistedState.client.js' }],
 
-  // Auto import components: https://go.nuxtjs.dev/config-components
   components: [
     '~/components', // default level is 0
   ],
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
-    // https://go.nuxtjs.dev/eslint
     '@nuxtjs/eslint-module',
-    // https://go.nuxtjs.dev/stylelint
     '@nuxtjs/stylelint-module',
-    // https://go.nuxtjs.dev/vuetify
     '@nuxtjs/vuetify',
     '@nuxtjs/router',
     '@ergonode/vuems',
@@ -61,14 +44,10 @@ export default {
     isDev: process.env.NODE_ENV !== 'production',
   },
 
-  // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/dotenv',
-    // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
-    // https://go.nuxtjs.dev/content
     '@nuxt/content',
     '@nuxtjs/auth-next',
   ],
@@ -88,9 +67,9 @@ export default {
           autoFetch: true,
         },
         endpoints: {
-          login: { url: '/api/admin/login', method: 'post' },
+          login: { url: '/api/xepan/core/admin/login', method: 'post' },
           logout: false,
-          user: { url: '/api/admin/user', method: 'get' },
+          user: { url: '/api/xepan/core/admin/user', method: 'get' },
         },
       },
     },
@@ -114,9 +93,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    axios: {
-      baseURL: process.env.API_GATEWAY_URL || 'http://localhost', // Used as fallback if no runtime config is provided
-    },
+    baseURL: process.env.API_GATEWAY_URL || 'http://localhost', // Used as fallback if no runtime config is provided
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa

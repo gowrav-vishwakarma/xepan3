@@ -1,0 +1,9 @@
+{
+  "name": "@xepan/api-gateway",
+  "version": "0.1.0",
+  "description": "ExpressGateway implemented for xEpan",
+  "main": "src/index.js",
+  "files": [
+    "*"
+  ]
+}

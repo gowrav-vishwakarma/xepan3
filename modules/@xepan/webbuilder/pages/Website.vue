@@ -17,13 +17,13 @@
 
 <script>
 import _ from 'lodash'
+import webTools from "~/assets/web-tools.json";
 
 export default {
   async asyncData(context) {
     const pagePath = process.client ? context.route.path : context.req.url
-    context.$axios.setBaseURL('http://localhost:8080')
-
-    const pageContent1 = await context.$axios
+    
+    let pageContent = await context.$axios
       .$get('/api/xepan/webbuilder/web/page-content', {
         params: { page: pagePath },
       })
@@ -32,8 +32,7 @@ export default {
           context.error({ statusCode: 404, message: 'Page not found' })
         }
       })
-      console.log(pageContent1);
-    let pageContent=false;
+      console.log('webTools',webTools);
     if (!pageContent) {
       pageContent = [
         {
@@ -46,7 +45,7 @@ export default {
         },
       ]
     }
-    const tools=[]
+    const tools=webTools
 
     // const tools = await context.$axios
     //   .$get('/api/web-editor/tools')
@@ -85,7 +84,7 @@ export default {
       }
 
       this.$axios
-        .post('/api/web-editor/page-content-save', postOptions)
+        .post('/api/xepan/webbuilder/web-editor/page-content-save', postOptions)
         .then(() => {
           alert('saved')
         })
