@@ -1,0 +1,59 @@
+<template>
+  <div class="generic">
+    <component
+      :is="comp"
+      :key="generateId()"
+      :component="comp"
+      :props.sync="item.props"
+      :toolbar-options.sync="item.toolbarOptions"
+      class="inner"
+      :isLoggedIn="isLoggedIn"
+      :items="item.items"
+    ></component>
+    <slot />
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'xEpan-Web-Generic',
+  props: {
+    isLoggedIn: Boolean,
+    item: {
+      type: Object,
+      default: () => {},
+    },
+  },
+  computed: {
+    comp() {
+      return this.item.component
+    },
+    props() {
+      return this.item
+    },
+  },
+  methods: {
+    generateId() {
+      return (
+        'id' +
+        Math.random().toString(36).substring(2) +
+        new Date().getTime().toString(36)
+      )
+    },
+  },
+}
+</script>
+
+<style scoped>
+.generic {
+  flex: 1;
+  display: flex;
+  align-items: stretch;
+  margin: 20px;
+}
+
+.inner {
+  width: 100%;
+  height: 100%;
+}
+</style>

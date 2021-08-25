@@ -1,0 +1,9 @@
+{
+  "name": "@xepan/core",
+  "version": "0.1.0",
+  "description": "Core functionality for xEpan",
+  "main": "./index.js",
+  "files": [
+    "*"
+  ]
+}

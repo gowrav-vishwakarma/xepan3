@@ -1,0 +1,55 @@
+<template>
+  <xEpanWebcomponent
+    :props.sync="props"
+    :toolbar-options.sync="toolbarOptions"
+    :component="component"
+    :isLoggedIn="isLoggedIn"
+  >
+    <component
+      :is="headerType"
+      type="text"
+      v-text="props.defaultcontent"
+    ></component>
+    <v-btn color="success" @click="changedefaultcontent">update me</v-btn>
+  </xEpanWebcomponent>
+</template>
+
+<script>
+import WebComponent from '~/modules/@xepan/webbuilder/components/Webcomponent.vue'
+
+export default {
+  extends: WebComponent,
+  // components: {
+  //   WebComponent,
+  // },
+  props: {
+    isLoggedIn: Boolean,
+    props: {
+      type: Object,
+      default: () => {
+        return { defaultcontent: 'HII', headerType: 'h1', haha: 'JJJ' }
+      },
+    },
+    toolbarOptions: {
+      type: Object,
+      default: () => {},
+    },
+  },
+  data() {
+    return {
+      content: this.props.defaultcontent,
+    }
+  },
+  computed: {
+    headerType() {
+      return this.props.headerType ? this.props.headerType : 'h1'
+    },
+  },
+  methods: {
+    changedefaultcontent() {
+      /* eslint vue/no-mutating-props:0 */
+      this.props.defaultcontent = this.content = Math.random()
+    },
+  },
+}
+</script>

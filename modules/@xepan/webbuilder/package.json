@@ -1,0 +1,9 @@
+{
+  "name": "@xepan/webbuild",
+  "version": "0.1.0",
+  "description": "D&D Frontend for xEpan",
+  "main": "./index.js",
+  "files": [
+    "*"
+  ]
+}

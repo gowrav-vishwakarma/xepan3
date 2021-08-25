@@ -3,7 +3,7 @@ module.exports = {
         tools: [
             { name: 'Block', component: 'div', tag: 'div', icon: "cogs" },
             {
-                name: 'Header', component: 'WebHeader', icon: "H1 icon",
+                name: 'Header', component: 'xEpanWebHeader', icon: "H1 icon",
                 props: {
                     headerType: "h1",
                     defaultcontent: "I am header"

@@ -1,0 +1,64 @@
+http:
+  port: 8080
+admin:
+  port: 9876
+  host: "localhost"
+apiEndpoints:
+  coreAPI:
+    host: "localhost"
+    paths:
+      - "/api/xepan/core"
+      - "/api/xepan/core/*"
+  webAPI:
+    hosts:
+      - "xepan3.loc"
+      - "localhost"
+    paths:
+      - "/api/xepan/webbuilder"
+      - "/api/xepan/webbuilder/*"
+  developerAPI:
+    host: "localhost"
+    paths:
+      - "/api/xepan/developer"
+      - "/api/xepan/developer/*"
+serviceEndpoints:
+  httpbin:
+    url: "http://localhost:3001"
+  webhttpbin:
+    url: "http://localhost:3002"
+  developerService:
+    url: "http://localhost:3002"
+policies:
+  - "basic-auth"
+  - "cors"
+  - "expression"
+  - "key-auth"
+  - "log"
+  - "oauth2"
+  - "proxy"
+  - "rate-limit"
+pipelines:
+  default:
+    apiEndpoints:
+      - "coreAPI"
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: "httpbin"
+              changeOrigin: true
+  webdefault:
+    apiEndpoints:
+      - "webAPI"
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: "webhttpbin"
+              changeOrigin: true
+  developerPipeline:
+    apiEndpoints:
+      - "developerAPI"
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: "developerService"
+              changeOrigin: true
