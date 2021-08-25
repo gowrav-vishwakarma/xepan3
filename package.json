@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
-    "servers":"concurrently -k --kill-others-on-fail \"(cd ./modules/@xepan/api-gateway/server && nodemon ./server.js)\" \"(cd ./modules/@xepan/core/server && nodemon ./bin/www)\" \"(cd ./modules/@xepan/webbuilder/server && nodemon ./bin/www)\" ",
+    "servers": "concurrently -k --kill-others-on-fail \"(cd ./modules/@xepan/api-gateway/server && nodemon ./server.js)\" \"(cd ./modules/@xepan/core/server && nodemon ./bin/www)\" \"(cd ./modules/@xepan/webbuilder/server && nodemon ./bin/www)\" \"(cd ./modules/@xepan/developer/src/server && nodemon ./server.js)\"",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",
@@ -38,6 +38,9 @@
     "mongoose": "^5.13.7",
     "morgan": "~1.9.1",
     "nuxt": "^2.15.7",
+    "v-drag-drop": "^1.0.2",
+    "vue-draggable-resizable": "^2.3.0",
+    "vue-file-toolbar-menu": "^1.3.4",
     "vuedraggable": "^2.24.3",
     "vuetify": "^2.5.5",
     "vuetify-form-base": "^0.3.3",

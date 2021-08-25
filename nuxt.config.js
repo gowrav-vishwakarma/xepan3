@@ -4,8 +4,8 @@ require('dotenv').config()
 export default {
   // ssr: false,
   head: {
-    titleTemplate: '%s - xEpan3',
-    title: 'xEpan3',
+    titleTemplate: '%s - Frendy Managed Project - Refactor',
+    title: 'Frendy Managed Project - Refactor',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -36,7 +36,12 @@ export default {
   ],
   vuems: {
     modules: {
-      local: ['@xepan/core', '@xepan/api-gateway', '@xepan/webbuilder'],
+      local: [
+        '@xepan/core',
+        '@xepan/api-gateway',
+        '@xepan/webbuilder',
+        '@xepan/developer',
+      ],
     },
     required: ['@xepan/core', '@xepan/api-gateway'],
     vuex: true,

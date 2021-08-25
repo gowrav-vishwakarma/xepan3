@@ -1,0 +1,9 @@
+{
+  "name": "@xepan/developer",
+  "version": "0.1.0",
+  "description": "Develoepr paradise with xEpan",
+  "main": "src/index.js",
+  "files": [
+    "src/*"
+  ]
+}
