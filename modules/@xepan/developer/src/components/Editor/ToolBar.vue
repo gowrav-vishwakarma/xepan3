@@ -30,17 +30,15 @@
       <v-expansion-panel v-for="(toolKey, i) in toolsKey" :key="i">
         <v-expansion-panel-header> {{ toolKey }} </v-expansion-panel-header>
         <v-expansion-panel-content>
-          <draggable
-            :group="{ name: 'webtools', pull: 'clone', put: false }"
-            :clone="clone"
-            v-model="toolsList[toolKey].tools"
-            @start="toolDragStarted"
-            @end="toolDragOrDropEnded"
+          <div
+            v-for="element in toolsList[toolKey].tools"
+            :key="element.id"
+            v-draggable="clone(element)"
+            @drag-start="toolDragStarted"
+            @drag-end="toolDragEnded"
           >
-            <div v-for="element in toolsList[toolKey].tools" :key="element.id">
-              {{ element.name }}
-            </div>
-          </draggable>
+            {{ element.name }}
+          </div>
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
@@ -66,6 +64,7 @@ export default {
                 ports: { in: [], out: [] },
                 allowDrop: true,
               },
+              parent: { id: '__toolbar' },
               items: [],
             },
           ],
@@ -79,10 +78,11 @@ export default {
     }
   },
   methods: {
-    toolDragStarted() {
+    toolDragStarted(e) {
+      console.log('e', e)
       this.drawer = true
     },
-    toolDragOrDropEnded() {
+    toolDragEnded() {
       this.drawer = false
     },
     clone(original) {

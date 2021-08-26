@@ -62,6 +62,7 @@ export default {
             allowDrop: true,
             toolbarOptions: {},
           },
+          parent: { id: '__stage' },
           items: [],
         },
       ],
@@ -71,30 +72,28 @@ export default {
 </script>
 
 <style lang="scss">
-.wrapper11 {
-  .list {
-    margin: 0;
-    width: 100%;
-    min-height: 100px;
-    .item {
-      padding: 20px;
-      margin: 10px;
-      background-color: rgb(220, 220, 255);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+.developer-stage {
+  width: 100%;
+  height: 500px;
+  outline: 1px dashed orange;
+  position: relative;
+}
 
-      &.feedback {
-        flex: 0 0 0;
-        align-self: strech;
-        outline: 1px solid blue;
-      }
+.drop-zone {
+  background-color: orchid;
+  position: relative;
+  width: 100%;
+  min-height: 100px;
+}
 
-      &.drag-image {
-        background-color: rgb(220, 255, 220);
-        transform: translate(-50%, -50%);
-      }
-    }
-  }
+.drop-zone-hovering {
+  background-color: red;
+}
+
+.code-block {
+  outline: 1px solid black;
+  width: 200px;
+  min-height: 100px;
+  position: absolute;
 }
 </style>

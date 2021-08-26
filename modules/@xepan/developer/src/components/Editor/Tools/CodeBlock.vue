@@ -1,18 +1,15 @@
 <template>
   <div
-    :style="{
-      position: 'absolute',
-      left: pos.x,
-      top: pos.y,
-      width: pos.w,
-      height: pos.h,
-      resize: 'both',
-    }"
+    class="code-block"
+    :style="{ top: pos.y, left: pos.x }"
+    v-draggable="item"
+    @drag-start="onDragStart"
+    @drag-move="onDragMove"
   >
     <v-card>
       <v-card-title primary-title> {{ item.name }} {{ item.id }} </v-card-title>
     </v-card>
-    <dz v-if="allowDrop" :items="item.items"> </dz>
+    <dz v-if="allowDrop" :parent="item" :items="item.items"> </dz>
   </div>
 </template>
 
@@ -55,10 +52,19 @@ export default {
     }
   },
   methods: {
-    selected(e) {
+    onDragMove(item, event) {
+      event.stopPropagation()
+      const bounds = event.path[1].getBoundingClientRect()
+      const x = event.clientX - bounds.left
+      const y = event.clientY - bounds.top
+
+      item.props.pos.x = x + 'px'
+      item.props.pos.y = y + 'px'
+    },
+
+    onDragStart(e, event) {
       console.log(e)
-      this.outer_active = false
-      // e.stopPropagation()
+      event.stopPropagation()
     },
     dropLink(a, b, c) {
       /* eslint vue/no-mutating-props:0 */

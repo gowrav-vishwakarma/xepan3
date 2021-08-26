@@ -1,43 +1,53 @@
 <template>
-  <div style="padding: 10px; border: 1px sold orange; resize: both">
-    <draggable
-      :list="items"
-      :style="{
-        width: w,
-        height: h,
-        border: '1px solid green',
-        position: 'absolute',
-      }"
-      group="webtools"
-      :options="{ disabled: false }"
-      @end="toolDragOrDropEnded"
-    >
-      <component
-        v-for="(item, index) in items"
-        :is="item.component"
-        :key="index"
-        :component="item.component"
-        v-bind.sync="item.props"
-        :toolbar-options.sync="item.toolbarOptions"
-        :item="item"
-      ></component>
-    </draggable>
+  <div
+    v-droppable
+    @drag-drop="handleDrop"
+    @drag-enter="onDragEnter"
+    @drag-leave="onDragLeave"
+    class="drop-zone"
+    :class="[isDragOver ? 'drop-zone-hovering' : '']"
+  >
+    <component
+      v-for="(item, index) in items"
+      :is="item.component"
+      :key="index"
+      :component="item.component"
+      v-bind.sync="item.props"
+      :toolbar-options.sync="item.toolbarOptions"
+      :item="item"
+    ></component>
   </div>
 </template>
 
 <script>
 export default {
   props: {
+    parent: Object,
     items: Array,
     w: { type: [Number, String], default: () => '100%' },
     h: { type: [Number, String], default: () => '100%' },
   },
 
   data() {
-    return {}
+    return {
+      isDragOver: false,
+    }
   },
 
   methods: {
+    onDragEnter(e) {
+      this.isDragOver = true
+    },
+    onDragLeave() {
+      this.isDragOver = false
+    },
+    handleDrop(item, isDroppable, event) {
+      console.log('Dropped', item, event, isDroppable)
+      if (item.parent.id !== this.parent.id) {
+        item.parent = this.parent
+        this.items.push(item)
+      }
+    },
     toolDragOrDropEnded(evt) {
       /* eslint vue/no-mutating-props:0 */
       const bounds = evt.to.getBoundingClientRect()
@@ -63,12 +73,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.developer-stage {
-  width: 100%;
-  min-height: 100vh;
-  background-color: blanchedalmond;
-  position: relative;
-}
-</style>
