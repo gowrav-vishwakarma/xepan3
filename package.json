@@ -38,7 +38,7 @@
     "mongoose": "^5.13.7",
     "morgan": "~1.9.1",
     "nuxt": "^2.15.7",
-    "v-drag-drop": "^1.0.2",
+    "vue-drag-resize": "^1.5.4",
     "vue-draggable-resizable": "^2.3.0",
     "vue-file-toolbar-menu": "^1.3.4",
     "vue-panzoom": "^1.1.3",

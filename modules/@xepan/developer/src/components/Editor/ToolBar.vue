@@ -30,17 +30,13 @@
       <v-expansion-panel v-for="(toolKey, i) in toolsKey" :key="i">
         <v-expansion-panel-header> {{ toolKey }} </v-expansion-panel-header>
         <v-expansion-panel-content>
-          <draggable
-            :group="{ name: 'webtools', pull: 'clone', put: false }"
-            :clone="clone"
-            v-model="toolsList[toolKey].tools"
-            @start="toolDragStarted"
-            @end="toolDragOrDropEnded"
+          <tool
+            v-for="element in toolsList[toolKey].tools"
+            :key="element.id"
+            :tool="element"
           >
-            <div v-for="element in toolsList[toolKey].tools" :key="element.id">
-              {{ element.name }}
-            </div>
-          </draggable>
+            {{ element.name }}
+          </tool>
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
@@ -48,10 +44,14 @@
 </template>
 
 <script>
+import Tool from './ToolBarTool.vue'
+
 export default {
+  components: { tool: Tool },
+
   data() {
     return {
-      drawer: false,
+      drawer: true,
       toolsList: {
         Basic: {
           tools: [
