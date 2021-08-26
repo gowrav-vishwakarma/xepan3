@@ -14,17 +14,21 @@ export default {
   },
 
   data() {
-    return {
-      isSelected: false,
-    }
+    return {}
+  },
+
+  computed: {
+    isSelected() {
+      return (
+        this.$store.getters['editor/selectedTool'].component ===
+        this.tool.component
+      )
+    },
   },
 
   methods: {
     toolSelected() {
       this.$store.commit('editor/setSelctedTool', this.tool)
-      this.isSelected =
-        this.$store.getters['editor/selectedTool'].component ===
-        this.tool.component
     },
   },
 }

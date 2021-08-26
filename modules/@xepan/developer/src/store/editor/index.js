@@ -18,6 +18,9 @@ export default {
     setSelctedTool(state, tool) {
       state.selectedTool = tool
     }, // -> commit('account/login')
+    deselectTool(state) {
+      state.selectedTool = false
+    }, // -> commit('account/login')
   },
 
   // nested modules

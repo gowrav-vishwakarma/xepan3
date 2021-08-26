@@ -1,19 +1,24 @@
 <template>
-  <div
-    :style="{
-      position: 'absolute',
-      left: pos.x,
-      top: pos.y,
-      width: pos.w,
-      height: pos.h,
-      resize: 'both',
-    }"
-  >
-    <v-card>
-      <v-card-title primary-title> {{ item.name }} {{ item.id }} </v-card-title>
-    </v-card>
-    <dz v-if="allowDrop" :items="item.items"> </dz>
-  </div>
+  <vue-drag-resize>
+    <div
+      class="code-block"
+      :style="{
+        position: 'absolute',
+        left: pos.x,
+        top: pos.y,
+        width: pos.w,
+        height: pos.h,
+        resize: 'both',
+      }"
+    >
+      <v-card>
+        <v-card-title primary-title>
+          {{ item.name }} {{ item.id }}
+        </v-card-title>
+      </v-card>
+      <dz v-if="allowDrop" :items="item.items"> </dz>
+    </div>
+  </vue-drag-resize>
 </template>
 
 <script>

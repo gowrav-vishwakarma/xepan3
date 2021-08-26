@@ -5,7 +5,7 @@
       <tool-bar />
       <v-main>
         <v-container fluid style="height: 100vh">
-          <stage :items="pageContent" />
+          <stage :items="pageContent" class="stage" />
         </v-container>
       </v-main>
     </client-only>
@@ -71,30 +71,16 @@ export default {
 </script>
 
 <style lang="scss">
-.wrapper11 {
-  .list {
-    margin: 0;
-    width: 100%;
-    min-height: 100px;
-    .item {
-      padding: 20px;
-      margin: 10px;
-      background-color: rgb(220, 220, 255);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      &.feedback {
-        flex: 0 0 0;
-        align-self: strech;
-        outline: 1px solid blue;
-      }
-
-      &.drag-image {
-        background-color: rgb(220, 255, 220);
-        transform: translate(-50%, -50%);
-      }
-    }
-  }
+.stage.drop-zone {
+  position: relative;
+  outline: 1px dashed red;
+  width: 100%;
+  height: 500px;
+}
+.code-block .drop-zone {
+  position: relative;
+  min-height: 100px;
+  min-width: 50px;
+  outline: 1px solid red;
 }
 </style>

@@ -1,31 +1,19 @@
 <template>
-  <div style="padding: 10px; border: 1px sold orange; resize: both">
-    <draggable
-      :list="items"
-      :style="{
-        width: w,
-        height: h,
-        border: '1px solid green',
-        position: 'absolute',
-      }"
-      group="webtools"
-      :options="{ disabled: false }"
-      @end="toolDragOrDropEnded"
-    >
-      <component
-        v-for="(item, index) in items"
-        :is="item.component"
-        :key="index"
-        :component="item.component"
-        v-bind.sync="item.props"
-        :toolbar-options.sync="item.toolbarOptions"
-        :item="item"
-      ></component>
-    </draggable>
+  <div class="drop-zone" @click.prevent="dropZoneClicked">
+    <component
+      v-for="(item, index) in items"
+      :is="item.component"
+      :key="index"
+      :component="item.component"
+      v-bind.sync="item.props"
+      :toolbar-options.sync="item.toolbarOptions"
+      :item="item"
+    ></component>
   </div>
 </template>
 
 <script>
+/* eslint vue/no-mutating-props:0 */
 export default {
   props: {
     items: Array,
@@ -38,19 +26,17 @@ export default {
   },
 
   methods: {
-    toolDragOrDropEnded(evt) {
-      /* eslint vue/no-mutating-props:0 */
-      const bounds = evt.to.getBoundingClientRect()
-      const x = evt.originalEvent.clientX - bounds.left
-      const y = evt.originalEvent.clientY - bounds.top
+    dropZoneClicked(evt) {
+      const isDropZoneClicked = evt.target.classList.contains('drop-zone')
+      const selectedTool = this.$store.getters['editor/selectedTool']
 
-      console.log(evt)
-      // console.log(this.items, evt.newIndex)
-      // console.log(this.items[evt.newIndex].props.pos.x, x, rect)
-      if (!this.items[evt.newIndex]) return
-      this.items[evt.newIndex].props.pos.x = x + 'px'
-      this.items[evt.newIndex].props.pos.y = y + 'px'
-      // a.item.pos.x = a.originalEvent.clientX
+      if (isDropZoneClicked && selectedTool !== false) {
+        console.log(evt)
+        selectedTool.props.pos.x = evt.x
+        selectedTool.props.pos.y = evt.y
+        this.items.push(selectedTool)
+        this.$store.commit('editor/deselectTool')
+      }
     },
 
     generateId() {
