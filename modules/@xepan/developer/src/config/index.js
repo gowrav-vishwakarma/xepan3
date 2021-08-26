@@ -5,5 +5,6 @@ export default {
     { ssr: false, src: './plugins/file-menu' },
     { ssr: false, src: './plugins/vue-draggable-resizable' },
     { ssr: false, src: './plugins/v-drag-drop-diectives' },
+    { ssr: false, src: './plugins/pan-zoom' },
   ],
 }

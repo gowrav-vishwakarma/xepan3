@@ -1,30 +1,39 @@
 <template>
-  <client-only>
-    <div v-droppable @drag-drop="dropLink" class="developer-stage">
-      <component
-        v-for="(item, index) in items"
-        :is="item.component"
-        :key="index"
-        :component="item.component"
-        v-bind.sync="item.props"
-        :toolbar-options.sync="item.toolbarOptions"
-        :children="item.children"
-      ></component>
-    </div>
-  </client-only>
+  <dz :items="items" w="100%" h="100vh"> </dz>
 </template>
 
 <script>
+import DZ from '../DropZone.vue'
+
 export default {
+  components: { dz: DZ },
   props: {
     items: Array,
   },
 
   methods: {
-    dropLink(a, b, c) {
+    toolDragOrDropEnded(evt) {
       /* eslint vue/no-mutating-props:0 */
-      this.items.push(a)
+      const selfRect = evt.item
+      const parentRect = evt.target
+      const x =
+        evt.originalEvent.clientX - parentRect.offsetLeft - selfRect.offsetLeft
+      const y =
+        evt.originalEvent.clientY - parentRect.offsetTop - selfRect.offsetTop
+
+      console.log(evt)
+      // console.log(this.items, evt.newIndex)
+      // console.log(this.items[evt.newIndex].props.pos.x, x, rect)
+      this.items[evt.newIndex].props.pos.x = x
+      this.items[evt.newIndex].props.pos.y = y
+      // a.item.pos.x = a.originalEvent.clientX
     },
+
+    checkMove(evt) {
+      console.log(evt)
+      return evt.draggedContext.element.name !== 'apple'
+    },
+
     generateId() {
       return (
         'id' +

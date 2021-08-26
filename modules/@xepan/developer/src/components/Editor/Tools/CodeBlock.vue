@@ -1,55 +1,40 @@
 <template>
-  <vue-draggable-resizable
-    :x="pos.x"
-    :y="pos.y"
-    :w="pos.w"
-    :h="pos.h"
-    @dragging="onDrag"
-    @resizing="onResize"
-    :parent="true"
-    @mousedown.stop.prevent
-    @mouseup.stop.prevent
+  <div
+    :style="{
+      position: 'absolute',
+      left: pos.x,
+      top: pos.y,
+      width: pos.w,
+      height: pos.h,
+      resize: 'both',
+    }"
   >
     <v-card>
-      <v-card-title primary-title> {{ title }} {{ type }} </v-card-title>
+      <v-card-title primary-title> {{ item.name }} {{ item.id }} </v-card-title>
     </v-card>
-    <div
-      v-droppable
-      @drag-drop="dropLink"
-      @mousedown.stop.prevent
-      @mouseup.stop.prevent
-      class="dropzone"
-    >
-      <component
-        v-for="(item, index) in children"
-        :is="item.component"
-        :key="index"
-        :component="item.component"
-        v-bind.sync="item.props"
-        :toolbar-options.sync="item.toolbarOptions"
-        :children="item.children"
-        @click.stop="selected"
-      ></component>
-    </div>
-  </vue-draggable-resizable>
+    <dz v-if="allowDrop" :items="item.items"> </dz>
+  </div>
 </template>
 
 <script>
 /* eslint vue/no-mutating-props:0 */
 
+import DZ from '../../DropZone.vue'
 import DC from './DeveloperComponent.vue'
 
 export default {
   extends: DC,
   name: 'CodeBlock',
+  components: { dz: DZ },
   props: {
+    item: { type: Object, default: () => {} },
     cbType: { type: String, default: () => 'Generic' },
     title: { type: [String, Boolean], default: () => 'Code Block' },
     type: { type: [String, Object], default: () => 'ClientSideJS' },
     pos: {
       type: Object,
       default: () => {
-        return { x: 0, y: 0, w: 100, h: 100 }
+        return { x: 0, y: 0, w: '100px', h: '100px' }
       },
     },
     ports: {
@@ -59,7 +44,7 @@ export default {
       },
     },
     allowDrop: { type: Boolean, default: () => true },
-    children: {
+    items: {
       type: Array,
       default: () => [],
     },
