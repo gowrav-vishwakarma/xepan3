@@ -33,9 +33,9 @@
           <div
             v-for="element in toolsList[toolKey].tools"
             :key="element.id"
-            v-draggable="clone(element)"
-            @drag-start="toolDragStarted"
-            @drag-end="toolDragEnded"
+            draggable
+            @dragstart="toolDragStarted($event, clone(element))"
+            @dragend="toolDragEnded($event, element)"
           >
             {{ element.name }}
           </div>
@@ -78,8 +78,10 @@ export default {
     }
   },
   methods: {
-    toolDragStarted(e) {
-      console.log('e', e)
+    toolDragStarted(evt, item) {
+      evt.dataTransfer.dropEffect = 'move'
+      evt.dataTransfer.effectAllowed = 'move'
+      evt.dataTransfer.setData('dragData', JSON.stringify(item))
       this.drawer = true
     },
     toolDragEnded() {

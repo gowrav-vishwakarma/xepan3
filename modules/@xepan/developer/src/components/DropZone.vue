@@ -1,10 +1,11 @@
 <template>
   <div
-    v-droppable
-    @drag-drop="handleDrop"
-    @drag-enter="onDragEnter"
-    @drag-leave="onDragLeave"
-    class="drop-zone"
+    @drop="handleDrop($event, 1)"
+    @dragstart.prevent="onDragStart($event)"
+    @dragleave.prevent="onDragLeave($event)"
+    @dragover.prevent="onDragLeave($event)"
+    @dragenter.prevent="onDragEnter($event)"
+    class="drop-zone pointer-events"
     :class="[isDragOver ? 'drop-zone-hovering' : '']"
   >
     <component
@@ -35,18 +36,21 @@ export default {
   },
 
   methods: {
+    onDragStart(e) {},
     onDragEnter(e) {
       this.isDragOver = true
     },
-    onDragLeave() {
+    onDragLeave(e) {
       this.isDragOver = false
     },
-    handleDrop(item, isDroppable, event) {
-      console.log('Dropped', item, event, isDroppable)
+    handleDrop(evt) {
+      const item = JSON.parse(evt.dataTransfer.getData('dragData'))
       if (item.parent.id !== this.parent.id) {
         item.parent = this.parent
         this.items.push(item)
       }
+      evt.stopPropagation()
+      // evt.preventDefault()
     },
     toolDragOrDropEnded(evt) {
       /* eslint vue/no-mutating-props:0 */

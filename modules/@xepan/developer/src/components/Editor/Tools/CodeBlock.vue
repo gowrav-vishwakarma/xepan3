@@ -1,10 +1,10 @@
 <template>
   <div
-    class="code-block"
+    class="code-block pointer-events"
     :style="{ top: pos.y, left: pos.x }"
-    v-draggable="item"
-    @drag-start="onDragStart"
-    @drag-move="onDragMove"
+    draggable
+    @dragstart="onDragStart($event)"
+    @dragover="onDragMove($event, item)"
   >
     <v-card>
       <v-card-title primary-title> {{ item.name }} {{ item.id }} </v-card-title>
@@ -52,19 +52,24 @@ export default {
     }
   },
   methods: {
-    onDragMove(item, event) {
-      event.stopPropagation()
-      const bounds = event.path[1].getBoundingClientRect()
-      const x = event.clientX - bounds.left
-      const y = event.clientY - bounds.top
+    onDragMove(event, item) {
+      console.log(event)
+      // const bounds = event.path[1].getBoundingClientRect()
+      // const x = event.clientX - bounds.left
+      // const y = event.clientY - bounds.top
 
-      item.props.pos.x = x + 'px'
-      item.props.pos.y = y + 'px'
+      // item.props.pos.x = x + 'px'
+      // item.props.pos.y = y + 'px'
+      event.stopPropagation()
+      event.preventDefault()
     },
 
-    onDragStart(e, event) {
-      console.log(e)
-      event.stopPropagation()
+    onDragStart(evt) {
+      evt.target.evt.dataTransfer.dropEffect = 'all'
+      evt.dataTransfer.effectAllowed = 'move'
+      evt.dataTransfer.setData('dragData', JSON.stringify(this.item))
+      evt.stopPropagation()
+      // evt.preventDefault()
     },
     dropLink(a, b, c) {
       /* eslint vue/no-mutating-props:0 */

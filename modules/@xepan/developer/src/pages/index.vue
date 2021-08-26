@@ -59,7 +59,7 @@ export default {
             type: 'ClientSideJS',
             pos: { x: 0, y: 0, w: '100px', h: '100px' },
             ports: { in: [], out: [] },
-            allowDrop: true,
+            allowDrop: false,
             toolbarOptions: {},
           },
           parent: { id: '__stage' },
