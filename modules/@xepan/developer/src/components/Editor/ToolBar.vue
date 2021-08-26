@@ -30,15 +30,17 @@
       <v-expansion-panel v-for="(toolKey, i) in toolsKey" :key="i">
         <v-expansion-panel-header> {{ toolKey }} </v-expansion-panel-header>
         <v-expansion-panel-content>
-          <div>
-            <div
-              v-draggable="element"
-              v-for="element in toolsList[toolKey].tools"
-              :key="element.id"
-            >
+          <draggable
+            :group="{ name: 'webtools', pull: 'clone', put: false }"
+            :clone="clone"
+            v-model="toolsList[toolKey].tools"
+            @start="toolDragStarted"
+            @end="toolDragOrDropEnded"
+          >
+            <div v-for="element in toolsList[toolKey].tools" :key="element.id">
               {{ element.name }}
             </div>
-          </div>
+          </draggable>
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
@@ -60,7 +62,7 @@ export default {
                 cbType: 'Generic',
                 title: 'ServerSide',
                 type: 'ClientSideJS',
-                pos: { x: 10, y: 10, w: 100, h: 50 },
+                pos: { x: 0, y: 0, w: 100, h: 100 },
                 ports: { in: [], out: [] },
                 allowDrop: true,
               },

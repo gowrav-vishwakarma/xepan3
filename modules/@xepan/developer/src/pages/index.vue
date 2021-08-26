@@ -4,7 +4,7 @@
       <menu-bar />
       <tool-bar />
       <v-main>
-        <v-container>
+        <v-container fluid style="height: 100vh">
           <stage :items="pageContent" />
         </v-container>
       </v-main>
@@ -57,7 +57,7 @@ export default {
             cbType: 'Generic',
             title: 'ServerSide',
             type: 'ClientSideJS',
-            pos: { x: 10, y: 10, w: 'auto', h: 'auto' },
+            pos: { x: 0, y: 0, w: '100px', h: '100px' },
             ports: { in: [], out: [] },
             allowDrop: true,
             toolbarOptions: {},
