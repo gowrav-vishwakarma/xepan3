@@ -52,8 +52,8 @@ export default {
         {
           name: 'Block',
           component: 'xEpanDeveloperEditorToolsCodeBlock',
+          id: 'a1',
           props: {
-            id: '1',
             cbType: 'Generic',
             title: 'ServerSide',
             type: 'ClientSideJS',

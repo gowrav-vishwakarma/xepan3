@@ -10,9 +10,7 @@
     }"
   >
     <v-card>
-      <v-card-title primary-title>
-        {{ item.name }} {{ item.components }}
-      </v-card-title>
+      <v-card-title primary-title> {{ item.name }} {{ item.id }} </v-card-title>
     </v-card>
     <dz v-if="allowDrop" :items="item.items"> </dz>
   </div>
