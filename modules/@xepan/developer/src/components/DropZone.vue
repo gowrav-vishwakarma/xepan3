@@ -1,6 +1,6 @@
 <template>
   <draggable
-    v-model="items"
+    :list="items"
     :style="{
       width: w,
       height: h,
@@ -10,7 +10,6 @@
     group="webtools"
     :options="{ disabled: false }"
     @end="toolDragOrDropEnded"
-    :move="checkMove"
   >
     <component
       v-for="(item, index) in items"
@@ -49,11 +48,6 @@ export default {
       this.items[evt.newIndex].props.pos.x = x + 'px'
       this.items[evt.newIndex].props.pos.y = y + 'px'
       // a.item.pos.x = a.originalEvent.clientX
-    },
-
-    checkMove(evt) {
-      console.log(evt)
-      return evt.draggedContext.element.name !== 'apple'
     },
 
     generateId() {

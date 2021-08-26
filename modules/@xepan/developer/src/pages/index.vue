@@ -62,6 +62,7 @@ export default {
             allowDrop: true,
             toolbarOptions: {},
           },
+          items: [],
         },
       ],
     }

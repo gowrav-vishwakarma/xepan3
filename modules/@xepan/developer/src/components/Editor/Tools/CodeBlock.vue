@@ -14,7 +14,7 @@
         {{ item.name }} {{ item.components }}
       </v-card-title>
     </v-card>
-    <dz v-if="allowDrop" :items="item.children"> </dz>
+    <dz v-if="allowDrop" :items="item.items"> </dz>
   </div>
 </template>
 
@@ -46,7 +46,7 @@ export default {
       },
     },
     allowDrop: { type: Boolean, default: () => true },
-    children: {
+    items: {
       type: Array,
       default: () => [],
     },

@@ -66,6 +66,7 @@ export default {
                 ports: { in: [], out: [] },
                 allowDrop: true,
               },
+              items: [],
             },
           ],
         },
