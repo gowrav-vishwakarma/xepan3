@@ -1,5 +1,11 @@
 <template>
-  <dz :items="items" w="100%" h="100vh" :parent="{ items }"> </dz>
+  <dz
+    :items="items"
+    w="100%"
+    h="100vh"
+    :parent="{ ...thisAsParentItem, items }"
+  >
+  </dz>
 </template>
 
 <script>
@@ -9,6 +15,23 @@ export default {
   components: { dz: DZ },
   props: {
     items: Array,
+  },
+  data() {
+    return {
+      thisAsParentItem: {
+        props: {
+          pos: {
+            w: 100,
+            h: 100,
+          },
+        },
+      },
+    }
+  },
+
+  mounted() {
+    this.thisAsParentItem.props.pos.w = this.$el.clientWidth
+    this.thisAsParentItem.props.pos.h = this.$el.clientHeight
   },
 
   methods: {

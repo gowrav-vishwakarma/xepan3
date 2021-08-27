@@ -1,5 +1,14 @@
 <template>
-  <vue-drag-resize :parentLimitation="true" :w="pos.w" :h="pos.h">
+  <vue-drag-resize
+    :parentLimitation="true"
+    :x="pos.x"
+    :y="pos.y"
+    :w="pos.w"
+    :h="pos.h"
+    :parentW="parent.props.pos.w"
+    :parentH="parent.props.pos.h"
+    @resizing="resizing"
+  >
     <div class="code-block">
       <div class="grey lighten-2">
         <v-icon @click.prevent="moveComponent">mdi-cogs</v-icon>
@@ -55,6 +64,13 @@ export default {
         tool: this.item,
         parent: this.parent,
       })
+    },
+
+    resizing(newRect) {
+      this.item.props.pos.x = this.pos.x = newRect.x
+      this.item.props.pos.y = this.pos.y = newRect.y
+      this.item.props.pos.w = this.pos.w = newRect.w
+      this.item.props.pos.h = this.pos.h = newRect.h
     },
   },
 }
