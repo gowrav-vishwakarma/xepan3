@@ -53,11 +53,6 @@ export default {
       default: () => [],
     },
   },
-  data() {
-    return {
-      outer_active: true,
-    }
-  },
   methods: {
     moveComponent() {
       this.$store.commit('editor/setSelctedTool', {
@@ -67,10 +62,11 @@ export default {
     },
 
     resizing(newRect) {
-      this.item.props.pos.x = this.pos.x = newRect.x
-      this.item.props.pos.y = this.pos.y = newRect.y
-      this.item.props.pos.w = this.pos.w = newRect.w
-      this.item.props.pos.h = this.pos.h = newRect.h
+      console.log(newRect)
+      this.item.props.pos.x = newRect.x
+      this.item.props.pos.y = newRect.y
+      this.item.props.pos.w = newRect.w
+      this.item.props.pos.h = newRect.h
     },
   },
 }
