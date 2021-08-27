@@ -9,12 +9,22 @@
     :parentH="parent.props.pos.h"
     @resizing="resizing"
   >
-    <div class="code-block">
+    <div
+      class="code-block"
+      :style="{ width: pos.w + 'px', height: pos.h + 'px' }"
+    >
       <div class="grey lighten-2">
         <v-icon @click.prevent="moveComponent">mdi-cogs</v-icon>
         {{ item.id }}
       </div>
-      <dz v-if="allowDrop" :items="item.items" :parent="item"> </dz>
+      <dz
+        v-if="allowDrop"
+        :items="item.items"
+        :w="pos.w"
+        :h="pos.h"
+        :parent="item"
+      >
+      </dz>
     </div>
   </vue-drag-resize>
 </template>
@@ -62,11 +72,10 @@ export default {
     },
 
     resizing(newRect) {
-      console.log(newRect)
-      this.item.props.pos.x = newRect.x
-      this.item.props.pos.y = newRect.y
-      this.item.props.pos.w = newRect.w
-      this.item.props.pos.h = newRect.h
+      this.item.props.pos.x = newRect.left
+      this.item.props.pos.y = newRect.top
+      this.item.props.pos.w = newRect.width
+      this.item.props.pos.h = newRect.height
     },
   },
 }

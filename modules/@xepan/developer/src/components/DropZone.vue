@@ -1,5 +1,9 @@
 <template>
-  <div class="drop-zone" @click.prevent="dropZoneClicked">
+  <div
+    class="drop-zone"
+    :style="{ width: w + 'px', height: h + 'px' }"
+    @click.prevent="dropZoneClicked"
+  >
     <component
       v-for="(item, index) in items"
       :is="item.component"
@@ -30,8 +34,12 @@ export default {
       const selectedTool = this.$store.getters['editor/selectedTool']
 
       if (isDropZoneClicked && selectedTool !== false) {
-        selectedTool.tool.props.pos.x = evt.x
-        selectedTool.tool.props.pos.y = evt.y
+        const bounds = evt.target.getBoundingClientRect()
+        const x = evt.clientX - bounds.left
+        const y = evt.clientY - bounds.top
+        selectedTool.tool.props.pos.x = x
+        selectedTool.tool.props.pos.y = y
+
         const oldParentIndex =
           selectedTool.parent.items !== undefined
             ? selectedTool.parent.items.findIndex(

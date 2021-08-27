@@ -79,8 +79,8 @@ export default {
 }
 .code-block .drop-zone {
   position: relative;
-  min-height: 100px;
-  min-width: 50px;
+  min-height: 10px;
+  min-width: 10px;
   outline: 1px solid red;
 }
 </style>
