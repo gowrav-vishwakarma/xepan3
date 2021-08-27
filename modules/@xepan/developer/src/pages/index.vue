@@ -1,13 +1,13 @@
 <template>
   <div>
     <client-only>
-      <menu-bar />
-      <tool-bar />
-      <v-main>
-        <v-container fluid style="height: 100vh">
+      <v-container fluid style="height: 100vh">
+        <tool-bar />
+        <v-main>
+          <menu-bar />
           <stage :items="pageContent" class="stage" />
-        </v-container>
-      </v-main>
+        </v-main>
+      </v-container>
     </client-only>
   </div>
 </template>
@@ -57,10 +57,30 @@ export default {
             cbType: 'Generic',
             title: 'ServerSide',
             type: 'ClientSideJS',
-            pos: { x: 100, y: 30, w: 100, h: 100 },
-            ports: { in: [], out: [] },
+            pos: { x: 100, y: 30, w: 300, h: 200 },
             allowDrop: true,
             toolbarOptions: {},
+          },
+          ports: {
+            in: [
+              {
+                id: 'x1',
+                name: 'X',
+                linkedTo: [],
+              },
+              {
+                id: 'y1',
+                name: 'Y',
+                linkedTo: [],
+              },
+            ],
+            out: [
+              {
+                id: 'po1',
+                name: 'Sum',
+                linkedTo: [],
+              },
+            ],
           },
           items: [],
         },
@@ -81,6 +101,19 @@ export default {
   position: relative;
   min-height: 10px;
   min-width: 10px;
-  outline: 1px solid red;
+  outline: 1px solid rgb(105, 115, 160);
+  background-color: azure;
+}
+
+@keyframes pulse {
+  0% {
+    background-color: #222;
+  }
+  50% {
+    background-color: #f44242;
+  }
+  100% {
+    background-color: #222;
+  }
 }
 </style>

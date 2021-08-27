@@ -8,23 +8,52 @@
     :parentW="parent.props.pos.w"
     :parentH="parent.props.pos.h"
     @resizing="resizing"
+    dragCancel=".no-drag"
   >
     <div
-      class="code-block"
+      class="code-block d-flex flex-row"
       :style="{ width: pos.w + 'px', height: pos.h + 'px' }"
     >
-      <div class="grey lighten-2">
-        <v-icon @click.prevent="moveComponent">mdi-cogs</v-icon>
-        {{ item.id }}
-      </div>
-      <dz
-        v-if="allowDrop"
-        :items="item.items"
-        :w="pos.w"
-        :h="pos.h"
-        :parent="item"
+      <div
+        class="in-ports-area d-flex flex-column mt-10 no-drag"
+        style="position: absolute; left: -15px; z-index: 1"
       >
-      </dz>
+        <port
+          class="no-drag"
+          v-for="inp in item.ports.in"
+          :key="inp.name"
+          :port="inp"
+          :parent="item"
+          type="In"
+        />
+      </div>
+      <div class="center-area">
+        <div class="grey lighten-2">
+          <v-icon @click.stop.prevent="moveComponent">mdi-cogs</v-icon>
+          {{ item.id }}
+        </div>
+        <dz
+          v-if="allowDrop"
+          :items="item.items"
+          :w="pos.w"
+          :h="pos.h"
+          :parent="item"
+        >
+        </dz>
+      </div>
+      <div
+        class="out-ports-area d-flex flex-column mt-10 no-drag"
+        :style="{ position: 'absolute', left: pos.w - 10 + 'px', 'z-index': 1 }"
+      >
+        <port
+          class="no-drag"
+          v-for="outp in item.ports.out"
+          :key="outp.name"
+          :port="outp"
+          :parent="item"
+          type="Out"
+        />
+      </div>
     </div>
   </vue-drag-resize>
 </template>
@@ -33,12 +62,13 @@
 /* eslint vue/no-mutating-props:0 */
 
 import DZ from '../../DropZone.vue'
+import Port from '../Port.vue'
 import DC from './DeveloperComponent.vue'
 
 export default {
   extends: DC,
   name: 'CodeBlock',
-  components: { dz: DZ },
+  components: { dz: DZ, port: Port },
   props: {
     parent: Object,
     item: { type: Object, default: () => {} },

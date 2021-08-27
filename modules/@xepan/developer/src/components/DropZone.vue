@@ -51,9 +51,7 @@ export default {
           selectedTool.parent.items.splice(oldParentIndex, 1)
         }
 
-        if (selectedTool.parent.id === '__toolbar')
-          selectedTool.tool.id = this.generateId()
-        this.items.push(JSON.parse(JSON.stringify(selectedTool.tool)))
+        this.items.push(selectedTool.tool)
 
         this.$store.commit('editor/deselectTool')
       }

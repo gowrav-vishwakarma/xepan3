@@ -1,10 +1,9 @@
 <template>
   <v-navigation-drawer
-    v-model="drawer"
+    :v-model="true"
     app
     absolute
     permanent
-    :mini-variant.sync="drawer"
     mini-variant-width="0"
     color="#EFEFEF"
   >
@@ -51,22 +50,23 @@ export default {
 
   data() {
     return {
-      drawer: true,
+      drawer: false,
       toolsList: {
         Basic: {
           tools: [
             {
               name: 'Block',
               component: 'xEpanDeveloperEditorToolsCodeBlock',
-              parent: {},
+              id: 'Dummy',
+              fn: 'nothing',
               props: {
                 cbType: 'Generic',
                 title: 'ServerSide',
                 type: 'ClientSideJS',
                 pos: { x: 0, y: 0, w: 100, h: 100 },
-                ports: { in: [], out: [] },
                 allowDrop: true,
               },
+              ports: { in: [{ name: 'v' }], out: [{ name: '2x' }] },
               items: [],
             },
           ],

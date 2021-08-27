@@ -21,18 +21,36 @@ export default {
     isSelected() {
       return (
         this.$store.getters['editor/selectedTool'].tool &&
-        this.$store.getters['editor/selectedTool'].tool.component ===
-          this.tool.component
+        this.$store.getters['editor/selectedTool'].tool.fn === this.tool.fn
       )
     },
   },
 
   methods: {
     toolSelected() {
+      const toolInstance = JSON.parse(JSON.stringify(this.tool))
+      toolInstance.id = this.generateId()
+      toolInstance.ports.in = toolInstance.ports.in.map((p) => ({
+        ...p,
+        id: this.generateId(),
+        linkedTo: [],
+      }))
+      toolInstance.ports.out = toolInstance.ports.out.map((p) => ({
+        ...p,
+        id: this.generateId(),
+        linkedTo: [],
+      }))
       this.$store.commit('editor/setSelctedTool', {
-        tool: this.tool,
+        tool: toolInstance,
         parent: { id: '__toolbar' },
       })
+    },
+    generateId() {
+      return (
+        'id' +
+        Math.random().toString(36).substring(2) +
+        new Date().getTime().toString(36)
+      )
     },
   },
 }
