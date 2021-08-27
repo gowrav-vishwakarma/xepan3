@@ -26,7 +26,7 @@
 
     <v-divider></v-divider>
     <v-expansion-panels>
-      <v-expansion-panel v-for="(toolKey, i) in toolsKey" :key="i">
+      <v-expansion-panel expand v-for="(toolKey, i) in toolsKey" :key="i">
         <v-expansion-panel-header> {{ toolKey }} </v-expansion-panel-header>
         <v-expansion-panel-content>
           <tool

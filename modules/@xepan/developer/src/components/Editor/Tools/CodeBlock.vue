@@ -8,6 +8,7 @@
     :parentW="parent.props.pos.w"
     :parentH="parent.props.pos.h"
     @resizing="resizing"
+    @dragging="dragging"
     dragCancel=".no-drag"
   >
     <div
@@ -25,6 +26,7 @@
           :port="inp"
           :parent="item"
           type="In"
+          :ref="inp.id"
         />
       </div>
       <div class="center-area">
@@ -52,6 +54,7 @@
           :port="outp"
           :parent="item"
           type="Out"
+          :ref="outp.id"
         />
       </div>
     </div>
@@ -93,7 +96,25 @@ export default {
       default: () => [],
     },
   },
+  mounted() {
+    this.updatePortsXY()
+  },
   methods: {
+    updatePortsXY() {
+      this.item.ports.in.forEach((p) => {
+        p.pos = {
+          x: this.$refs[p.id][0].$el.getBoundingClientRect().left,
+          y: this.$refs[p.id][0].$el.getBoundingClientRect().top,
+        }
+      })
+
+      this.item.ports.out.forEach((p) => {
+        p.pos = {
+          x: this.$refs[p.id][0].$el.getBoundingClientRect().left,
+          y: this.$refs[p.id][0].$el.getBoundingClientRect().top,
+        }
+      })
+    },
     moveComponent() {
       this.$store.commit('editor/setSelctedTool', {
         tool: this.item,
@@ -106,6 +127,10 @@ export default {
       this.item.props.pos.y = newRect.top
       this.item.props.pos.w = newRect.width
       this.item.props.pos.h = newRect.height
+    },
+
+    dragging(position) {
+      this.updatePortsXY()
     },
   },
 }

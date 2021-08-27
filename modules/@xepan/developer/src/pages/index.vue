@@ -57,21 +57,18 @@ export default {
             cbType: 'Generic',
             title: 'ServerSide',
             type: 'ClientSideJS',
-            pos: { x: 100, y: 30, w: 300, h: 200 },
+            pos: { x: 57, y: 16, w: 961, h: 311 },
             allowDrop: true,
             toolbarOptions: {},
           },
           ports: {
             in: [
-              {
-                id: 'x1',
-                name: 'X',
-                linkedTo: [],
-              },
+              { id: 'x1', name: 'X', linkedTo: [], pos: { x: 254, y: 129 } },
               {
                 id: 'y1',
                 name: 'Y',
-                linkedTo: [],
+                linkedTo: ['idrzu37e5ovviksucl92j'],
+                pos: { x: 254, y: 177.765625 },
               },
             ],
             out: [
@@ -79,10 +76,109 @@ export default {
                 id: 'po1',
                 name: 'Sum',
                 linkedTo: [],
+                pos: { x: 1220, y: 129 },
               },
             ],
           },
-          items: [],
+          items: [
+            {
+              name: 'Block',
+              component: 'xEpanDeveloperEditorToolsCodeBlock',
+              id: 'idfamvzvg39kksucl92j',
+              fn: 'nothing',
+              props: {
+                cbType: 'Generic',
+                title: 'ServerSide',
+                type: 'ClientSideJS',
+                pos: { x: 43, y: 29, w: 390, h: 207 },
+                allowDrop: true,
+              },
+              ports: {
+                in: [
+                  {
+                    name: 'v',
+                    id: 'idrzu37e5ovviksucl92j',
+                    linkedTo: ['y1', 'idnrilsgi8bnksucp3wb'],
+                    pos: { x: 355, y: 199.765625 },
+                  },
+                ],
+                out: [
+                  {
+                    name: '2x',
+                    id: 'idpavmvjo469sksucl92k',
+                    linkedTo: ['idqceqokiu97ksucp3wb'],
+                    pos: { x: 750, y: 199.765625 },
+                  },
+                ],
+              },
+              items: [
+                {
+                  name: 'Block',
+                  component: 'xEpanDeveloperEditorToolsCodeBlock',
+                  id: 'idr238cdg3l8ksucp3wb',
+                  fn: 'nothing',
+                  props: {
+                    cbType: 'Generic',
+                    title: 'ServerSide',
+                    type: 'ClientSideJS',
+                    pos: { x: 31, y: 61, w: 313, h: 75 },
+                    allowDrop: true,
+                  },
+                  ports: {
+                    in: [
+                      {
+                        name: 'v',
+                        id: 'idnrilsgi8bnksucp3wb',
+                        linkedTo: ['idrzu37e5ovviksucl92j'],
+                        pos: { x: 387, y: 286.53125 },
+                      },
+                    ],
+                    out: [
+                      {
+                        name: '2x',
+                        id: 'idqceqokiu97ksucp3wb',
+                        linkedTo: ['idpavmvjo469sksucl92k'],
+                        pos: { x: 705, y: 286.53125 },
+                      },
+                    ],
+                  },
+                  items: [],
+                },
+              ],
+            },
+            {
+              name: 'Block',
+              component: 'xEpanDeveloperEditorToolsCodeBlock',
+              id: 'id6id0wlgroiqksucozcn',
+              fn: 'nothing',
+              props: {
+                cbType: 'Generic',
+                title: 'ServerSide',
+                type: 'ClientSideJS',
+                pos: { x: 568, y: 67, w: 312, h: 110 },
+                allowDrop: true,
+              },
+              ports: {
+                in: [
+                  {
+                    name: 'v',
+                    id: 'idkav5997eh7ksucozco',
+                    linkedTo: [],
+                    pos: { x: 255, y: 154.765625 },
+                  },
+                ],
+                out: [
+                  {
+                    name: '2x',
+                    id: 'id4qwexnkw8v5ksucozco',
+                    linkedTo: [],
+                    pos: { x: 572, y: 154.765625 },
+                  },
+                ],
+              },
+              items: [],
+            },
+          ],
         },
       ],
     }
