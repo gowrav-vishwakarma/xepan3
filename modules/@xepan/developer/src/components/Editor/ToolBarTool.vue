@@ -20,15 +20,19 @@ export default {
   computed: {
     isSelected() {
       return (
-        this.$store.getters['editor/selectedTool'].component ===
-        this.tool.component
+        this.$store.getters['editor/selectedTool'].tool &&
+        this.$store.getters['editor/selectedTool'].tool.component ===
+          this.tool.component
       )
     },
   },
 
   methods: {
     toolSelected() {
-      this.$store.commit('editor/setSelctedTool', this.tool)
+      this.$store.commit('editor/setSelctedTool', {
+        tool: this.tool,
+        parent: { id: '__toolbar' },
+      })
     },
   },
 }

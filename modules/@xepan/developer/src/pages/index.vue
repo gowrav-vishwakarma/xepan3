@@ -53,11 +53,12 @@ export default {
           name: 'Block',
           component: 'xEpanDeveloperEditorToolsCodeBlock',
           id: 'a1',
+          parent: {},
           props: {
             cbType: 'Generic',
             title: 'ServerSide',
             type: 'ClientSideJS',
-            pos: { x: 0, y: 0, w: '100px', h: '100px' },
+            pos: { x: 0, y: 0, w: 100, h: 100 },
             ports: { in: [], out: [] },
             allowDrop: true,
             toolbarOptions: {},

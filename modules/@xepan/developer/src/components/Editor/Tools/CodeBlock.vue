@@ -1,22 +1,11 @@
 <template>
-  <vue-drag-resize>
-    <div
-      class="code-block"
-      :style="{
-        position: 'absolute',
-        left: pos.x,
-        top: pos.y,
-        width: pos.w,
-        height: pos.h,
-        resize: 'both',
-      }"
-    >
-      <v-card>
-        <v-card-title primary-title>
-          {{ item.name }} {{ item.id }}
-        </v-card-title>
-      </v-card>
-      <dz v-if="allowDrop" :items="item.items"> </dz>
+  <vue-drag-resize :parentLimitation="true" :w="pos.w" :h="pos.h">
+    <div class="code-block">
+      <div class="grey lighten-2">
+        <v-icon @click.prevent="moveComponent">mdi-cogs</v-icon>
+        {{ item.id }}
+      </div>
+      <dz v-if="allowDrop" :items="item.items" :parent="item"> </dz>
     </div>
   </vue-drag-resize>
 </template>
@@ -32,6 +21,7 @@ export default {
   name: 'CodeBlock',
   components: { dz: DZ },
   props: {
+    parent: Object,
     item: { type: Object, default: () => {} },
     cbType: { type: String, default: () => 'Generic' },
     title: { type: [String, Boolean], default: () => 'Code Block' },
@@ -39,7 +29,7 @@ export default {
     pos: {
       type: Object,
       default: () => {
-        return { x: 0, y: 0, w: '100px', h: '100px' }
+        return { x: 0, y: 0, w: '100', h: '100' }
       },
     },
     ports: {
@@ -60,24 +50,11 @@ export default {
     }
   },
   methods: {
-    selected(e) {
-      console.log(e)
-      this.outer_active = false
-      // e.stopPropagation()
-    },
-    dropLink(a, b, c) {
-      /* eslint vue/no-mutating-props:0 */
-      this.children.push(JSON.parse(JSON.stringify(a)))
-    },
-    onResize(x, y, width, height) {
-      this.pos.x = x
-      this.pos.y = y
-      this.pos.w = width
-      this.pos.h = height
-    },
-    onDrag(x, y) {
-      this.pos.x = x
-      this.pos.y = y
+    moveComponent() {
+      this.$store.commit('editor/setSelctedTool', {
+        tool: this.item,
+        parent: this.parent,
+      })
     },
   },
 }

@@ -1,5 +1,5 @@
 <template>
-  <dz :items="items" w="100%" h="100vh"> </dz>
+  <dz :items="items" w="100%" h="100vh" :parent="{ items }"> </dz>
 </template>
 
 <script>

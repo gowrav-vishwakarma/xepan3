@@ -58,6 +58,7 @@ export default {
             {
               name: 'Block',
               component: 'xEpanDeveloperEditorToolsCodeBlock',
+              parent: {},
               props: {
                 cbType: 'Generic',
                 title: 'ServerSide',
@@ -71,39 +72,9 @@ export default {
           ],
         },
       },
-      toolsData: {
-        basic: {
-          tools: [{ id: 1, name: 'Service' }],
-        },
-      },
     }
   },
-  methods: {
-    toolDragStarted() {
-      this.drawer = true
-    },
-    toolDragOrDropEnded() {
-      this.drawer = false
-    },
-    clone(original) {
-      const t = JSON.parse(JSON.stringify(original))
-      t.props.pos.x = '0px'
-      t.props.pos.y = '0px'
-      t.id = this.generateId()
-      return t
-    },
 
-    generateId() {
-      return (
-        'id' +
-        Math.random().toString(36).substring(2) +
-        new Date().getTime().toString(36)
-      )
-    },
-    rejectCut() {
-      return false
-    },
-  },
   computed: {
     toolsKey() {
       return Object.keys(this.toolsList)
@@ -113,10 +84,6 @@ export default {
 </script>
 
 <style scoped>
-.drag {
-  color: black;
-}
-
 .v-navigation-drawer--mini-variant,
 .v-navigation-drawer {
   overflow: visible !important;
