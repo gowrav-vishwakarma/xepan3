@@ -68,6 +68,7 @@ export default {
               },
               ports: { in: [{ name: 'v' }], out: [{ name: '2x' }] },
               items: [],
+              connections: [],
             },
           ],
         },

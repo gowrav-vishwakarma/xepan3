@@ -24,7 +24,8 @@
           v-for="inp in item.ports.in"
           :key="inp.name"
           :port="inp"
-          :parent="item"
+          :parent="parent"
+          :item="item"
           type="In"
           :ref="inp.id"
         />
@@ -39,7 +40,9 @@
           :items="item.items"
           :w="pos.w"
           :h="pos.h"
-          :parent="item"
+          :parent="parent"
+          :item="item"
+          :connections="item.connections"
         >
         </dz>
       </div>
@@ -52,7 +55,8 @@
           v-for="outp in item.ports.out"
           :key="outp.name"
           :port="outp"
-          :parent="item"
+          :parent="parent"
+          :item="item"
           type="Out"
           :ref="outp.id"
         />
@@ -91,10 +95,10 @@ export default {
       },
     },
     allowDrop: { type: Boolean, default: () => true },
-    items: {
-      type: Array,
-      default: () => [],
-    },
+    // items: {
+    //   type: Array,
+    //   default: () => [],
+    // },
   },
   mounted() {
     this.updatePortsXY()
@@ -103,8 +107,8 @@ export default {
     updatePortsXY() {
       this.item.ports.in.forEach((p) => {
         p.pos = {
-          x: this.$refs[p.id][0].$el.getBoundingClientRect().left,
-          y: this.$refs[p.id][0].$el.getBoundingClientRect().top,
+          x: this.$refs[p.id][0].$el.offsetLeft,
+          y: this.$refs[p.id][0].$el.offsetTop,
         }
       })
 
@@ -130,7 +134,14 @@ export default {
     },
 
     dragging(position) {
+      console.log('position', position)
       this.updatePortsXY()
+    },
+
+    createConnection() {
+      const selctedPorts = this.$store.getters['editor/selectedPorts']
+      this.item.connections.push(selctedPorts)
+      console.log('Creating in ' + this.item.id)
     },
   },
 }

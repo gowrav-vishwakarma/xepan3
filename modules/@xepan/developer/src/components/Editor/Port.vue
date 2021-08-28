@@ -1,7 +1,7 @@
 <template>
   <span @click.stop.prevent="portClicked($event)">
     <v-icon class="no-drag" :class="{ red: isSelected }">mdi-play</v-icon
-    >{{ port.name }}
+    >{{ port.id }}
   </span>
 </template>
 
@@ -34,11 +34,19 @@ export default {
       if (this.isSelected) mutation = 'editor/portDeSelect'
       this.$store.commit(mutation, this.port)
       const selctedPorts = this.$store.getters['editor/selectedPorts']
+
+      if (selctedPorts.length === 0) {
+        this.$store.commit('editor/portDeSelectAll')
+      }
+
       if (selctedPorts.length === 2) {
-        if (!this.port.linkedTo.includes(selctedPorts[0].id)) {
-          this.port.linkedTo.push(selctedPorts[0].id)
-          selctedPorts[0].linkedTo.push(this.port.id)
+        let $p
+        if (this.type.toLowerCase() === 'in') {
+          $p = this.$parent.$parent.$parent.$parent.$parent
+        } else if (this.type.toLowerCase() === 'out') {
+          $p = this.$parent.$parent
         }
+        $p.createConnection()
         this.$store.commit('editor/portDeSelectAll')
       }
       //   const anyInSelected = this.$store.getters['editor/clickedInPort']

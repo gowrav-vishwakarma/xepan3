@@ -5,8 +5,8 @@
     @click.prevent="dropZoneClicked"
   >
     <component
-      v-for="(item, index) in items"
       :is="item.component"
+      v-for="(item, index) in items"
       :key="index"
       :component="item.component"
       v-bind.sync="item.props"
@@ -14,21 +14,62 @@
       :item="item"
       :parent="parent"
     ></component>
+    <connection
+      v-for="conn in connections"
+      :key="conn.x + conn.y"
+      :connection="conn"
+    />
   </div>
 </template>
 
 <script>
 /* eslint vue/no-mutating-props:0 */
+import connection from './Connection.vue'
+
 export default {
+  components: { connection },
+
   props: {
     items: Array,
     parent: Object,
+    connections: Array,
     w: { type: [Number, String], default: () => '100%' },
     h: { type: [Number, String], default: () => '100%' },
   },
 
-  mounted() {},
+  data() {
+    return {}
+  },
+
+  mounted() {
+    // this.drawConnections()
+  },
   methods: {
+    drawConnections() {
+      this.items.forEach((item) => {
+        item.ports.in.forEach((ip) => {
+          this.drawConnection(ip)
+        })
+        item.ports.out.forEach((ip) => {
+          this.drawConnection(ip)
+        })
+      })
+    },
+    drawConnection(port) {
+      port.linkedTo.forEach((link) => {
+        const exists = this.connections.find((o) => {
+          return (
+            (o.x === link && o.y === port.id) ||
+            (o.y === link && o.x === port.id)
+          )
+        })
+        if (!exists) {
+          this.connections.push({ x: port.id, y: link, portX: port })
+        } else {
+          exists[exists.x === port.id ? 'portX' : 'portY'] = port
+        }
+      })
+    },
     dropZoneClicked(evt) {
       const isDropZoneClicked = evt.target.classList.contains('drop-zone')
       const selectedTool = this.$store.getters['editor/selectedTool']
@@ -63,24 +104,6 @@ export default {
         Math.random().toString(36).substring(2) +
         new Date().getTime().toString(36)
       )
-    },
-
-    scaleAmountNeededToFit(el, margin = 0) {
-      const parentSize = {
-        width: el.parentElement.clientWidth - margin * 2,
-        height: el.parentElement.clientHeight - margin * 2,
-      }
-
-      return Math.min(
-        parentSize.width / el.clientWidth,
-        parentSize.height / el.clientHeight
-      )
-    },
-
-    fitToParent(element, margin) {
-      const scale = this.scaleAmountNeededToFit(element, margin)
-      element.style.transformOrigin = '0 0'
-      element.style.transform = `translate(${margin}px, ${margin}px) scale(${scale})`
     },
   },
 }

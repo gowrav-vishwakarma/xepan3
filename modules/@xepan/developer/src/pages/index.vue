@@ -61,13 +61,13 @@ export default {
             allowDrop: true,
             toolbarOptions: {},
           },
+          connections: [],
           ports: {
             in: [
-              { id: 'x1', name: 'X', linkedTo: [], pos: { x: 254, y: 129 } },
+              { id: 'x1', name: 'X', pos: { x: 254, y: 129 } },
               {
                 id: 'y1',
                 name: 'Y',
-                linkedTo: ['idrzu37e5ovviksucl92j'],
                 pos: { x: 254, y: 177.765625 },
               },
             ],
@@ -75,7 +75,6 @@ export default {
               {
                 id: 'po1',
                 name: 'Sum',
-                linkedTo: [],
                 pos: { x: 1220, y: 129 },
               },
             ],
@@ -93,12 +92,12 @@ export default {
                 pos: { x: 43, y: 29, w: 390, h: 207 },
                 allowDrop: true,
               },
+              connections: [],
               ports: {
                 in: [
                   {
                     name: 'v',
                     id: 'idrzu37e5ovviksucl92j',
-                    linkedTo: ['y1', 'idnrilsgi8bnksucp3wb'],
                     pos: { x: 355, y: 199.765625 },
                   },
                 ],
@@ -106,7 +105,6 @@ export default {
                   {
                     name: '2x',
                     id: 'idpavmvjo469sksucl92k',
-                    linkedTo: ['idqceqokiu97ksucp3wb'],
                     pos: { x: 750, y: 199.765625 },
                   },
                 ],
@@ -124,12 +122,12 @@ export default {
                     pos: { x: 31, y: 61, w: 313, h: 75 },
                     allowDrop: true,
                   },
+                  connections: [],
                   ports: {
                     in: [
                       {
                         name: 'v',
                         id: 'idnrilsgi8bnksucp3wb',
-                        linkedTo: ['idrzu37e5ovviksucl92j'],
                         pos: { x: 387, y: 286.53125 },
                       },
                     ],
@@ -137,7 +135,6 @@ export default {
                       {
                         name: '2x',
                         id: 'idqceqokiu97ksucp3wb',
-                        linkedTo: ['idpavmvjo469sksucl92k'],
                         pos: { x: 705, y: 286.53125 },
                       },
                     ],
@@ -158,12 +155,12 @@ export default {
                 pos: { x: 568, y: 67, w: 312, h: 110 },
                 allowDrop: true,
               },
+              connections: [],
               ports: {
                 in: [
                   {
                     name: 'v',
                     id: 'idkav5997eh7ksucozco',
-                    linkedTo: [],
                     pos: { x: 255, y: 154.765625 },
                   },
                 ],
@@ -171,7 +168,6 @@ export default {
                   {
                     name: '2x',
                     id: 'id4qwexnkw8v5ksucozco',
-                    linkedTo: [],
                     pos: { x: 572, y: 154.765625 },
                   },
                 ],
