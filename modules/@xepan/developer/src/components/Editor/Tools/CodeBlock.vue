@@ -42,7 +42,7 @@
           :items="item.items"
           :w="pos.w"
           :h="pos.h"
-          :parent="parent"
+          :parent="item"
           :item="item"
           :connections="item.connections"
         >
@@ -104,52 +104,71 @@ export default {
     // },
   },
   mounted() {
-    this.updatePortsFixXY()
-    this.updatePortsDynamicXY()
+    this.updatePortsInternalXY()
+    this.updatePortsParentXY()
   },
   methods: {
-    updatePortsDynamicXY() {
+    updatePortsParentXY() {
+      // port.offsetParent.offsetParent.offsetParent
       this.item.ports.in.forEach((p) => {
-        p.pos.to = {
+        p.pos.parent = {
           // From parent referance
           x:
-            this.$el.offsetLeft +
-            this.$refs['in-ports-area'].offsetLeft +
             this.$refs[p.id][0].$el.offsetLeft +
-            15,
+            this.$refs[p.id][0].$el.offsetParent.offsetLeft +
+            this.$refs[p.id][0].$el.offsetParent.offsetParent.offsetLeft +
+            this.$refs[p.id][0].$el.offsetParent.offsetParent.offsetParent
+              .offsetLeft,
+
           y:
-            this.$el.offsetTop +
-            this.$refs['in-ports-area'].offsetTop +
             this.$refs[p.id][0].$el.offsetTop +
-            this.$refs[p.id][0].$el.offsetHeight / 2,
+            this.$refs[p.id][0].$el.offsetParent.offsetTop +
+            this.$refs[p.id][0].$el.offsetParent.offsetParent.offsetTop +
+            this.$refs[p.id][0].$el.offsetParent.offsetParent.offsetParent
+              .offsetTop,
         }
       })
 
       this.item.ports.out.forEach((p) => {
-        p.pos.from = {
+        p.pos.parent = {
           // From parent referance
-          x: this.$el.offsetLeft + this.$refs[p.id][0].$el.offsetLeft,
-          y: this.$el.offsetTop + this.$refs[p.id][0].$el.offsetTop,
+          x:
+            this.$refs[p.id][0].$el.offsetLeft +
+            this.$refs[p.id][0].$el.offsetParent.offsetLeft +
+            this.$refs[p.id][0].$el.offsetParent.offsetParent.offsetLeft +
+            this.$refs[p.id][0].$el.offsetParent.offsetParent.offsetParent
+              .offsetLeft,
+
+          y:
+            this.$refs[p.id][0].$el.offsetTop +
+            this.$refs[p.id][0].$el.offsetParent.offsetTop +
+            this.$refs[p.id][0].$el.offsetParent.offsetParent.offsetTop +
+            this.$refs[p.id][0].$el.offsetParent.offsetParent.offsetParent
+              .offsetTop,
         }
       })
     },
 
-    updatePortsFixXY() {
+    updatePortsInternalXY() {
       this.item.ports.in.forEach((p, i) => {
-        p.pos.from = {
+        p.pos.internal = {
           // From local referance
           x: this.$refs[p.id][0].$el.offsetLeft,
-          y: 30 + this.$refs[p.id][0].$el.offsetTop,
+          y:
+            this.$refs[p.id][0].$el.offsetParent.offsetTop +
+            this.$refs[p.id][0].$el.offsetTop,
         }
       })
 
       this.item.ports.out.forEach((p) => {
-        p.pos.to = {
+        p.pos.internal = {
           // From local referance
           x:
-            this.$refs['out-ports-area'].offsetLeft +
+            this.$refs[p.id][0].$el.offsetParent.offsetLeft +
             this.$refs[p.id][0].$el.offsetLeft,
-          y: 30 + this.$refs[p.id][0].$el.offsetTop,
+          y:
+            this.$refs[p.id][0].$el.offsetParent.offsetTop +
+            this.$refs[p.id][0].$el.offsetTop,
         }
       })
     },
@@ -169,13 +188,13 @@ export default {
 
     dragging(position) {
       // console.log('position', position)
-      this.updatePortsFixXY()
-      this.updatePortsDynamicXY()
+      this.updatePortsParentXY()
+      this.updatePortsInternalXY()
     },
 
-    createConnection(toOut) {
+    createConnection() {
       const selctedPorts = this.$store.getters['editor/selectedPorts']
-      this.item.connections.push({ selctedPorts, toOut })
+      this.item.connections.push(selctedPorts)
     },
   },
 }
