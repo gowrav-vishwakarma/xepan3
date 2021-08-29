@@ -191,6 +191,8 @@ export default {
       this.item.props.pos.y = newRect.top
       this.item.props.pos.w = newRect.width
       this.item.props.pos.h = newRect.height
+      this.updatePortsInternalXY()
+      this.updatePortsParentXY()
     },
 
     dragging(position) {

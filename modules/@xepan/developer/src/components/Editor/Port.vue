@@ -6,9 +6,7 @@
       class="no-drag"
       :class="{ red: isSelected }"
       >mdi-play</v-icon
-    >{{
-      `(${port.pos.internal.x},${port.pos.internal.y})-(${port.pos.parent.x},${port.pos.parent.y})`
-    }}
+    >{{ port.name }}
   </span>
 </template>
 
