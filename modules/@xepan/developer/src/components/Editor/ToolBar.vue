@@ -70,13 +70,13 @@ export default {
                 in: [
                   {
                     name: 'v',
-                    pos: { from: { x: 0, y: 0 }, to: { x: 0, y: 0 } },
+                    pos: { internal: { x: 0, y: 0 }, parent: { x: 0, y: 0 } },
                   },
                 ],
                 out: [
                   {
                     name: '2x',
-                    pos: { from: { x: 0, y: 0 }, to: { x: 0, y: 0 } },
+                    pos: { internal: { x: 0, y: 0 }, parent: { x: 0, y: 0 } },
                   },
                 ],
               },

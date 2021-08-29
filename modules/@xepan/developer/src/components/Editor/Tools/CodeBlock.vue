@@ -118,14 +118,16 @@ export default {
             this.$refs[p.id][0].$el.offsetParent.offsetLeft +
             this.$refs[p.id][0].$el.offsetParent.offsetParent.offsetLeft +
             this.$refs[p.id][0].$el.offsetParent.offsetParent.offsetParent
-              .offsetLeft,
+              .offsetLeft +
+            10,
 
           y:
             this.$refs[p.id][0].$el.offsetTop +
             this.$refs[p.id][0].$el.offsetParent.offsetTop +
             this.$refs[p.id][0].$el.offsetParent.offsetParent.offsetTop +
             this.$refs[p.id][0].$el.offsetParent.offsetParent.offsetParent
-              .offsetTop,
+              .offsetTop +
+            10,
         }
       })
 
@@ -137,14 +139,16 @@ export default {
             this.$refs[p.id][0].$el.offsetParent.offsetLeft +
             this.$refs[p.id][0].$el.offsetParent.offsetParent.offsetLeft +
             this.$refs[p.id][0].$el.offsetParent.offsetParent.offsetParent
-              .offsetLeft,
+              .offsetLeft +
+            10,
 
           y:
             this.$refs[p.id][0].$el.offsetTop +
             this.$refs[p.id][0].$el.offsetParent.offsetTop +
             this.$refs[p.id][0].$el.offsetParent.offsetParent.offsetTop +
             this.$refs[p.id][0].$el.offsetParent.offsetParent.offsetParent
-              .offsetTop,
+              .offsetTop +
+            10,
         }
       })
     },
@@ -156,7 +160,8 @@ export default {
           x: this.$refs[p.id][0].$el.offsetLeft,
           y:
             this.$refs[p.id][0].$el.offsetParent.offsetTop +
-            this.$refs[p.id][0].$el.offsetTop,
+            this.$refs[p.id][0].$el.offsetTop -
+            10,
         }
       })
 
@@ -165,10 +170,12 @@ export default {
           // From local referance
           x:
             this.$refs[p.id][0].$el.offsetParent.offsetLeft +
-            this.$refs[p.id][0].$el.offsetLeft,
+            this.$refs[p.id][0].$el.offsetLeft +
+            10,
           y:
             this.$refs[p.id][0].$el.offsetParent.offsetTop +
-            this.$refs[p.id][0].$el.offsetTop,
+            this.$refs[p.id][0].$el.offsetTop -
+            10,
         }
       })
     },
