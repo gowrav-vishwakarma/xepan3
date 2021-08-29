@@ -1,7 +1,14 @@
 <template>
-  <span @click.stop.prevent="portClicked($event)">
-    <v-icon class="no-drag" :class="{ red: isSelected }">mdi-play</v-icon
-    >{{ port.id }}
+  <span>
+    <v-icon
+      @click.stop.prevent="portClicked($event)"
+      ref="icon"
+      class="no-drag"
+      :class="{ red: isSelected }"
+      >mdi-play</v-icon
+    >{{
+      `(${port.pos.from.x},${port.pos.from.y})-(${port.pos.to.x},${port.pos.to.y})`
+    }}
   </span>
 </template>
 
@@ -46,7 +53,7 @@ export default {
         } else if (this.type.toLowerCase() === 'out') {
           $p = this.$parent.$parent
         }
-        $p.createConnection()
+        $p.createConnection(this.type.toLowerCase() === 'out')
         this.$store.commit('editor/portDeSelectAll')
       }
       //   const anyInSelected = this.$store.getters['editor/clickedInPort']

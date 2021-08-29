@@ -16,8 +16,9 @@
     ></component>
     <connection
       v-for="conn in connections"
-      :key="conn.x + conn.y"
-      :connection="conn"
+      :key="conn.selctedPorts[0].id + conn.selctedPorts[1].id"
+      :connection="conn.selctedPorts"
+      :toOut="conn.toOut"
     />
   </div>
 </template>

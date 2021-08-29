@@ -10,6 +10,7 @@
     @resizing="resizing"
     @dragging="dragging"
     dragCancel=".no-drag"
+    style="z-index: 1"
   >
     <div
       class="code-block d-flex flex-row"
@@ -18,6 +19,7 @@
       <div
         class="in-ports-area d-flex flex-column mt-10 no-drag"
         style="position: absolute; left: -15px; z-index: 1"
+        ref="in-ports-area"
       >
         <port
           class="no-drag"
@@ -49,6 +51,7 @@
       <div
         class="out-ports-area d-flex flex-column mt-10 no-drag"
         :style="{ position: 'absolute', left: pos.w - 10 + 'px', 'z-index': 1 }"
+        ref="out-ports-area"
       >
         <port
           class="no-drag"
@@ -101,21 +104,52 @@ export default {
     // },
   },
   mounted() {
-    this.updatePortsXY()
+    this.updatePortsFixXY()
+    this.updatePortsDynamicXY()
   },
   methods: {
-    updatePortsXY() {
+    updatePortsDynamicXY() {
       this.item.ports.in.forEach((p) => {
-        p.pos = {
-          x: this.$refs[p.id][0].$el.offsetLeft,
-          y: this.$refs[p.id][0].$el.offsetTop,
+        p.pos.to = {
+          // From parent referance
+          x:
+            this.$el.offsetLeft +
+            this.$refs['in-ports-area'].offsetLeft +
+            this.$refs[p.id][0].$el.offsetLeft +
+            15,
+          y:
+            this.$el.offsetTop +
+            this.$refs['in-ports-area'].offsetTop +
+            this.$refs[p.id][0].$el.offsetTop +
+            this.$refs[p.id][0].$el.offsetHeight / 2,
         }
       })
 
       this.item.ports.out.forEach((p) => {
-        p.pos = {
-          x: this.$refs[p.id][0].$el.getBoundingClientRect().left,
-          y: this.$refs[p.id][0].$el.getBoundingClientRect().top,
+        p.pos.from = {
+          // From parent referance
+          x: this.$el.offsetLeft + this.$refs[p.id][0].$el.offsetLeft,
+          y: this.$el.offsetTop + this.$refs[p.id][0].$el.offsetTop,
+        }
+      })
+    },
+
+    updatePortsFixXY() {
+      this.item.ports.in.forEach((p, i) => {
+        p.pos.from = {
+          // From local referance
+          x: this.$refs[p.id][0].$el.offsetLeft,
+          y: 30 + this.$refs[p.id][0].$el.offsetTop,
+        }
+      })
+
+      this.item.ports.out.forEach((p) => {
+        p.pos.to = {
+          // From local referance
+          x:
+            this.$refs['out-ports-area'].offsetLeft +
+            this.$refs[p.id][0].$el.offsetLeft,
+          y: 30 + this.$refs[p.id][0].$el.offsetTop,
         }
       })
     },
@@ -134,14 +168,14 @@ export default {
     },
 
     dragging(position) {
-      console.log('position', position)
-      this.updatePortsXY()
+      // console.log('position', position)
+      this.updatePortsFixXY()
+      this.updatePortsDynamicXY()
     },
 
-    createConnection() {
+    createConnection(toOut) {
       const selctedPorts = this.$store.getters['editor/selectedPorts']
-      this.item.connections.push(selctedPorts)
-      console.log('Creating in ' + this.item.id)
+      this.item.connections.push({ selctedPorts, toOut })
     },
   },
 }

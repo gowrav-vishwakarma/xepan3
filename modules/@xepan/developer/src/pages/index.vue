@@ -64,18 +64,22 @@ export default {
           connections: [],
           ports: {
             in: [
-              { id: 'x1', name: 'X', pos: { x: 254, y: 129 } },
+              {
+                id: 'x1',
+                name: 'X',
+                pos: { from: { x: 0, y: 0 }, to: { x: 0, y: 0 } },
+              },
               {
                 id: 'y1',
                 name: 'Y',
-                pos: { x: 254, y: 177.765625 },
+                pos: { from: { x: 0, y: 0 }, to: { x: 0, y: 0 } },
               },
             ],
             out: [
               {
                 id: 'po1',
                 name: 'Sum',
-                pos: { x: 1220, y: 129 },
+                pos: { from: { x: 0, y: 0 }, to: { x: 0, y: 0 } },
               },
             ],
           },
@@ -98,14 +102,24 @@ export default {
                   {
                     name: 'v',
                     id: 'idrzu37e5ovviksucl92j',
-                    pos: { x: 355, y: 199.765625 },
+                    pos: { from: { x: 0, y: 0 }, to: { x: 0, y: 0 } },
+                  },
+                  {
+                    name: 'v2',
+                    id: 'idxxxxxe5ovviksucl92j',
+                    pos: { from: { x: 0, y: 0 }, to: { x: 0, y: 0 } },
+                  },
+                  {
+                    name: 'v3',
+                    id: 'idyyyyye5ovviksucl92j',
+                    pos: { from: { x: 0, y: 0 }, to: { x: 0, y: 0 } },
                   },
                 ],
                 out: [
                   {
                     name: '2x',
                     id: 'idpavmvjo469sksucl92k',
-                    pos: { x: 750, y: 199.765625 },
+                    pos: { from: { x: 0, y: 0 }, to: { x: 0, y: 0 } },
                   },
                 ],
               },
@@ -128,14 +142,14 @@ export default {
                       {
                         name: 'v',
                         id: 'idnrilsgi8bnksucp3wb',
-                        pos: { x: 387, y: 286.53125 },
+                        pos: { from: { x: 0, y: 0 }, to: { x: 0, y: 0 } },
                       },
                     ],
                     out: [
                       {
                         name: '2x',
                         id: 'idqceqokiu97ksucp3wb',
-                        pos: { x: 705, y: 286.53125 },
+                        pos: { from: { x: 0, y: 0 }, to: { x: 0, y: 0 } },
                       },
                     ],
                   },
@@ -161,14 +175,14 @@ export default {
                   {
                     name: 'v',
                     id: 'idkav5997eh7ksucozco',
-                    pos: { x: 255, y: 154.765625 },
+                    pos: { from: { x: 0, y: 0 }, to: { x: 0, y: 0 } },
                   },
                 ],
                 out: [
                   {
                     name: '2x',
                     id: 'id4qwexnkw8v5ksucozco',
-                    pos: { x: 572, y: 154.765625 },
+                    pos: { from: { x: 0, y: 0 }, to: { x: 0, y: 0 } },
                   },
                 ],
               },

@@ -66,7 +66,20 @@ export default {
                 pos: { x: 0, y: 0, w: 100, h: 100 },
                 allowDrop: true,
               },
-              ports: { in: [{ name: 'v' }], out: [{ name: '2x' }] },
+              ports: {
+                in: [
+                  {
+                    name: 'v',
+                    pos: { from: { x: 0, y: 0 }, to: { x: 0, y: 0 } },
+                  },
+                ],
+                out: [
+                  {
+                    name: '2x',
+                    pos: { from: { x: 0, y: 0 }, to: { x: 0, y: 0 } },
+                  },
+                ],
+              },
               items: [],
               connections: [],
             },
