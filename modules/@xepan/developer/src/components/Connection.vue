@@ -1,10 +1,10 @@
 <template>
-  <svg height="210" width="500" style="position: absolute">
+  <svg width="100%" style="position: absolute">
     <line
-      :x1="toOut ? connection[0].pos.to.x : connection[0].pos.from.x"
-      :y1="toOut ? connection[0].pos.to.y : connection[0].pos.from.y"
-      :x2="toOut ? connection[1].pos.from.x : connection[1].pos.to.x"
-      :y2="toOut ? connection[1].pos.from.y : connection[1].pos.to.y"
+      :x1="from.x"
+      :y1="from.y"
+      :x2="to.x"
+      :y2="to.y"
       style="stroke: rgb(255, 0, 0); stroke-width: 2"
     />
   </svg>
@@ -14,7 +14,20 @@
 export default {
   props: {
     connection: Array,
-    toOut: Boolean,
+  },
+
+  computed: {
+    from() {
+      return this.connection[0].type === 'In'
+        ? this.connection[0].pos.internal
+        : this.connection[0].pos.parent
+    },
+
+    to() {
+      return this.connection[1].type === 'Out'
+        ? this.connection[1].pos.internal
+        : this.connection[1].pos.parent
+    },
   },
 }
 </script>

@@ -7,7 +7,7 @@
       :class="{ red: isSelected }"
       >mdi-play</v-icon
     >{{
-      `(${port.pos.from.x},${port.pos.from.y})-(${port.pos.to.x},${port.pos.to.y})`
+      `(${port.pos.internal.x},${port.pos.internal.y})-(${port.pos.parent.x},${port.pos.parent.y})`
     }}
   </span>
 </template>
@@ -39,6 +39,10 @@ export default {
     portClicked(evt) {
       let mutation = 'editor/portSelect'
       if (this.isSelected) mutation = 'editor/portDeSelect'
+
+      this.port.type = this.type
+      this.port.parent = this.parent
+
       this.$store.commit(mutation, this.port)
       const selctedPorts = this.$store.getters['editor/selectedPorts']
 
@@ -53,7 +57,7 @@ export default {
         } else if (this.type.toLowerCase() === 'out') {
           $p = this.$parent.$parent
         }
-        $p.createConnection(this.type.toLowerCase() === 'out')
+        $p.createConnection()
         this.$store.commit('editor/portDeSelectAll')
       }
       //   const anyInSelected = this.$store.getters['editor/clickedInPort']
