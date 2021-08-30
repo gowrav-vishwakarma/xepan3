@@ -203,6 +203,8 @@ export default {
 
     createConnection() {
       const selctedPorts = this.$store.getters['editor/selectedPorts']
+      delete selctedPorts[0].parent
+      delete selctedPorts[1].parent
       this.item.connections.push(selctedPorts)
     },
   },
