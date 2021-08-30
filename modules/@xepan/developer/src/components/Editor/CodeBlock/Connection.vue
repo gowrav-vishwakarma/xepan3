@@ -1,5 +1,5 @@
 <template>
-  <svg width="auto" height="auto" style="position: absolute">
+  <svg width="100%" height="100%" style="position: absolute">
     <line
       :x1="from.x"
       :y1="from.y"
@@ -18,6 +18,7 @@ export default {
 
   computed: {
     from() {
+      console.log(this.$parent)
       return this.connection[0].type === 'In'
         ? this.connection[0].pos.internal
         : this.connection[0].pos.parent

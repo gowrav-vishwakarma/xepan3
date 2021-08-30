@@ -67,5 +67,3 @@ export default {
   },
 }
 </script>
-
-// animation-name: color;

@@ -42,34 +42,9 @@ export default {
   },
 
   mounted() {
-    // this.drawConnections()
+    console.log('cc', this)
   },
   methods: {
-    drawConnections() {
-      this.items.forEach((item) => {
-        item.ports.in.forEach((ip) => {
-          this.drawConnection(ip)
-        })
-        item.ports.out.forEach((ip) => {
-          this.drawConnection(ip)
-        })
-      })
-    },
-    drawConnection(port) {
-      port.linkedTo.forEach((link) => {
-        const exists = this.connections.find((o) => {
-          return (
-            (o.x === link && o.y === port.id) ||
-            (o.y === link && o.x === port.id)
-          )
-        })
-        if (!exists) {
-          this.connections.push({ x: port.id, y: link, portX: port })
-        } else {
-          exists[exists.x === port.id ? 'portX' : 'portY'] = port
-        }
-      })
-    },
     dropZoneClicked(evt) {
       const isDropZoneClicked = evt.target.classList.contains('drop-zone')
       const selectedTool = this.$store.getters['editor/selectedTool']

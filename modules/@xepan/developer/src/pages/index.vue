@@ -51,7 +51,7 @@ export default {
       pageContent: [
         {
           name: 'Block',
-          component: 'xEpanDeveloperEditorToolsCodeBlock',
+          component: 'xEpanDeveloperEditorCodeBlock',
           id: 'a1',
           props: {
             cbType: 'Generic',
@@ -86,7 +86,7 @@ export default {
           items: [
             {
               name: 'Block',
-              component: 'xEpanDeveloperEditorToolsCodeBlock',
+              component: 'xEpanDeveloperEditorCodeBlock',
               id: 'idfamvzvg39kksucl92j',
               fn: 'nothing',
               props: {
@@ -126,7 +126,7 @@ export default {
               items: [
                 {
                   name: 'Block',
-                  component: 'xEpanDeveloperEditorToolsCodeBlock',
+                  component: 'xEpanDeveloperEditorCodeBlock',
                   id: 'idr238cdg3l8ksucp3wb',
                   fn: 'nothing',
                   props: {
@@ -165,7 +165,7 @@ export default {
             },
             {
               name: 'Block',
-              component: 'xEpanDeveloperEditorToolsCodeBlock',
+              component: 'xEpanDeveloperEditorCodeBlock',
               id: 'id6id0wlgroiqksucozcn',
               fn: 'nothing',
               props: {

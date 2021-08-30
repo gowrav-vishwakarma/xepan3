@@ -11,6 +11,7 @@
     @dragging="dragging"
     dragCancel=".no-drag"
     style="z-index: 1"
+    @dblclick.prevent="toolsSelected"
   >
     <div
       class="code-block d-flex flex-row"
@@ -71,12 +72,10 @@
 <script>
 /* eslint vue/no-mutating-props:0 */
 
-import DZ from '../../DropZone.vue'
-import Port from '../Port.vue'
-import DC from './DeveloperComponent.vue'
+import DZ from './DropZone.vue'
+import Port from './Port.vue'
 
 export default {
-  extends: DC,
   name: 'CodeBlock',
   components: { dz: DZ, port: Port },
   props: {
@@ -108,6 +107,16 @@ export default {
     this.updatePortsParentXY()
   },
   methods: {
+    toolsSelected() {
+      if (!this.isLoggedIn) return
+      this.$nuxt.$emit(
+        'xepan-editor-tools-selected',
+        this.component,
+        this.props
+        // modelProperty: 'variable in props' Optional, default props itself
+        // formschema: 'variable in toolbarOptions' Optional, default toolbarOptions itself
+      )
+    },
     updatePortsParentXY() {
       // port.offsetParent.offsetParent.offsetParent
       this.item.ports.in.forEach((p) => {
