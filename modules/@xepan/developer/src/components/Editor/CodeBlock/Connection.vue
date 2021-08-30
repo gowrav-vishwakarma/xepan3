@@ -18,7 +18,6 @@ export default {
 
   computed: {
     from() {
-      console.log(this.$parent)
       return this.connection[0].type === 'In'
         ? this.connection[0].pos.internal
         : this.connection[0].pos.parent

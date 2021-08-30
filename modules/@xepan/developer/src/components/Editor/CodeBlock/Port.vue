@@ -27,7 +27,7 @@ export default {
 
   computed: {
     isSelected() {
-      return this.$store.getters['editor/selectedPorts'].find(
+      return this.$store.getters['codeblock/selectedPorts'].find(
         (o) => o.id === this.port.id
       )
     },
@@ -35,17 +35,17 @@ export default {
 
   methods: {
     portClicked(evt) {
-      let mutation = 'editor/portSelect'
-      if (this.isSelected) mutation = 'editor/portDeSelect'
+      let mutation = 'codeblock/portSelect'
+      if (this.isSelected) mutation = 'codeblock/portDeSelect'
 
       this.port.type = this.type
       this.port.parent = this.parent
 
       this.$store.commit(mutation, this.port)
-      const selctedPorts = this.$store.getters['editor/selectedPorts']
+      const selctedPorts = this.$store.getters['codeblock/selectedPorts']
 
       if (selctedPorts.length === 0) {
-        this.$store.commit('editor/portDeSelectAll')
+        this.$store.commit('codeblock/portDeSelectAll')
       }
 
       if (selctedPorts.length === 2) {
@@ -56,7 +56,7 @@ export default {
           $p = this.$parent.$parent
         }
         $p.createConnection()
-        this.$store.commit('editor/portDeSelectAll')
+        this.$store.commit('codeblock/portDeSelectAll')
       }
       //   const anyInSelected = this.$store.getters['editor/clickedInPort']
       //   const anyOutSelected = this.$store.getters['editor/clickedOutPort']
