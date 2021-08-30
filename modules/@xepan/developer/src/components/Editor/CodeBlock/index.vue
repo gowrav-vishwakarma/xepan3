@@ -103,8 +103,10 @@ export default {
     // },
   },
   mounted() {
-    this.updatePortsInternalXY()
-    this.updatePortsParentXY()
+    this.$nextTick(() => {
+      this.updatePortsInternalXY()
+      this.updatePortsParentXY()
+    })
   },
   methods: {
     toolsSelected() {
@@ -189,7 +191,7 @@ export default {
       })
     },
     moveComponent() {
-      this.$store.commit('codeblock/setSelctedTool', {
+      this.$store.commit('editor/codeblock/setSelctedTool', {
         tool: this.item,
         parent: this.parent,
       })
@@ -207,11 +209,11 @@ export default {
     dragging(position) {
       // console.log('position', position)
       this.updatePortsParentXY()
-      this.updatePortsInternalXY()
+      // this.updatePortsInternalXY()
     },
 
     createConnection() {
-      const selctedPorts = this.$store.getters['codeblock/selectedPorts']
+      const selctedPorts = this.$store.getters['editor/codeblock/selectedPorts']
       delete selctedPorts[0].parent
       delete selctedPorts[1].parent
       this.item.connections.push(selctedPorts)
