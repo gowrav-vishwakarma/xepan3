@@ -1,5 +1,5 @@
 <template>
-  <svg width="auto" height="auto" style="position: absolute">
+  <svg width="100%" height="100%" style="position: absolute">
     <line
       :x1="from.x"
       :y1="from.y"

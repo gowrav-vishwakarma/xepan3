@@ -11,6 +11,7 @@
     @dragging="dragging"
     dragCancel=".no-drag"
     style="z-index: 1"
+    @dblclick.prevent="toolsSelected"
   >
     <div
       class="code-block d-flex flex-row"
@@ -71,12 +72,10 @@
 <script>
 /* eslint vue/no-mutating-props:0 */
 
-import DZ from '../../DropZone.vue'
-import Port from '../Port.vue'
-import DC from './DeveloperComponent.vue'
+import DZ from './DropZone.vue'
+import Port from './Port.vue'
 
 export default {
-  extends: DC,
   name: 'CodeBlock',
   components: { dz: DZ, port: Port },
   props: {
@@ -104,10 +103,22 @@ export default {
     // },
   },
   mounted() {
-    this.updatePortsInternalXY()
-    this.updatePortsParentXY()
+    this.$nextTick(() => {
+      this.updatePortsInternalXY()
+      this.updatePortsParentXY()
+    })
   },
   methods: {
+    toolsSelected() {
+      if (!this.isLoggedIn) return
+      this.$nuxt.$emit(
+        'xepan-editor-tools-selected',
+        this.component,
+        this.props
+        // modelProperty: 'variable in props' Optional, default props itself
+        // formschema: 'variable in toolbarOptions' Optional, default toolbarOptions itself
+      )
+    },
     updatePortsParentXY() {
       // port.offsetParent.offsetParent.offsetParent
       this.item.ports.in.forEach((p) => {
@@ -180,7 +191,7 @@ export default {
       })
     },
     moveComponent() {
-      this.$store.commit('editor/setSelctedTool', {
+      this.$store.commit('editor/codeblock/setSelctedTool', {
         tool: this.item,
         parent: this.parent,
       })
@@ -198,11 +209,11 @@ export default {
     dragging(position) {
       // console.log('position', position)
       this.updatePortsParentXY()
-      this.updatePortsInternalXY()
+      // this.updatePortsInternalXY()
     },
 
     createConnection() {
-      const selctedPorts = this.$store.getters['editor/selectedPorts']
+      const selctedPorts = this.$store.getters['editor/codeblock/selectedPorts']
       delete selctedPorts[0].parent
       delete selctedPorts[1].parent
       this.item.connections.push(selctedPorts)

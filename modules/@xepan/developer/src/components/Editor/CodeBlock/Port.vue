@@ -27,7 +27,7 @@ export default {
 
   computed: {
     isSelected() {
-      return this.$store.getters['editor/selectedPorts'].find(
+      return this.$store.getters['editor/codeblock/selectedPorts'].find(
         (o) => o.id === this.port.id
       )
     },
@@ -35,17 +35,17 @@ export default {
 
   methods: {
     portClicked(evt) {
-      let mutation = 'editor/portSelect'
-      if (this.isSelected) mutation = 'editor/portDeSelect'
+      let mutation = 'editor/codeblock/portSelect'
+      if (this.isSelected) mutation = 'editor/codeblock/portDeSelect'
 
       this.port.type = this.type
       this.port.parent = this.parent
 
       this.$store.commit(mutation, this.port)
-      const selctedPorts = this.$store.getters['editor/selectedPorts']
+      const selctedPorts = this.$store.getters['editor/codeblock/selectedPorts']
 
       if (selctedPorts.length === 0) {
-        this.$store.commit('editor/portDeSelectAll')
+        this.$store.commit('editor/codeblock/portDeSelectAll')
       }
 
       if (selctedPorts.length === 2) {
@@ -56,7 +56,7 @@ export default {
           $p = this.$parent.$parent
         }
         $p.createConnection()
-        this.$store.commit('editor/portDeSelectAll')
+        this.$store.commit('editor/codeblock/portDeSelectAll')
       }
       //   const anyInSelected = this.$store.getters['editor/clickedInPort']
       //   const anyOutSelected = this.$store.getters['editor/clickedOutPort']
@@ -67,5 +67,3 @@ export default {
   },
 }
 </script>
-
-// animation-name: color;
