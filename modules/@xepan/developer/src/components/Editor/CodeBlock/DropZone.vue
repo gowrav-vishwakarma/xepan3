@@ -45,7 +45,7 @@ export default {
   methods: {
     dropZoneClicked(evt) {
       const isDropZoneClicked = evt.target.classList.contains('drop-zone')
-      const selectedTool = this.$store.getters['editor/codeblock/selectedTool']
+      const selectedTool = this.$store.getters['editor/selectedTool']
 
       if (isDropZoneClicked && selectedTool !== false) {
         const bounds = evt.target.getBoundingClientRect()
@@ -67,7 +67,7 @@ export default {
 
         this.items.push(selectedTool.tool)
 
-        this.$store.commit('editor/codeblock/deselectTool')
+        this.$store.commit('editor/deselectTool')
       }
     },
 

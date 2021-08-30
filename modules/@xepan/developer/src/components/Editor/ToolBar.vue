@@ -25,7 +25,7 @@
     </v-list-item>
 
     <v-divider></v-divider>
-    <v-expansion-panels>
+    <v-expansion-panels dense>
       <v-expansion-panel expand v-for="(toolKey, i) in toolsKey" :key="i">
         <v-expansion-panel-header> {{ toolKey }} </v-expansion-panel-header>
         <v-expansion-panel-content>
@@ -56,7 +56,7 @@ export default {
           tools: [
             {
               name: 'Block',
-              component: 'xEpanDeveloperEditorToolsCodeBlock',
+              component: 'xEpanDeveloperEditorCodeBlock',
               id: 'Dummy',
               fn: 'nothing',
               props: {
