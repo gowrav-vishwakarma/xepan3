@@ -7,7 +7,7 @@ module.exports = {
   },
   serviceEndpoints: {
     developerService: {
-      url: 'http://localhost:3002',
+      url: 'http://localhost:3003',
     },
   },
   policies: [

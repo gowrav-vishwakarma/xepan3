@@ -1,29 +1,17 @@
 <template>
-  <div>
-    <client-only>
-      <v-container fluid style="height: 100vh">
-        <tool-bar />
-        <v-main>
-          <menu-bar />
-          <stage :items="pageContent" class="stage" />
-        </v-main>
-      </v-container>
-    </client-only>
-  </div>
+  <client-only>
+    <stage :items="pageContent" class="stage" />
+  </client-only>
 </template>
 
 <script>
-import ToolBar from '../components/Editor/ToolBar.vue'
-import MenuBar from '../components/Editor/MenuBar.vue'
-import Stage from '../components/Editor/Stage.vue'
+import stage from '../components/Editor/Stage.vue'
 
 export default {
-  layout: 'developer',
   components: {
-    ToolBar,
-    MenuBar,
-    Stage,
+    stage,
   },
+  layout: 'developer',
   // auth: false,
   // asyncData(context) {
   //   let pageContent = false

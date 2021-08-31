@@ -1,32 +1,21 @@
 <template>
-  <v-navigation-drawer
-    :v-model="true"
-    app
-    absolute
-    permanent
-    mini-variant-width="0"
-    color="#EFEFEF"
-  >
-    <v-btn
-      absolute
-      right
-      fab
-      :style="{ top: '50%', transform: 'translate(75%, -50%)' }"
-      @click="drawer = !drawer"
-    >
-      <v-icon v-if="drawer">mdi-chevron-right</v-icon>
-      <v-icon v-else>mdi-chevron-left</v-icon>
-    </v-btn>
+  <v-navigation-drawer floating app clipped-left permanent color="#EFEFEF">
     <v-list-item>
       <v-list-item-content>
-        <v-list-item-title class="text-h6"> Tools </v-list-item-title>
-        <v-list-item-subtitle> Blocks </v-list-item-subtitle>
+        <v-list-item-title class="text-h6">
+          {{
+            $store.getters['project/selectedProject']
+              ? $store.getters['project/selectedProject'].name
+              : 'No Project Selected'
+          }}
+        </v-list-item-title>
+        <v-list-item-subtitle>Tools</v-list-item-subtitle>
       </v-list-item-content>
     </v-list-item>
 
     <v-divider></v-divider>
     <v-expansion-panels dense>
-      <v-expansion-panel expand v-for="(toolKey, i) in toolsKey" :key="i">
+      <v-expansion-panel v-for="(toolKey, i) in toolsKey" :key="i" expand>
         <v-expansion-panel-header> {{ toolKey }} </v-expansion-panel-header>
         <v-expansion-panel-content>
           <tool

@@ -11,11 +11,17 @@ const db = {}
 mongoose.set('debug', true)
 
 db._mongoose = mongoose
-mongoose.connect('mongodb://localhost/' + config.database, {
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-  useNewUrlParser: true,
-})
+mongoose.connect(
+  'mongodb://localhost/' + config.database,
+  {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+  },
+  (err) => {
+    if (err) throw err
+    console.log('conncted to db')
+  }
+)
 db._connection = mongoose.connection
 
 fs.readdirSync(__dirname)

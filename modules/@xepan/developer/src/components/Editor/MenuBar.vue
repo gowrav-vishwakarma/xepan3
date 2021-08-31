@@ -30,7 +30,14 @@ export default {
           {
             text: 'Project',
             menu: [
-              { text: 'New...', click: () => alert('Action 1') },
+              {
+                text: 'Management...',
+                click: () =>
+                  this.$router.push(
+                    '/admin/developer/project/management',
+                    () => {}
+                  ),
+              },
               { text: 'Configure...', click: () => alert('Action2') },
             ],
           },

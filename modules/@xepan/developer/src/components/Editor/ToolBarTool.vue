@@ -1,7 +1,7 @@
 <template>
   <div
-    @click="toolSelected"
     :style="{ outline: isSelected ? '1px solid red' : '' }"
+    @click="toolSelected"
   >
     <slot />
   </div>
@@ -10,7 +10,7 @@
 <script>
 export default {
   props: {
-    tool: { type: Object },
+    tool: { type: Object, default: () => {} },
   },
 
   data() {
@@ -28,17 +28,19 @@ export default {
 
   methods: {
     toolSelected() {
+      if (this.isSelected) {
+        this.$store.commit('editor/deselectTool')
+        return
+      }
       const toolInstance = JSON.parse(JSON.stringify(this.tool))
       toolInstance.id = this.generateId()
       toolInstance.ports.in = toolInstance.ports.in.map((p) => ({
         ...p,
         id: this.generateId(),
-        linkedTo: [],
       }))
       toolInstance.ports.out = toolInstance.ports.out.map((p) => ({
         ...p,
         id: this.generateId(),
-        linkedTo: [],
       }))
       this.$store.commit('editor/setSelctedTool', {
         tool: toolInstance,
