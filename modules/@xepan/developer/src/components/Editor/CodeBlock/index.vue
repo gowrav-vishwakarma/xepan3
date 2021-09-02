@@ -34,10 +34,12 @@
         />
       </div>
       <div class="center-area">
-        <div class="grey lighten-2">
-          <v-icon @click.stop.prevent="moveComponent">mdi-cogs</v-icon>
+        <v-card class="">
+          <v-icon @click.stop.prevent="moveComponent" :color="isMoveClicked"
+            >mdi-drag-variant</v-icon
+          >
           {{ item.id }}
-        </div>
+        </v-card>
         <dz
           v-if="allowDrop"
           :items="item.items"
@@ -195,10 +197,12 @@ export default {
       })
     },
     moveComponent() {
-      this.$store.commit('editor/codeblock/setSelctedTool', {
-        tool: this.item,
-        parent: this.parent,
-      })
+      if (!this.isMoveClicked)
+        this.$store.commit('editor/setSelctedTool', {
+          tool: this.item,
+          parent: this.parent,
+        })
+      else this.$store.commit('editor/deselectTool')
     },
 
     resizing(newRect) {
@@ -221,6 +225,14 @@ export default {
       delete selctedPorts[0].parent
       delete selctedPorts[1].parent
       this.item.connections.push(selctedPorts)
+    },
+  },
+  computed: {
+    isMoveClicked() {
+      return this.$store.getters['editor/selectedTool'] &&
+        this.$store.getters['editor/selectedTool'].tool.id === this.item.id
+        ? 'red'
+        : ''
     },
   },
 }

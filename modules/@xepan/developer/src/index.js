@@ -1,6 +1,5 @@
 const fs = require('fs')
 const path = require('path')
-const _ = require('lodash')
 
 /* eslint require-await:0 */
 export async function beforeModule() {
@@ -18,7 +17,7 @@ export async function beforeModule() {
   //   )
   // )
 
-  let toolsJson = {}
+  const toolsJson = {}
 
   fs.readdirSync(path.join(__dirname, 'developer-tools'))
     .filter((file) => {
@@ -26,7 +25,8 @@ export async function beforeModule() {
     })
     .forEach((file) => {
       const tool = require(path.join(__dirname, 'developer-tools', file))
-      toolsJson = _.merge(toolsJson, tool)
+      if (!toolsJson[tool.toolBlock]) toolsJson[tool.toolBlock] = { tools: [] }
+      toolsJson[tool.toolBlock].tools.push(tool)
     })
 
   fs.writeFileSync(

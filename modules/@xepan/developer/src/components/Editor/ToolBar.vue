@@ -9,15 +9,21 @@
               : 'No Project Selected'
           }}
         </v-list-item-title>
-        <v-list-item-subtitle>Tools</v-list-item-subtitle>
+        <v-list-item-subtitle>
+          <v-chip x-small label @click="reCompileTools">
+            <v-icon left color="red">mdi-hammer-wrench</v-icon>ReCompile Tools
+          </v-chip>
+        </v-list-item-subtitle>
       </v-list-item-content>
     </v-list-item>
 
     <v-divider></v-divider>
     <v-expansion-panels :accordion="true" :flat="true" dense :multiple="true">
       <v-expansion-panel v-for="(toolKey, i) in toolsKey" :key="i" expand>
-        <v-expansion-panel-header> {{ toolKey }} </v-expansion-panel-header>
-        <v-expansion-panel-content>
+        <v-expansion-panel-header dense>
+          {{ toolKey }}
+        </v-expansion-panel-header>
+        <v-expansion-panel-content expand>
           <v-card class="d-flex flex-row">
             <tool
               v-for="element in toolsList[toolKey].tools"
@@ -35,23 +41,35 @@
 
 <script>
 import Tool from './ToolBarTool.vue'
-import toolsList from '~/assets/developer-tools.json'
+
 export default {
   components: { tool: Tool },
 
-  // asyncData({ axios }) {
-  // },
+  async fetch() {
+    await this.fetchTools()
+  },
 
   data() {
     return {
       drawer: false,
-      toolsList,
+      toolsList: [],
     }
   },
 
   computed: {
     toolsKey() {
       return Object.keys(this.toolsList)
+    },
+  },
+  methods: {
+    async fetchTools() {
+      this.toolsList = await this.$axios.$get('/api/xepan/developer/tools/list')
+    },
+
+    reCompileTools() {
+      this.$axios
+        .$get('/api/xepan/developer/tools/recompile')
+        .then(() => this.fetchTools())
     },
   },
 }

@@ -1,12 +1,12 @@
 module.exports = {
-  toolBlock: 'Basic',
-  title: 'Block',
+  toolBlock: 'Js',
+  title: 'Block JS',
   component: 'xEpanDeveloperEditorCodeBlock',
   namespace: 'com.xepan',
-  fn: 'nothing',
+  fn: 'nothing1',
   ui: {
     icon: 'cogs',
-    class: 'orange',
+    class: 'red',
   },
   props: {
     type: 'ClientSideJS',
