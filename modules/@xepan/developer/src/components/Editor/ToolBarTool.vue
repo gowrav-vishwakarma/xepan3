@@ -1,10 +1,14 @@
 <template>
-  <div
-    :style="{ outline: isSelected ? '1px solid red' : '' }"
+  <v-card
     @click="toolSelected"
+    class="pa-1 mr-1 caption"
+    :class="{ red: isSelected }"
   >
+    <v-icon :class="toolClass" v-if="tool.ui && tool.ui.icon"
+      >mdi-{{ tool.ui.icon }}</v-icon
+    >
     <slot />
-  </div>
+  </v-card>
 </template>
 
 <script>
@@ -18,10 +22,15 @@ export default {
   },
 
   computed: {
+    toolClass() {
+      return this.tool.ui && this.tool.ui.class ? this.tool.ui.class : ''
+    },
     isSelected() {
       return (
         this.$store.getters['editor/selectedTool'].tool &&
-        this.$store.getters['editor/selectedTool'].tool.fn === this.tool.fn
+        this.$store.getters['editor/selectedTool'].tool.fn === this.tool.fn &&
+        this.$store.getters['editor/selectedTool'].tool.namespace ===
+          this.tool.namespace
       )
     },
   },
@@ -35,12 +44,14 @@ export default {
       const toolInstance = JSON.parse(JSON.stringify(this.tool))
       toolInstance.id = this.generateId()
       toolInstance.ports.in = toolInstance.ports.in.map((p) => ({
-        ...p,
         id: this.generateId(),
+        ...p,
+        pos: { internal: { x: 0, y: 0 }, parent: { x: 0, y: 0 } },
       }))
       toolInstance.ports.out = toolInstance.ports.out.map((p) => ({
-        ...p,
         id: this.generateId(),
+        ...p,
+        pos: { internal: { x: 0, y: 0 }, parent: { x: 0, y: 0 } },
       }))
       this.$store.commit('editor/setSelctedTool', {
         tool: toolInstance,

@@ -34,6 +34,11 @@ export default {
         name: 'DeveloperDashboard',
       })
       this.$store.commit('project/setSelctedProject', item)
+      this.$store.dispatch('editor/resetEditor')
+      this.$store.commit('editor/addTab', {
+        name: 'Project Structure',
+        type: 'ProjectStructure',
+      })
     },
   },
 }

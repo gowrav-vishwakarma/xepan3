@@ -1,6 +1,20 @@
 <template>
   <client-only>
-    <stage :items="pageContent" class="stage" />
+    <div>
+      <v-tabs v-model="selectedTab" background-color="primary" dark>
+        <v-tab v-for="tab in tabs" :key="tab.name">
+          {{ tab.name }}
+          <v-icon left @click="alert('Closing')">mdi-close</v-icon>
+        </v-tab>
+      </v-tabs>
+
+      <v-tabs-items v-model="selectedTab">
+        <v-tab-item v-for="tab in tabs" :key="tab.name">
+          {{ tab.type }}
+        </v-tab-item>
+      </v-tabs-items>
+      <stage :items="pageContent" class="stage" />
+    </div>
   </client-only>
 </template>
 
@@ -36,6 +50,7 @@ export default {
   // },
   data() {
     return {
+      selectedTab: 0,
       pageContent: [
         {
           name: 'Block',
@@ -45,10 +60,10 @@ export default {
             cbType: 'Generic',
             title: 'ServerSide',
             type: 'ClientSideJS',
-            pos: { x: 57, y: 16, w: 961, h: 311 },
             allowDrop: true,
             toolbarOptions: {},
           },
+          pos: { x: 57, y: 16, w: 961, h: 311 },
           connections: [],
           ports: {
             in: [
@@ -81,9 +96,9 @@ export default {
                 cbType: 'Generic',
                 title: 'ServerSide',
                 type: 'ClientSideJS',
-                pos: { x: 43, y: 29, w: 390, h: 207 },
                 allowDrop: true,
               },
+              pos: { x: 43, y: 29, w: 390, h: 207 },
               connections: [],
               ports: {
                 in: [
@@ -121,9 +136,9 @@ export default {
                     cbType: 'Generic',
                     title: 'ServerSide',
                     type: 'ClientSideJS',
-                    pos: { x: 31, y: 61, w: 313, h: 75 },
                     allowDrop: true,
                   },
+                  pos: { x: 31, y: 61, w: 313, h: 75 },
                   connections: [],
                   ports: {
                     in: [
@@ -160,9 +175,9 @@ export default {
                 cbType: 'Generic',
                 title: 'ServerSide',
                 type: 'ClientSideJS',
-                pos: { x: 568, y: 67, w: 312, h: 110 },
                 allowDrop: true,
               },
+              pos: { x: 568, y: 67, w: 312, h: 110 },
               connections: [],
               ports: {
                 in: [
@@ -186,6 +201,16 @@ export default {
         },
       ],
     }
+  },
+  computed: {
+    tabs() {
+      return this.$store.getters['editor/tabs']
+    },
+  },
+  methods: {
+    alert(msg) {
+      alert(msg)
+    },
   },
 }
 </script>

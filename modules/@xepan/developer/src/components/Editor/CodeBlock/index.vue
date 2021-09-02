@@ -1,12 +1,12 @@
 <template>
   <vue-drag-resize
     :parentLimitation="true"
-    :x="pos.x"
-    :y="pos.y"
-    :w="pos.w"
-    :h="pos.h"
-    :parentW="parent.props.pos.w"
-    :parentH="parent.props.pos.h"
+    :x="item.pos.x"
+    :y="item.pos.y"
+    :w="item.pos.w"
+    :h="item.pos.h"
+    :parentW="parent.pos.w"
+    :parentH="parent.pos.h"
     @resizing="resizing"
     @dragging="dragging"
     dragCancel=".no-drag"
@@ -15,7 +15,7 @@
   >
     <div
       class="code-block d-flex flex-row"
-      :style="{ width: pos.w + 'px', height: pos.h + 'px' }"
+      :style="{ width: item.pos.w + 'px', height: item.pos.h + 'px' }"
     >
       <div
         class="in-ports-area d-flex flex-column mt-10 no-drag"
@@ -41,8 +41,8 @@
         <dz
           v-if="allowDrop"
           :items="item.items"
-          :w="pos.w"
-          :h="pos.h"
+          :w="item.pos.w"
+          :h="item.pos.h"
           :parent="item"
           :item="item"
           :connections="item.connections"
@@ -51,7 +51,11 @@
       </div>
       <div
         class="out-ports-area d-flex flex-column mt-10 no-drag"
-        :style="{ position: 'absolute', left: pos.w - 10 + 'px', 'z-index': 1 }"
+        :style="{
+          position: 'absolute',
+          left: item.pos.w - 10 + 'px',
+          'z-index': 1,
+        }"
         ref="out-ports-area"
       >
         <port
@@ -198,10 +202,10 @@ export default {
     },
 
     resizing(newRect) {
-      this.item.props.pos.x = newRect.left
-      this.item.props.pos.y = newRect.top
-      this.item.props.pos.w = newRect.width
-      this.item.props.pos.h = newRect.height
+      this.item.pos.x = newRect.left
+      this.item.pos.y = newRect.top
+      this.item.pos.w = newRect.width
+      this.item.pos.h = newRect.height
       this.updatePortsInternalXY()
       this.updatePortsParentXY()
     },

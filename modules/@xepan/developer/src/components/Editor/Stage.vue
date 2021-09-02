@@ -21,11 +21,10 @@ export default {
   data() {
     return {
       thisAsParentItem: {
-        props: {
-          pos: {
-            w: 100,
-            h: 100,
-          },
+        props: {},
+        pos: {
+          w: 100,
+          h: 100,
         },
         connections: [],
       },
@@ -33,8 +32,8 @@ export default {
   },
 
   mounted() {
-    this.thisAsParentItem.props.pos.w = this.$el.clientWidth
-    this.thisAsParentItem.props.pos.h = this.$el.clientHeight
+    this.thisAsParentItem.pos.w = this.$el.clientWidth
+    this.thisAsParentItem.pos.h = this.$el.clientHeight
   },
 }
 </script>

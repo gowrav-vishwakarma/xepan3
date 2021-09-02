@@ -10,7 +10,6 @@ export async function beforeModule() {
   })
 
   const _toolsJson = require(path.join(__dirname, 'web-tools.js'))
-  console.log('_toolsJson', _toolsJson)
   let toolsJson = fs.readFileSync(
     path.resolve(path.join(__dirname, '../../../assets', 'web-tools.json'))
   )
@@ -20,7 +19,6 @@ export async function beforeModule() {
     JSON.stringify(toolsJson)
   )
   // run before loading module
-  console.log('I AM CALLED beforeModule')
 }
 export default async function (moduleOptions = {}) {}
 export async function afterModule() {}

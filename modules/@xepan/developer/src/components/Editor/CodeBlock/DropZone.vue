@@ -51,8 +51,8 @@ export default {
         const bounds = evt.target.getBoundingClientRect()
         const x = evt.clientX - bounds.left
         const y = evt.clientY - bounds.top
-        selectedTool.tool.props.pos.x = x
-        selectedTool.tool.props.pos.y = y
+        selectedTool.tool.pos.x = x
+        selectedTool.tool.pos.y = y
 
         const oldParentIndex =
           selectedTool.parent.items !== undefined

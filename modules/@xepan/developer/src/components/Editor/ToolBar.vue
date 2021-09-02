@@ -14,17 +14,19 @@
     </v-list-item>
 
     <v-divider></v-divider>
-    <v-expansion-panels dense>
+    <v-expansion-panels :accordion="true" :flat="true" dense :multiple="true">
       <v-expansion-panel v-for="(toolKey, i) in toolsKey" :key="i" expand>
         <v-expansion-panel-header> {{ toolKey }} </v-expansion-panel-header>
         <v-expansion-panel-content>
-          <tool
-            v-for="element in toolsList[toolKey].tools"
-            :key="element.id"
-            :tool="element"
-          >
-            {{ element.name }}
-          </tool>
+          <v-card class="d-flex flex-row">
+            <tool
+              v-for="element in toolsList[toolKey].tools"
+              :key="element.id"
+              :tool="element"
+            >
+              {{ element.title }}
+            </tool>
+          </v-card>
         </v-expansion-panel-content>
       </v-expansion-panel>
     </v-expansion-panels>
@@ -33,48 +35,17 @@
 
 <script>
 import Tool from './ToolBarTool.vue'
-
+import toolsList from '~/assets/developer-tools.json'
 export default {
   components: { tool: Tool },
+
+  // asyncData({ axios }) {
+  // },
 
   data() {
     return {
       drawer: false,
-      toolsList: {
-        Basic: {
-          tools: [
-            {
-              name: 'Block',
-              component: 'xEpanDeveloperEditorCodeBlock',
-              id: 'Dummy',
-              fn: 'nothing',
-              props: {
-                cbType: 'Generic',
-                title: 'ServerSide',
-                type: 'ClientSideJS',
-                pos: { x: 0, y: 0, w: 100, h: 100 },
-                allowDrop: true,
-              },
-              ports: {
-                in: [
-                  {
-                    name: 'v',
-                    pos: { internal: { x: 0, y: 0 }, parent: { x: 0, y: 0 } },
-                  },
-                ],
-                out: [
-                  {
-                    name: '2x',
-                    pos: { internal: { x: 0, y: 0 }, parent: { x: 0, y: 0 } },
-                  },
-                ],
-              },
-              items: [],
-              connections: [],
-            },
-          ],
-        },
-      },
+      toolsList,
     }
   },
 
