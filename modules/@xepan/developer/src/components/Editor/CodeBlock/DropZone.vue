@@ -2,7 +2,7 @@
   <div
     class="drop-zone"
     :style="{ width: w + 'px', height: h + 'px' }"
-    @click.prevent="dropZoneClicked"
+    @click.stop.prevent="dropZoneClicked"
   >
     <component
       :is="item.component"
@@ -12,6 +12,7 @@
       v-bind.sync="item.props"
       :toolbar-options.sync="item.toolbarOptions"
       :item="item"
+      :allowDrop="item.allowDrop"
       :parent="parent"
     ></component>
     <connection
@@ -33,6 +34,7 @@ export default {
     items: Array,
     parent: Object,
     connections: Array,
+    allowDrop: { type: Boolean, default: () => true },
     w: { type: [Number, String], default: () => '100%' },
     h: { type: [Number, String], default: () => '100%' },
   },
@@ -48,26 +50,26 @@ export default {
       const selectedTool = this.$store.getters['editor/selectedTool']
 
       if (isDropZoneClicked && selectedTool !== false) {
-        const bounds = evt.target.getBoundingClientRect()
-        const x = evt.clientX - bounds.left
-        const y = evt.clientY - bounds.top
-        selectedTool.tool.pos.x = x
-        selectedTool.tool.pos.y = y
+        if (this.allowDrop) {
+          const bounds = evt.target.getBoundingClientRect()
+          const x = evt.clientX - bounds.left
+          const y = evt.clientY - bounds.top
+          selectedTool.tool.pos.x = x
+          selectedTool.tool.pos.y = y
 
-        const oldParentIndex =
-          selectedTool.parent.items !== undefined
-            ? selectedTool.parent.items.findIndex(
-                (o) => o.id === selectedTool.tool.id
-              )
-            : -1
+          const oldParentIndex =
+            selectedTool.parent.items !== undefined
+              ? selectedTool.parent.items.findIndex(
+                  (o) => o.id === selectedTool.tool.id
+                )
+              : -1
 
-        if (oldParentIndex > -1) {
-          selectedTool.parent.items.splice(oldParentIndex, 1)
+          if (oldParentIndex > -1) {
+            selectedTool.parent.items.splice(oldParentIndex, 1)
+          }
+          this.items.push(selectedTool.tool)
+          this.$store.commit('editor/deselectTool')
         }
-
-        this.items.push(selectedTool.tool)
-
-        this.$store.commit('editor/deselectTool')
       }
     },
 

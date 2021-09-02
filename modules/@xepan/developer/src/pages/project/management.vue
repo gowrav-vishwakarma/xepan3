@@ -39,6 +39,7 @@ export default {
         name: 'Project Structure',
         type: 'ProjectStructure',
       })
+      this.$store.commit('editor/selectTab', 0)
     },
   },
 }

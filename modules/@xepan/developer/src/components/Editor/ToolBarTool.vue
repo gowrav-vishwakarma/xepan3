@@ -53,6 +53,8 @@ export default {
         ...p,
         pos: { internal: { x: 0, y: 0 }, parent: { x: 0, y: 0 } },
       }))
+      toolInstance.pos = { x: 0, y: 0, w: 100, h: 100 }
+
       this.$store.commit('editor/setSelctedTool', {
         tool: toolInstance,
         parent: { id: '__toolbar' },

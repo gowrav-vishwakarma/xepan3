@@ -35,13 +35,19 @@
       </div>
       <div class="center-area">
         <v-card class="">
-          <v-icon @click.stop.prevent="moveComponent" :color="isMoveClicked"
-            >mdi-drag-variant</v-icon
+          <v-icon
+            @click.stop.prevent="moveComponent"
+            :color="isMoveClicked"
+            v-if="item.noMove !== true"
           >
-          {{ item.id }}
+            mdi-drag-variant
+          </v-icon>
+          <slot name="title">
+            {{ item.id }}
+          </slot>
         </v-card>
         <dz
-          v-if="allowDrop"
+          :allowDrop="allowDrop"
           :items="item.items"
           :w="item.pos.w"
           :h="item.pos.h"
@@ -87,9 +93,6 @@ export default {
   props: {
     parent: Object,
     item: { type: Object, default: () => {} },
-    cbType: { type: String, default: () => 'Generic' },
-    title: { type: [String, Boolean], default: () => 'Code Block' },
-    type: { type: [String, Object], default: () => 'ClientSideJS' },
     pos: {
       type: Object,
       default: () => {
@@ -103,10 +106,6 @@ export default {
       },
     },
     allowDrop: { type: Boolean, default: () => true },
-    // items: {
-    //   type: Array,
-    //   default: () => [],
-    // },
   },
   mounted() {
     this.$nextTick(() => {

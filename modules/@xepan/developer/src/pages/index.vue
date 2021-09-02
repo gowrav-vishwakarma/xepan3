@@ -2,9 +2,9 @@
   <client-only>
     <div>
       <v-tabs v-model="selectedTab" background-color="primary" dark>
-        <v-tab v-for="tab in tabs" :key="tab.name">
+        <v-tab v-for="(tab, index) in tabs" :key="tab.name">
           {{ tab.name }}
-          <v-icon left @click="alert('Closing')">mdi-close</v-icon>
+          <v-icon left @click="closeTab(index)">mdi-close</v-icon>
         </v-tab>
       </v-tabs>
 
@@ -50,7 +50,6 @@ export default {
   // },
   data() {
     return {
-      selectedTab: 0,
       pageContent: [
         {
           name: 'Block',
@@ -206,10 +205,18 @@ export default {
     tabs() {
       return this.$store.getters['editor/tabs']
     },
+    selectedTab: {
+      get() {
+        return this.$store.getters['editor/selectedTab']
+      },
+      set(tab) {
+        this.$store.commit('editor/selectTab', tab)
+      },
+    },
   },
   methods: {
-    alert(msg) {
-      alert(msg)
+    closeTab(number) {
+      this.$store.commit('editor/removeTab', number)
     },
   },
 }
