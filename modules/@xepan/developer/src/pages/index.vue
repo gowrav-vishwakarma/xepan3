@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import stage from '../components/Editor/Stage.vue'
+import stage from '../components/Editor/IDE/Stage.vue'
 
 export default {
   components: {

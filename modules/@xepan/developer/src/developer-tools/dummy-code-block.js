@@ -11,6 +11,15 @@ module.exports = {
   props: {
     type: 'ClientSideJS',
   },
+  toolbarOptions: {
+    type: {
+      type: 'icon',
+      large: true,
+      label: 'print',
+      color: 'blue',
+      tooltip: 'Icon Print',
+    },
+  },
   allowDrop: ['.'],
   pos: { x: 0, y: 0, w: 100, h: 100 },
   ports: {

@@ -6,4 +6,10 @@ module.exports = {
   noMove: true,
   allowDrop: false,
   ports: { in: [], out: [] },
+  props: {
+    hasWebComponents: true,
+  },
+  toolbarOptions: {
+    hasWebComponents: 'checkbox',
+  },
 }

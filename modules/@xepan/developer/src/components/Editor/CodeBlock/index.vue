@@ -11,7 +11,6 @@
     @dragging="dragging"
     dragCancel=".no-drag"
     style="z-index: 1"
-    @dblclick.prevent="toolsSelected"
   >
     <div
       class="code-block d-flex flex-row"
@@ -34,28 +33,37 @@
         />
       </div>
       <div class="center-area">
-        <v-card class="">
+        <v-card
+          class="d-inline-flex flex-row justify-space-between"
+          style="width: 100%"
+        >
           <v-icon
             @click.stop.prevent="moveComponent"
             :color="isMoveClicked"
             v-if="item.noMove !== true"
+            left
           >
-            mdi-drag-variant
+            mdi-paper-cut-vertical
           </v-icon>
           <slot name="title">
             {{ item.id }}
           </slot>
+          <v-icon @click.stop.prevent="toolsSelected" right>
+            mdi-application-cog
+          </v-icon>
         </v-card>
-        <dz
-          :allowDrop="allowDrop"
-          :items="item.items"
-          :w="item.pos.w"
-          :h="item.pos.h"
-          :parent="item"
-          :item="item"
-          :connections="item.connections"
-        >
-        </dz>
+        <slot name="drop-zone">
+          <dz
+            :allowDrop="allowDrop"
+            :items="item.items"
+            :w="item.pos.w"
+            :h="item.pos.h"
+            :parent="item"
+            :item="item"
+            :connections="item.connections"
+          >
+          </dz>
+        </slot>
       </div>
       <div
         class="out-ports-area d-flex flex-column mt-10 no-drag"
@@ -105,7 +113,7 @@ export default {
         return { in: [], out: [] }
       },
     },
-    allowDrop: { type: Boolean, default: () => true },
+    allowDrop: { type: [Boolean, Array], default: () => true },
   },
   mounted() {
     this.$nextTick(() => {
@@ -115,14 +123,7 @@ export default {
   },
   methods: {
     toolsSelected() {
-      if (!this.isLoggedIn) return
-      this.$nuxt.$emit(
-        'xepan-editor-tools-selected',
-        this.component,
-        this.props
-        // modelProperty: 'variable in props' Optional, default props itself
-        // formschema: 'variable in toolbarOptions' Optional, default toolbarOptions itself
-      )
+      this.$nuxt.$emit('xepan-editor-tools-selected', this.item)
     },
     updatePortsParentXY() {
       // port.offsetParent.offsetParent.offsetParent

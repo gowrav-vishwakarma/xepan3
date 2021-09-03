@@ -114,7 +114,17 @@ export default {
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
-    treeShake: true,
+    treeShake: {
+      components: [
+        'VRow',
+        'VCol',
+        'VTextField',
+        'VTooltip',
+        'VCheckbox',
+        'VSelect',
+      ],
+      directives: ['Ripple', 'Intersect', 'Touch', 'Resize', 'ClickOutside'],
+    },
     theme: {
       dark: false,
       themes: {

@@ -34,7 +34,7 @@ export default {
     items: Array,
     parent: Object,
     connections: Array,
-    allowDrop: { type: Boolean, default: () => true },
+    allowDrop: { type: [Boolean, Array], default: () => true },
     w: { type: [Number, String], default: () => '100%' },
     h: { type: [Number, String], default: () => '100%' },
   },

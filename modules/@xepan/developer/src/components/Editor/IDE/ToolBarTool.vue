@@ -1,6 +1,7 @@
 <template>
   <v-card
-    @click="toolSelected"
+    @click.native="toolSelected"
+    @dblclick.native="toolDblClicked"
     class="pa-1 mr-1 caption"
     :class="{ red: isSelected }"
   >
@@ -36,7 +37,11 @@ export default {
   },
 
   methods: {
+    toolDblClicked() {
+      console.log('Tool DBL clicked')
+    },
     toolSelected() {
+      console.log('Tool clicked')
       if (this.isSelected) {
         this.$store.commit('editor/deselectTool')
         return

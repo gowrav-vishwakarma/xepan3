@@ -8,6 +8,15 @@
     :allowDrop="item.allowDrop"
   >
     <template #title> Wohoo </template>
+    <template #drop-zone>
+      <div
+        class="drop-zone"
+        :style="{ width: item.pos.w + 'px', height: item.pos.h + 'px' }"
+        @click.stop.prevent=""
+      >
+        <span v-if="item.props.hasWebComponents">WEB Components: YES</span>
+      </div>
+    </template>
   </code-block>
 </template>
 

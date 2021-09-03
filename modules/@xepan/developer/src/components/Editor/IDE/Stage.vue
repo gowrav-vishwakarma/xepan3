@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import DZ from './CodeBlock/DropZone.vue'
+import DZ from '../CodeBlock/DropZone.vue'
 
 export default {
   components: { dz: DZ },
