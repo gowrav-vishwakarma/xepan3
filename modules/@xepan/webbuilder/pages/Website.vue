@@ -22,7 +22,6 @@ import webTools from '~/assets/web-tools.json'
 export default {
   async asyncData(context) {
     const pagePath = process.client ? context.route.path : context.req.url
-
     let pageContent = await context.$axios
       .$get('/api/xepan/webbuilder/web/page-content', {
         params: { page: pagePath },

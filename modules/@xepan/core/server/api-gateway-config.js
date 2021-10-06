@@ -28,6 +28,7 @@ module.exports = {
           proxy: [
             {
               action: {
+                origin: '*',
                 serviceEndpoint: 'httpbin',
                 changeOrigin: true,
               },

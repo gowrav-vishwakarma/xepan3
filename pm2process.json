@@ -1,0 +1,30 @@
+{
+    "apps": [
+        {
+            "name": "ApiGateway",
+            "script": "./modules/@xepan/api-gateway/server/server.js",
+            "watch": true,
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "env_production": {
+                "NODE_ENV": "production"
+            }
+        },
+        {
+            "name": "core-app",
+            "script": "./modules/@xepan/core/server/bin/www",
+            "exec_mode": "fork"
+        },
+        {
+            "name": "webbuilder-app",
+            "script": "./modules/@xepan/webbuilder/server/bin/www",
+            "exec_mode": "fork"
+        },
+        {
+            "name": "developer-app",
+            "script": "./modules/@xepan/developer/src/server/bin/www",
+            "exec_mode": "fork"
+        }
+    ]
+}

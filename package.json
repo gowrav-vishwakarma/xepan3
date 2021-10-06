@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nuxt",
-    "servers": "concurrently -k --kill-others-on-fail \"(cd ./modules/@xepan/api-gateway/server && nodemon ./server.js)\" \"(cd ./modules/@xepan/core/server && nodemon ./bin/www)\" \"(cd ./modules/@xepan/webbuilder/server && nodemon ./bin/www)\" \"(cd ./modules/@xepan/developer/src/server && nodemon ./server.js)\"",
+    "servers": "concurrently -k --kill-others-on-fail \"(cd ./modules/@xepan/api-gateway/server && nodemon --delay 500ms ./server.js)\" \"(cd ./modules/@xepan/core/server && nodemon  --delay 500ms ./bin/www)\" \"(cd ./modules/@xepan/webbuilder/server && nodemon --delay 500ms  ./bin/www)\" \"(cd ./modules/@xepan/developer/src/server && nodemon --delay 500ms  ./server.js)\"",
     "build": "nuxt build",
     "start": "nuxt start",
     "generate": "nuxt generate",

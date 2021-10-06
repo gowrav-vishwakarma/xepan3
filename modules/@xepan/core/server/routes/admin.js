@@ -1,7 +1,8 @@
+const fs = require('fs')
+const path = require('path')
 const express = require('express')
 const router = express.Router()
 const jwt = require('jsonwebtoken')
-const _ = require('lodash')
 const { User } = require('../models')
 
 /* GET home page. */
@@ -60,13 +61,12 @@ router.get('/user', async function (req, res) {
 })
 
 router.get('/menus', function (req, res) {
-  let menus = { drawer: {}, topmenu: {}, usermenu: {} }
-  const menusPath = []
-  menusPath.forEach((p) => {
-    const m = require(p)
-    menus = _.merge(menus, m)
-  })
-  res.send(menus)
+  const menuList = fs.readFileSync(
+    path.resolve(
+      path.join(__dirname, '../../../../../assets', 'admin-menus.json')
+    )
+  )
+  res.send(JSON.parse(menuList))
 })
 
 module.exports = router

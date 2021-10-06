@@ -4,9 +4,7 @@
     <div>{{ `${randNumber} Hi` }}</div>
     <button @click="showMessageFromBackend">Show message from backend</button>
     <button @click="logout">LOGOUT</button>
-    <div>
-      <xEpanAppsList />
-    </div>
+    <div>DIV</div>
   </div>
 </template>
 

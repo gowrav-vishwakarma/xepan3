@@ -84,11 +84,11 @@ export default {
   },
 
   async mounted() {
-    console.log(this.$nuxt)
     const menusFromApi = (
-      await this.$axios.get('/api/xepan/core/admin/menus').catch((err) => console.log(err))
+      await this.$axios
+        .get('/api/xepan/core/admin/menus')
+        .catch((err) => console.log(err))
     ).data
-
     // topmenu populate
     const sortedTopMenu = []
     Object.entries(menusFromApi.topmenu).forEach(([key, m]) => {
