@@ -1,8 +1,8 @@
 /* eslint require-await:0 */
 export async function beforeModule() {
   this.options.components.push({
-    path: '~modules/@xepan/core/components',
-    prefix: 'xEpanCore',
+    path: '~modules/@xepan/HiHR/src/components',
+    prefix: 'xEpanHiHR',
   })
   // run before loading module
   // this.addTemplate({
@@ -16,8 +16,6 @@ export default async function (context) {
 }
 export async function afterModule() {
   // run after loading module
-
-  console.log('I AM CALLED afterModule')
 }
 
-module.exports.meta = require('./package.json')
+module.exports.meta = require('../package.json')

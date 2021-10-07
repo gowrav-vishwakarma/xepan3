@@ -1,0 +1,9 @@
+{
+    "name": "@xepan/hihr",
+    "version": "0.1.0",
+    "description": "JobPortal for xEpan",
+    "main": "src/index.js",
+    "files": [
+        "src/*"
+    ]
+}

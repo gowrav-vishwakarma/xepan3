@@ -4,11 +4,16 @@ const express = require('express')
 const cookieParser = require('cookie-parser')
 const logger = require('morgan')
 const cors = require('cors')
+const config = require('./config/config.js')
 
 const webRouter = require('./routes/web')
 const editorRouter = require('./routes/editor')
 
 const app = express()
+app.use((req, res, next) => {
+  config.domain = 'www'
+  next()
+})
 
 app.use(logger('dev'))
 app.use(cors())

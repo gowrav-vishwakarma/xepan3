@@ -1,0 +1,9 @@
+{
+    "name": "@xepan/solution-now",
+    "version": "0.1.0",
+    "description": "Solution now for xEpan",
+    "main": "src/index.js",
+    "files": [
+        "src/*"
+    ]
+}

@@ -5,17 +5,20 @@ const path = require('path')
 const mongoose = require('mongoose')
 const basename = path.basename(__filename)
 const env = process.env.NODE_ENV || 'development'
-const config = require(path.join(__dirname, '/../config/config.js'))[env]
+const config = require(path.join(__dirname, '/../config/config.js'))
 const db = {}
 
-mongoose.set('debug', true)
+console.log('connecting', 'mongodb://localhost/xepan3_' + config.domain)
+
+env === 'development' && mongoose.set('debug', true)
 
 db._mongoose = mongoose
-mongoose.connect('mongodb://localhost/' + config.database, {
+mongoose.connect('mongodb://localhost/xepan3_' + config.domain, {
   useUnifiedTopology: true,
   useFindAndModify: false,
   useNewUrlParser: true,
 })
+
 db._connection = mongoose.connection
 
 fs.readdirSync(__dirname)

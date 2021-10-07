@@ -1,0 +1,9 @@
+{
+    "name": "@xepan/mars",
+    "version": "0.1.0",
+    "description": "Martians identity management for xEpan",
+    "main": "src/index.js",
+    "files": [
+        "src/*"
+    ]
+}
