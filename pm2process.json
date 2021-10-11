@@ -14,17 +14,35 @@
         {
             "name": "core-app",
             "script": "./modules/@xepan/core/server/bin/www",
-            "exec_mode": "fork"
+            "exec_mode": "fork",
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "env_production": {
+                "NODE_ENV": "production"
+            }
         },
         {
             "name": "webbuilder-app",
             "script": "./modules/@xepan/webbuilder/server/bin/www",
-            "exec_mode": "fork"
+            "exec_mode": "fork",
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "env_production": {
+                "NODE_ENV": "production"
+            }
         },
         {
             "name": "developer-app",
             "script": "./modules/@xepan/developer/src/server/bin/www",
-            "exec_mode": "fork"
+            "exec_mode": "fork",
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "env_production": {
+                "NODE_ENV": "production"
+            }
         }
     ]
 }

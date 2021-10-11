@@ -18,6 +18,7 @@ export async function beforeModule(context) {
   context.allModules.forEach((m) => {
     const apiConfigfilePath = path.join(
       m.path,
+      '..',
       'server',
       'api-gateway-config.js'
     )
