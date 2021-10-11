@@ -35,7 +35,51 @@
         },
         {
             "name": "developer-app",
-            "script": "./modules/@xepan/developer/src/server/bin/www",
+            "script": "./modules/@xepan/developer/server/bin/www",
+            "exec_mode": "fork",
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "env_production": {
+                "NODE_ENV": "production"
+            }
+        },
+        {
+            "name": "hihr-app",
+            "script": "./modules/@xepan/hihr/server/bin/www",
+            "exec_mode": "fork",
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "env_production": {
+                "NODE_ENV": "production"
+            }
+        },
+        {
+            "name": "mars-app",
+            "script": "./modules/@xepan/mars/server/bin/www",
+            "exec_mode": "fork",
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "env_production": {
+                "NODE_ENV": "production"
+            }
+        },
+        {
+            "name": "okr-app",
+            "script": "./modules/@xepan/okr/server/bin/www",
+            "exec_mode": "fork",
+            "env": {
+                "NODE_ENV": "development"
+            },
+            "env_production": {
+                "NODE_ENV": "production"
+            }
+        },
+        {
+            "name": "solution-now-app",
+            "script": "./modules/@xepan/solution-now/server/bin/www",
             "exec_mode": "fork",
             "env": {
                 "NODE_ENV": "development"

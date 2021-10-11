@@ -21,7 +21,7 @@ module.exports = {
     'rate-limit',
   ],
   pipelines: {
-    webdefault: {
+    webPipeline: {
       apiEndpoints: ['webAPI'],
       policies: [
         {

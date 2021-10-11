@@ -1,13 +1,13 @@
 module.exports = {
   apiEndpoints: {
-    coreAPI: {
+    okrAPI: {
       host: 'localhost',
-      paths: ['/api/xepan/core', '/api/xepan/core/*'],
+      paths: ['/api/xepan/okrs', '/api/xepan/okrs/*'],
     },
   },
   serviceEndpoints: {
-    httpbin: {
-      url: 'http://localhost:3001',
+    okrService: {
+      url: 'http://localhost:3006',
     },
   },
   policies: [
@@ -21,15 +21,15 @@ module.exports = {
     'rate-limit',
   ],
   pipelines: {
-    default: {
-      apiEndpoints: ['coreAPI'],
+    okrPipeline: {
+      apiEndpoints: ['okrAPI'],
       policies: [
         {
           proxy: [
             {
               action: {
                 origin: '*',
-                serviceEndpoint: 'httpbin',
+                serviceEndpoint: 'okrService',
                 changeOrigin: true,
               },
             },

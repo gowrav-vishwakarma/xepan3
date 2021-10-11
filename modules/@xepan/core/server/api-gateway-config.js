@@ -6,7 +6,7 @@ module.exports = {
     },
   },
   serviceEndpoints: {
-    httpbin: {
+    coreService: {
       url: 'http://localhost:3001',
     },
   },
@@ -21,7 +21,7 @@ module.exports = {
     'rate-limit',
   ],
   pipelines: {
-    default: {
+    corepipeline: {
       apiEndpoints: ['coreAPI'],
       policies: [
         {
@@ -29,7 +29,7 @@ module.exports = {
             {
               action: {
                 origin: '*',
-                serviceEndpoint: 'httpbin',
+                serviceEndpoint: 'coreService',
                 changeOrigin: true,
               },
             },

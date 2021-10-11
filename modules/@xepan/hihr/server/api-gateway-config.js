@@ -1,13 +1,13 @@
 module.exports = {
   apiEndpoints: {
-    coreAPI: {
-      host: 'localhost',
-      paths: ['/api/xepan/core', '/api/xepan/core/*'],
+    hihrAPI: {
+      hosts: ['localhost', 'xepan.loc'],
+      paths: ['/api/xepan/hihr', '/api/xepan/hihr/*'],
     },
   },
   serviceEndpoints: {
-    httpbin: {
-      url: 'http://localhost:3001',
+    hihrService: {
+      url: 'http://localhost:3005',
     },
   },
   policies: [
@@ -21,15 +21,15 @@ module.exports = {
     'rate-limit',
   ],
   pipelines: {
-    default: {
-      apiEndpoints: ['coreAPI'],
+    hihrPipeline: {
+      apiEndpoints: ['hihrAPI'],
       policies: [
         {
           proxy: [
             {
               action: {
                 origin: '*',
-                serviceEndpoint: 'httpbin',
+                serviceEndpoint: 'hihrService',
                 changeOrigin: true,
               },
             },

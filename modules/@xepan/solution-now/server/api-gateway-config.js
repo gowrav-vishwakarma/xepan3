@@ -1,13 +1,13 @@
 module.exports = {
   apiEndpoints: {
-    coreAPI: {
+    snAPI: {
       host: 'localhost',
-      paths: ['/api/xepan/core', '/api/xepan/core/*'],
+      paths: ['/api/xepan/solution-now', '/api/xepan/solution-now/*'],
     },
   },
   serviceEndpoints: {
-    httpbin: {
-      url: 'http://localhost:3001',
+    snService: {
+      url: 'http://localhost:3007',
     },
   },
   policies: [
@@ -21,15 +21,15 @@ module.exports = {
     'rate-limit',
   ],
   pipelines: {
-    default: {
-      apiEndpoints: ['coreAPI'],
+    snPipeline: {
+      apiEndpoints: ['snAPI'],
       policies: [
         {
           proxy: [
             {
               action: {
                 origin: '*',
-                serviceEndpoint: 'httpbin',
+                serviceEndpoint: 'snService',
                 changeOrigin: true,
               },
             },

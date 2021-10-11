@@ -16,11 +16,48 @@ apiEndpoints:
     paths:
       - "/api/xepan/webbuilder"
       - "/api/xepan/webbuilder/*"
+  marsAPI:
+    host: "localhost"
+    paths:
+      - "/api/xepan/mars"
+      - "/api/xepan/mars/*"
+  okrAPI:
+    host: "localhost"
+    paths:
+      - "/api/xepan/okrs"
+      - "/api/xepan/okrs/*"
+  snAPI:
+    host: "localhost"
+    paths:
+      - "/api/xepan/solution-now"
+      - "/api/xepan/solution-now/*"
+  hihrAPI:
+    hosts:
+      - "localhost"
+      - "xepan.loc"
+    paths:
+      - "/api/xepan/hihr"
+      - "/api/xepan/hihr/*"
+  developerAPI:
+    host: "localhost"
+    paths:
+      - "/api/xepan/developer"
+      - "/api/xepan/developer/*"
 serviceEndpoints:
-  httpbin:
+  coreService:
     url: "http://localhost:3001"
   webhttpbin:
     url: "http://localhost:3002"
+  marsService:
+    url: "http://localhost:3004"
+  okrService:
+    url: "http://localhost:3006"
+  snService:
+    url: "http://localhost:3007"
+  hihrService:
+    url: "http://localhost:3005"
+  developerService:
+    url: "http://localhost:3003"
 policies:
   - "basic-auth"
   - "cors"
@@ -31,20 +68,64 @@ policies:
   - "proxy"
   - "rate-limit"
 pipelines:
-  default:
+  corepipeline:
     apiEndpoints:
       - "coreAPI"
     policies:
       - proxy:
           - action:
               origin: "*"
-              serviceEndpoint: "httpbin"
+              serviceEndpoint: "coreService"
               changeOrigin: true
-  webdefault:
+  webPipeline:
     apiEndpoints:
       - "webAPI"
     policies:
       - proxy:
           - action:
               serviceEndpoint: "webhttpbin"
+              changeOrigin: true
+  marsPipeline:
+    apiEndpoints:
+      - "marsAPI"
+    policies:
+      - proxy:
+          - action:
+              origin: "*"
+              serviceEndpoint: "marsService"
+              changeOrigin: true
+  okrPipeline:
+    apiEndpoints:
+      - "okrAPI"
+    policies:
+      - proxy:
+          - action:
+              origin: "*"
+              serviceEndpoint: "okrService"
+              changeOrigin: true
+  snPipeline:
+    apiEndpoints:
+      - "snAPI"
+    policies:
+      - proxy:
+          - action:
+              origin: "*"
+              serviceEndpoint: "snService"
+              changeOrigin: true
+  hihrPipeline:
+    apiEndpoints:
+      - "hihrAPI"
+    policies:
+      - proxy:
+          - action:
+              origin: "*"
+              serviceEndpoint: "hihrService"
+              changeOrigin: true
+  developerPipeline:
+    apiEndpoints:
+      - "developerAPI"
+    policies:
+      - proxy:
+          - action:
+              serviceEndpoint: "developerService"
               changeOrigin: true

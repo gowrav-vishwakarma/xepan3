@@ -1,13 +1,13 @@
 module.exports = {
   apiEndpoints: {
-    coreAPI: {
+    marsAPI: {
       host: 'localhost',
-      paths: ['/api/xepan/core', '/api/xepan/core/*'],
+      paths: ['/api/xepan/mars', '/api/xepan/mars/*'],
     },
   },
   serviceEndpoints: {
-    httpbin: {
-      url: 'http://localhost:3001',
+    marsService: {
+      url: 'http://localhost:3004',
     },
   },
   policies: [
@@ -21,15 +21,15 @@ module.exports = {
     'rate-limit',
   ],
   pipelines: {
-    default: {
-      apiEndpoints: ['coreAPI'],
+    marsPipeline: {
+      apiEndpoints: ['marsAPI'],
       policies: [
         {
           proxy: [
             {
               action: {
                 origin: '*',
-                serviceEndpoint: 'httpbin',
+                serviceEndpoint: 'marsService',
                 changeOrigin: true,
               },
             },
