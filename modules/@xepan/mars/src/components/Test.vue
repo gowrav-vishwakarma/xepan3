@@ -1,9 +1,16 @@
 <template>
-  <div>I AM TEST Martians</div>
+  <div>{{ text }}</div>
 </template>
 
 <script>
 export default {
   name: 'Test',
+  props: {
+    text: {
+      default: () => {
+        'HI'
+      },
+    },
+  },
 }
 </script>

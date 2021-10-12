@@ -33,6 +33,7 @@ export default {
     '@nuxtjs/vuetify',
     '@nuxtjs/router',
     '@ergonode/vuems',
+    '@nuxt/postcss8',
   ],
   vuems: {
     modules: {
@@ -159,5 +160,14 @@ export default {
     //   // You can extend webpack config here
     //   config.resolve.alias.vue$ = "vue/dist/vue.esm.js";
     // }
+  },
+
+  storybook: {
+    stories: ['~/modules/**/*.stories.js'],
+    decorators: [
+      // VApp decorator for Vuetify
+      '<v-app><story/></v-app>',
+    ],
+    port: 4000,
   },
 }
