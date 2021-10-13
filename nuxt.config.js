@@ -164,10 +164,10 @@ export default {
 
   storybook: {
     stories: ['~/modules/**/*.stories.js'],
-    decorators: [
-      // VApp decorator for Vuetify
-      '<v-app><story/></v-app>',
-    ],
+    // decorators: [
+    //   // VApp decorator for Vuetify
+    //   '<v-app><story/></v-app>',
+    // ],
     port: 4000,
   },
 }

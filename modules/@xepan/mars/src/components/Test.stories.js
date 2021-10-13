@@ -1,7 +1,7 @@
 import YourComponent from './Test.vue'
 
 export default {
-  title: 'YourComponent',
+  title: 'Mars/Test',
   component: YourComponent,
 }
 
