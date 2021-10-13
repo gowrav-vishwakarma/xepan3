@@ -8,25 +8,22 @@ export default {
     status: {
       type: String,
       default: () => {
-        'none'
+        ''
       },
     },
   },
 
   computed: {
     color() {
-      switch (this.status) {
-        case 'none':
-          return 'red'
-        case 'low':
-          return 'orange'
-        case 'mid':
-          return 'yellow'
-        case 'high':
-          return 'green'
-        default:
-          return 'black'
-      }
+      return this.status === 'biometic'
+        ? 'green'
+        : this.status === 'govtId'
+        ? 'yellow'
+        : this.status === 'mobile'
+        ? 'orange'
+        : this.status === 'email'
+        ? 'red'
+        : 'black'
     },
   },
 }

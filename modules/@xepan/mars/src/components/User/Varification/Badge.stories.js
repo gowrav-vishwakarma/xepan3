@@ -15,8 +15,8 @@ export const Badge = Template.bind({})
 
 Badge.argTypes = {
   status: {
-    options: ['none', 'low', 'mid', 'high'],
+    options: ['none', 'email', 'mobile', 'govtId', 'biometic'],
     control: { type: 'inline-radio' },
-    defaultValue: 'none',
+    defaultValue: '',
   },
 }
