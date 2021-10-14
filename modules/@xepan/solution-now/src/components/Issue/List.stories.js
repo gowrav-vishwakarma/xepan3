@@ -1,4 +1,4 @@
-import YourComponent from './New.vue'
+import YourComponent from './List.vue'
 
 export default {
   title: 'Solution Now/Issues',
