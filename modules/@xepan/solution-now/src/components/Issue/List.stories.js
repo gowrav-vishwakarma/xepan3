@@ -11,6 +11,47 @@ const Template = (args, { argTypes }) => ({
   template: '<YourComponent v-bind="$props"/>',
 })
 
-export const List = Template.bind({})
+export const IssueList = Template.bind({})
 
-List.args = {}
+IssueList.args = {
+  issueList: [
+    {
+      title: 'Dummy Issue, With short detail as title here',
+      description:
+        'This is a bit long long description. This is a bit long long description. This is a bit long long description. This is a bit long long description. This is a bit long long description. This is a bit long long description. ',
+      budget: {
+        amount: 200,
+        per: 'Hourly',
+        currency: 'inr',
+      },
+      type: 'Live',
+      media: {},
+      languages: ['En', 'Hi'],
+      createdAt: new Date(),
+      stack: ['VuejS', 'MySQL'],
+      user: {
+        fullname: 'Rahul Nimaje',
+        verification: 'mobile',
+      },
+    },
+    {
+      title: 'Dummy Issue, With short detail as title here',
+      description:
+        'This is a bit long long description. This is a bit long long description. This is a bit long long description. This is a bit long long description. This is a bit long long description. This is a bit long long description. ',
+      budget: {
+        amount: 200,
+        per: 'Hourly',
+        currency: 'inr',
+      },
+      type: 'Live',
+      media: {},
+      languages: ['En', 'Hi'],
+      createdAt: new Date(),
+      stack: ['VuejS', 'MySQL'],
+      user: {
+        fullname: 'Rahul Nimaje',
+        verification: 'mobile',
+      },
+    },
+  ],
+}
