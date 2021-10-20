@@ -26,8 +26,8 @@ const indexRouter = require('./routes/index')
 const adminRouter = require('./routes/admin')
 const usersRouter = require('./routes/users')
 
-app.use('/api/xepan/core', indexRouter)
-app.use('/api/xepan/core/users', usersRouter)
-app.use('/api/xepan/core/admin', adminRouter)
+app.use('/api/xepan/mars', indexRouter)
+app.use('/api/xepan/mars/users', usersRouter)
+app.use('/api/xepan/mars/admin', adminRouter)
 
 module.exports = app
