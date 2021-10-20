@@ -1,21 +1,21 @@
 <template>
   <v-container>
-    <v-card v-if="panel == 'register'">
+    <div v-if="panel == 'register'">
       <v-card-text>
         <v-text-field outlined label="Mobile Number"></v-text-field>
       </v-card-text>
       <v-card-actions>
         <v-btn color="primary" @click="Register">Register</v-btn>
       </v-card-actions>
-    </v-card>
-    <v-card v-else>
+    </div>
+    <div v-else>
       <v-card-text>
         <v-text-field outlined label="OTP"></v-text-field>
       </v-card-text>
       <v-card-actions>
         <v-btn color="primary">Verity</v-btn>
       </v-card-actions>
-    </v-card>
+    </div>
   </v-container>
 </template>
 <script>

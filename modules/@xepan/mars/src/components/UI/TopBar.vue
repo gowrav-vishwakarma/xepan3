@@ -6,10 +6,10 @@
 
     <v-spacer></v-spacer>
     <v-btn-toggle v-model="platform_selected" dense mandatory>
-      <v-btn color="primary" x-small>M Profile</v-btn>
-      <v-btn color="primary" x-small>My OKRs</v-btn>
-      <v-btn color="primary" x-small>Jobs</v-btn>
-      <v-btn color="primary" x-small>Solution Now</v-btn>
+      <v-btn color="primary" x-small to="/">M Profile</v-btn>
+      <v-btn color="primary" x-small to="/okrs/home">My OKRs</v-btn>
+      <v-btn color="primary" x-small to="/hihr/home">Jobs</v-btn>
+      <v-btn color="primary" x-small to="/solution-now/home">Solution Now</v-btn>
     </v-btn-toggle>
     <v-menu left bottom>
       <template v-slot:activator="{ on, attrs }">
