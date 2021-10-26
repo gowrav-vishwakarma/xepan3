@@ -59,6 +59,7 @@
             "name": "mars-app",
             "script": "./modules/@xepan/mars/server/bin/www",
             "exec_mode": "fork",
+            "watch": ["./modules/@xepan/mars/server"],
             "env": {
                 "NODE_ENV": "development"
             },

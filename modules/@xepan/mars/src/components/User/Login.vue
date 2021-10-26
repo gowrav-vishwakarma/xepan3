@@ -2,16 +2,19 @@
   <div>
     <v-card-title primary-title> Login </v-card-title>
     <v-container>
-      <v-text-field
+      <v-text-field 
         v-model="username"
+        outlined
         prepend-icon="person"
-        filled
+      
         label="username"
-      ></v-text-field>
+      >
+      </v-text-field>
       <v-text-field
         v-model="password"
+        outlined
         prepend-icon="lock"
-        filled
+       
         label="password"
       ></v-text-field>
       <v-btn class="ma-10" color="primary">Login</v-btn>

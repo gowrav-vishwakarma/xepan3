@@ -6,11 +6,12 @@ const UserSchema = new mongoose.Schema({
   username: String,
   password: String,
   roles: [],
+  verified:String,
   verification: {
-    email: false,
-    mobile: false,
-    govtId: false,
-    biometric: false,
+    email: {code: String, verified: Boolean},
+    mobile: {code: String, verified: Boolean},
+    govtId: {verified: Boolean},
+    biometric: {verified: Boolean},
   },
 })
 
