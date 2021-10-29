@@ -5,7 +5,7 @@
       sm="12"
       md="8"
       lg="6">
-    <v-card>
+    <div>
       <v-row justify="center">
         <v-btn-toggle  v-model="loginMode"  dense mandatory>
       <v-btn color="primary" large>Login</v-btn>
@@ -14,11 +14,11 @@
    </v-row>
     <!-- <XEpanMarsUserLogin v-if="loginMode == 0" /> -->
     <!-- <XEpanMarsUserRegister v-if="loginMode == 1" /> -->
-    <XEpanMarsUserLogin class="ma-10" v-if="loginMode == 0" />
+    <XEpanMarsUserLogin v-if="loginMode == 0" class="ma-10"  />
   
-    <XEpanMarsUserRegister class="ma-10" v-if="loginMode == 1" />
+    <XEpanMarsUserRegister v-if="loginMode == 1" class="ma-10"  />
 
-  </v-card>
+  </div>
   </v-col>
 </v-row>
   

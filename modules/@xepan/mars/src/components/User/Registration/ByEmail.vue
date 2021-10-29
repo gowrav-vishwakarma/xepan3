@@ -26,7 +26,7 @@
     <div v-else>
       <v-card-text>
         <v-text-field
-          v-model="emailcode"
+          v-model="verifycode"
           outlined
           prepend-icon="email"
           label="Verification Code"
@@ -43,13 +43,19 @@
 </template>
 
 <script>
+
+
 export default {
   data() {
+   
+    
     return {
       panel: 'register',
       useremail: '',
       userpassword: '',
       emailcode: '',
+      verifycode:'',
+      ecode:''
     }
   },
   methods: {
@@ -58,31 +64,33 @@ export default {
         .$post('/api/xepan/mars/users/registration', {
           useremail: this.useremail,
           userpassword: this.userpassword,
+          verifycode: this.verifycode,
         })
         .then((response) => {
           console.log(response)
-          console.log(this.useremail, this.userpassword)
+           
+          console.log(this.useremail, this.userpassword,this.verifycode)
           this.panel = 'verification'
         })
+
+        
     },
     verify() {
+
+     
       this.$axios
         .$post('/api/xepan/mars/users/verifycode', {
           useremail: this.useremail,
-          emailcode: this.emailcode,
-        }).then(async(Response)=>{
-
-         await console.log(Response.data) 
-        }).catch((e) => {
-         alert('message:"invalid code"')
+          verifycode: this.verifycode,
+          
         })
-      if (this.emailcode === "1234") {
-        
-        this.$router.push("/").catch(()=>{});
-
-      }else {
-           alert('message:"invalid code"')
-       }
+        .then(async(Response)=>{
+          window.location.reload();
+          await console.log(Response)
+        }).catch((e) => {
+          console.log(e)
+         alert('message:"invalid OTP"')
+        })
     },  
   },
 }
