@@ -24,7 +24,8 @@ export default {
   methods: {
     async showMessageFromBackend() {
       try {
-        const response = (await this.$axios.get('/api/admin/user')).data
+        const response = (await this.$axios.get('/api/xepan/core/admin/user'))
+          .data
         this.randNumber = response.number
         console.log(response)
       } catch (err) {

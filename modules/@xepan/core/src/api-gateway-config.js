@@ -1,13 +1,13 @@
 module.exports = {
   apiEndpoints: {
     coreAPI: {
-      host: 'localhost',
+      host: 'xepan3',
       paths: ['/api/xepan/core', '/api/xepan/core/*'],
     },
   },
   serviceEndpoints: {
     httpbin: {
-      url: 'http://localhost:3001',
+      url: 'http://xepan3:3001',
     },
   },
   policies: [
